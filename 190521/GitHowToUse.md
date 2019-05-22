@@ -1,6 +1,6 @@
 # Github How To Use
 
-## I. 기본 명령어 aa
+## I. 기본 명령어
 
 * git init
 
