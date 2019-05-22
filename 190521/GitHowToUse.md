@@ -109,9 +109,10 @@
 
 2) 중복접근(?)오류 : ! [rejected]        master -> master (fetch first)
 
-=> "git push -u origin master" 입력 (주의사항 : 모든 업로드 파일이 삭제 된다.)
+=> "git push -f origin master" 입력 (주의사항 : 모든 업로드 파일이 삭제 된다.)
 ```
 
 
 
  
+
