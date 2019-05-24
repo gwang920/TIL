@@ -137,7 +137,7 @@ ex) TV의 속성과 기능
   			hour = date.getHours();
   			minute = date.getMinutes();
   			second = date.getSeconds();
-  			standard = 9;
+  			standard = 9;   // 서울 표준시간 09:00
   
   			startTime = System.currentTimeMillis();
   		}
