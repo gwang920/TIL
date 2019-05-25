@@ -1,4 +1,4 @@
-##### Switch & case 문 break 의 역할
+### Switch & case 문 break 의 역할
 
 ```java
 public char randomNuber(){
@@ -22,7 +22,7 @@ System.out.println(randomNumber());
 - default는 switch문의 기본값으로 조건에 맞는 값이 없는경우 실행된다.
 ```
 
-##### return vs break
+### return vs break
 
 ```java
 
