@@ -1,7 +1,5 @@
 # I.재귀호출(recursive call)
 
-###### 
-
 ##### - 메서드의 내부에서 자신을 다시 호출하는 것
 
 - 알고리즘에서 유용하다(?)
@@ -65,7 +63,7 @@ class PowerTest {
     
     
     static long power(int x,int n){
-		if(n==1) return x;
+		if(n==1) return x;                         // 2*p4*p3*p2*p1(==2)  n기준
         return x*power(x,n-1);
     }
 }
@@ -93,3 +91,7 @@ class PowerTest {
 ```
 
 추가 실습 = > 재귀 알고리즘 풀어보자
+
+
+
+재귀 
