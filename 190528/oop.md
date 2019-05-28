@@ -9,9 +9,9 @@ App -------> Biz --------------> Dao ----------> Oracle
              ^ ^                 ^ ^
              | |                 | |
   UserBiz____| |                 | |
-           	   |___ProductBiz    | |
-           	                     | |
-					UserDao______| |_______ProductDuo
+               |___ProductBiz    | |
+           	                 | |
+		    UserDao______| |_______ProductDuo
 
 user
 product
