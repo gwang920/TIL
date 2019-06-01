@@ -1,3 +1,9 @@
+# I. JAVA
+
+#### - JAVA vs C
+
+
+
 # II. Development Environment
 
 ### 	- JDK & Eclipse
@@ -26,7 +32,7 @@
 
 ### 	- oop
 
-		##### 		1) OOAD - UML
+##### 	1) OOAD - UML
 
 ##### 		2) OOP - Java or C++
 
@@ -42,10 +48,23 @@
 
 ##### 		3) Polymorphism
 
-
-
 ##### 		4) Abstraction
 
 ##### 		5) Override
 
 ##### 		6) Overload
+
+#### - Abstraction
+
+#### - interface
+
+#### - Generic
+
+#### - Collection API
+
+##### 1) Set - 중복 불가, 순서 없음
+
+##### 2) List - 순서 있음, 속도 느림
+
+##### 3) Hash - Key, Value
+
