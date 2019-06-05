@@ -24,15 +24,15 @@ ROUND - 반올림
 ```
 `
 SELECT ENAME || ' ' || JOB AS EJOB FROM EMP;  // Column == EJOB
-											// Column 속성 == ENAME 속성 + JOB 속성
+						// Column 속성 == ENAME 속성 + JOB 속성
 
 `
 SELECT LOWER(ENAME) || ' ' || JOB AS EJOB FROM EMP;
-											// KING + PRESIDENT ==> king PRESIDENT
+						// KING + PRESIDENT ==> king PRESIDENT
 											
 `
 SELECT ENAME, SUBSTR(ENAME,1,3) FROM EMP; // 첫자부터 세번째자까지 STRING 에서 뽑기
-										// ABCED ==> ABC
+								// ABCED ==> ABC
 
 `
 SELECT ENAME, SUBSTR(ENAME,1,3), 
@@ -56,12 +56,12 @@ WHERE DEPTNO IN(20,30)   // == WHERE DEPTNO 20 OR DEPTNO 30
 `
 SELECT ENAME, HIREDATE,CURRENT_DATE,  // CURRENT_DATE 현재날짜(월/일/년) == SYSDATE
 TO_CHAR(CURRENT_TIMESTAMP,'YYYY:MM:DD:HH:MM:SS')	
-FROM EMP;							// TO_CHAR 형식지정 EX)2019:05:31:03:05:00
-									// DATE 한정(?)
+FROM EMP;						// TO_CHAR 형식지정 EX)2019:05:31:03:05:00
+								// DATE 한정(?)
 									
 `
 TO_CHAR(SYSDATE,'YYYY/MM') - TO_CHAR(HIREDATE,'YYYY/MM') // ERROR ==> (CHARACTER-														//		       CHARACTER)
-												//SYSDATE - HIREDATE 가능 (숫자-숫자)
+								//SYSDATE - HIREDATE 가능 (숫자-숫자)
 												
 `
 SELECT ENAME,SAL FROM EMP
