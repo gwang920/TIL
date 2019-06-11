@@ -104,6 +104,12 @@
 
   clone만 해주면 자동으로 전환됨
 
+* git config --global user.name "gwang920"
+
+* git config --global user.email "gwang92@naver.com"
+
+  
+
 ### 오류 참고
 
 ``` 
