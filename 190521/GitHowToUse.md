@@ -98,7 +98,11 @@
 
 * 참고 사이트 : <https://victorydntmd.tistory.com/53>
 
- 
+### IIII. Clone (다른 컴퓨터로 master change)
+
+* git clone https://github.com/gwang920/TIL.git
+
+  clone만 해주면 자동으로 전환됨
 
 ### 오류 참고
 
