@@ -151,7 +151,7 @@ PDPRICE NUMBER,
 PDAMOUNT NUMBER
 );
 ALTER TABLE T_PRODUCTS ADD PRIMARY KEY(PDNO);
-ALTER TABLE T_PRODUCTS ADD FOREIGN KEY(FACTNO) 
+ALTER TABLE T_PRODUCTS ADD FOREIGN KEY(FACTNO)
 REFERENCES T_FACTORY(FACTNO);
 
 ```
@@ -908,7 +908,7 @@ public class Max {
 	}
 }
 
-- ProductDelte
+- ProductDelete
 
 package test;
 import com.ProductsBiz;
@@ -1166,5 +1166,13 @@ public class Products {
 https://hyeonstorage.tistory.com/113
 https://devbox.tistory.com/entry/Comporison
 https://blog.outsider.ne.kr/6
+
+
+오류
+
+다른 pc에서 다시 실행할 때
+project 우클릭 - > properties -> java build path -> add external jars..
+
+추가해주자..!
 ```
 
