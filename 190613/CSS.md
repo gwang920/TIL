@@ -38,7 +38,7 @@ ex) <h3>Header</h3>
 
 
 
-- 
+
 
 
 
@@ -64,7 +64,7 @@ td:nth-child(4n+1){
 
 ### ID / CLASS
 
-##### 	- ID : 스타일을 지정할 때 한 가지만 지정할 때
+##### 	- ID : 스타일을 한 가지만 지정할 때
 
 ##### 	- CLASS : 그룹으로 묶어 스타일을 지정할 때
 
@@ -181,7 +181,7 @@ ex) 화면의 바깥쪽 여백(margin) =0 안쪽 여백(padding)=0 으로 설정
 
 ``` 
 - html 의 <style> ~ </style>을 옮긴다 css로
-- 연동  <link type = "" rel="" href=">
+- 연동 시 html에 추가  <link type = "" rel="" href=">
 
 ex)  <link type = "text/css" rel="stylesheet" href="c1.css">
 ```
