@@ -9,6 +9,7 @@
 - check box 중복 선택 시 return 값 결정
 - 음료 중복시 ' , '로 구분 시 데이터 사이에만 ' , '를 넣는방법 ?
   - id[i] 의 length를 구해서 넣는다 (?) -- > 고민해보자
+- id가 겹치면 안된다
 
 ```HTML
 <!DOCTYPE html>
@@ -22,6 +23,7 @@
 
 			text-align: left;
 		}
+	
 
 		td {
 			text-align: center;
@@ -56,10 +58,11 @@
 			var target = document.getElementById("payment");
 
 			if (target.options[target.selectedIndex].text == "카드/현금") {
+				document.getElementById("type").value=' ';
 				alert("지불방법을 선택하세요");
 			}
 			else {
-				document.getElementById("pay").value = target.options[target.selectedIndex].text;
+				document.getElementById("pays").value = target.options[target.selectedIndex].text;
 			}
 
 		};
@@ -102,7 +105,7 @@
 
 			</tr>
 			<tr>
-				<td colspan="3">지불 <input type="text" id="pay">
+				<td colspan="3">지불 <input type="text" id="pays">
 				</td>
 
 			</tr>
