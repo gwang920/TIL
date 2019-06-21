@@ -63,7 +63,6 @@ function Person(name,age){               //함수랑 구조가 같고 앞문자�
 this.name=name;
 this.age=age;
 
-
 };
 
 Person.prototype.print=function(){
