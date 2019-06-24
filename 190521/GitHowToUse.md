@@ -107,6 +107,12 @@
 * git config --global user.email "gwang92@naver.com"
 
   
+  
+  
+  
+  ##### * 빠져나오기 - esc키를 누른다음 [:wq]
+  
+  
 
 ### 오류 참고
 
