@@ -246,9 +246,11 @@
 
 		}
 		function getData(map) {
-
+// 1) 
+// 2) https://cors.io/?
+            // url 2)막혀서 1)로 수정
 			$.ajax({
-				url: 'https://cors.io/?http://data.jeju.go.kr/rest/besteating/getEatingList?authApiKey=V%2BXyeaErdAAZAf2dSPlKPWTvwIjmHbInOd70m0wxy1C5v0g4RTgBBnzKsmMcdY3nGQcoMdzx00lSpth0Dn%2FsUg%3D%3D',
+				url: 'https://cors-anywhere.herokuapp.com/ http://data.jeju.go.kr/rest/besteating/getEatingList?authApiKey=V%2BXyeaErdAAZAf2dSPlKPWTvwIjmHbInOd70m0wxy1C5v0g4RTgBBnzKsmMcdY3nGQcoMdzx00lSpth0Dn%2FsUg%3D%3D',
 				success: function (data) {
 					
 					parsing(data, map);
