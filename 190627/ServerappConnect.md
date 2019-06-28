@@ -1,34 +1,39 @@
+# I. 관제시스템
 
+- 관제시스템에 통신을 더해 특정 사물을 제어할 수 있다
+
+- ex) 커넥티드카 : 자동차에서 올라온 데이터 수집
+- http는 신호를 보낼 수 없다
 
 ![1561599054995](C:\Users\student\AppData\Roaming\Typora\typora-user-images\1561599054995.png)
 
-관제시스템
+
+
+- jstl, cos,standard : jsp에서 자바코딩을 안쓰게 하기 위한 파일
+
+- ojdbc6_g : db연동하기위해
+
+  
+
+##### Container Model
+
+- Web Server는 Container를 가질 수 있다
+
+- Container에 맞는 Servlet (레고 개념)
+
+##### 명령 흐름
+
+- list 명령이면   req -> user -> DB 
+
+- req -> product
 
 
 
-자동차에서 올라온 데이터 수집
-
-http는 신호를 보낼 수 없다
 
 
+# 실습#
 
-
-
-jstl, cos,standard : jsp에서 자바코딩을 안쓰게 하기 위한 파일
-
-ojdbc6_g : db연동하기위해
-
-
-
-
-
-
-
-list 명령이면   req -> user -> DB 
-
-req -> product
-
-
+### jsp,html,servlet 연동
 
 servlet java
 
@@ -133,8 +138,6 @@ public class Item {
 }
 
 ```
-
-
 
 ```
 html
