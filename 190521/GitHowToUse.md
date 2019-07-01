@@ -26,7 +26,6 @@
 
   * 해당 폴더로 파일 이동
 
-    
 
 ## II. Github에 소스코드 올리기(최초)
 
@@ -96,7 +95,41 @@
 
 * 참고 사이트 : <https://victorydntmd.tistory.com/53>
 
-### IIII. Clone (다른 컴퓨터로 master change)
+
+
+### IIII. Branch
+
+- 최종 저장폴더로 이동 ex) cd TIL
+
+- git init  입력
+
+  ```
+  Initialized empty Git repository in C:/Users/student/.git/
+  ```
+
+- git 에 내가 누군지 알려주기
+
+  ```
+  git config --global user.email "you@example.com"
+  git config --global user.name "Your Name"
+
+  ```
+
+- 원격저장소 연동하기
+
+  ```
+  git remote add origin https://github.com/gwang920/TIL.git
+  ```
+
+- 응답이 없으면
+
+  ```
+  git branch --set -upstream-to=origin/master master
+  ```
+
+  ​
+
+### IIIII. Clone (다른 컴퓨터로 master change)
 
 * git clone https://github.com/gwang920/TIL.git
 
@@ -106,13 +139,15 @@
 
 * git config --global user.email "gwang92@naver.com"
 
-  
-  
-  
-  
+  ​
+
+  ​
+
+  ​
+
   ##### * 빠져나오기 - esc키를 누른다음 [:wq]
-  
-  
+
+  ​
 
 ### 오류 참고
 
