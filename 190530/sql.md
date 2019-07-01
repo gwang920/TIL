@@ -23,6 +23,7 @@
   - ##### CREATE
 
   - ##### DROP
+  	ex) drop table t_user;
 
   - ##### ALTER
 
