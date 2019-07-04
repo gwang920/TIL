@@ -86,18 +86,7 @@ pom.xml에 필요한 파일을 코드로 작성하면 다운로드를 실행한�
 
 
 
-
-
-```
-3 - Spring AOP(Aspect Oriented Programming)
-
-1) XML
-2) Annotation
-```
-
-
-
-##### 3) AOP 
+##### 3) AOP
 
 ##### AOP 용어
 
@@ -108,6 +97,14 @@ pom.xml에 필요한 파일을 코드로 작성하면 다운로드를 실행한�
 
 - 포인트컷(Pointcut)
   - 필터링된 조인포인트
+
+```
+3 - Spring AOP(Aspect Oriented Programming)
+
+1) XML
+2) Annotation
+```
+
 - 어드바이스
 
 ##### * 어드바이스 동작시점
@@ -145,5 +142,15 @@ Around - 함수 시작 전/후에 모두 동작
 
 ```
 4 - Spring JDBC , ORM(Mybatis)
+```
+
+
+
+
+
+```
+5 - SpringMVC
+
+
 ```
 
