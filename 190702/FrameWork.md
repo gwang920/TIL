@@ -151,6 +151,21 @@ Around - 함수 시작 전/후에 모두 동작
 ```
 5 - SpringMVC
 
+- web.xml:
+1) dispatcher
+2) filter
+- spring.xml
+1) ViewResolver
+
+index.html
+main.jsp
+MainController.java
+
+web -> WEB-INF -> config -> spring.xml
+web -> WEB-INF -> lib -> ojdbc6_g.jar
+web -> WEB-INF -> web.xml(추가 servlet -> fillter)
+
+
 
 ```
 
