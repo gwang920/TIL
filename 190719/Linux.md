@@ -44,6 +44,20 @@ SWAP -  메모리 영역이 부족할 때 사용한다
 
 
 
+리눅스를 사용하는 이유?
+
+```
+1. 리눅스는 오픈소스고 윈도우는 유료
+
+즉, 리눅스는 오픈소스 라이브러리와 프로그램의 생태계가 있다는 뜻이고, 또한 이를 뒷받침하는 오픈소스 커뮤니티가 있기 때문에 그러한 프로그램을 각 배포판에 최적화된 형태로 패키징하고 관리하는 절차가 잘 되어 있다는 뜻
+
+2. GUI가 아닌만큼 그 리소스를 서버 돌리는데 전력으로 사용 가능
+```
+
+
+
+
+
 Virtual Machine
 
 - Vmware(가상의 환경 만들기)
@@ -122,6 +136,21 @@ paste -> rundll32 "C:\Program Files (x86)\VMware\VMware Player\vmnetui.dll" VMNe
 
 
 
+' / ' 의 개념
+
+```
+(1) /GAME/PUZZLE 
+(2) GAME/PUZZLE 
+
+(1)번의 '/GAME/PUZZLE'는 루트 디렉토리 밑에 있는 GAME 디렉토리 밑의 PUZZLE 디렉토리임을 나타냅니다. 
+
+(2)번의 'GAME/PUZZLE'는 현재 디렉토리 밑에 있는 GAME이라는 디렉토리 밑의 PUZZLE 디렉토리임을 나타냅니다. 이때 GAME이라는 디렉토리가 어느 디렉토리 밑에 있는지 알 수 없습니다. 루트 디렉토리 밑에 포함된 것일 수도 있지만 다른 서브 디렉토리 밑에 포함된 디렉토리일 수도 있습니다. 따라서 (2)번 문장의 GAME 디렉토리가 루트 밑에 있는 디렉토리라는 보장이 없습니다. 
+
+출처: https://booolean.tistory.com/400 [Boolean]
+```
+
+
+
 터미널 ( 기본 명령어 p182)
 
 ```
@@ -186,13 +215,30 @@ ex) cat ifcfg ens-33
 - more 파일명
 
 사용자지정 명령어
+- vi .bashrc 
+- alias 
+- alias rm='rm-i'
+- alias ls='rs-i'
+- alias ll='clear'
 
-vi .bashrc 
-alias 
-alias rm='rm-i'
-alias ls='rs-i'
-alias ll='clear'
+.bashrc 테마/환경설정
+- 명령을 찾을 수 없습니다. => 현재 디렉토리가 path에 지정되지 않았을 때
+- ./ : 현재 디렉토리 밑에 (path가 지정되지 않았을 때 사용하자)
 
+path 지정 (in bashrc)
+- PATH=.:$PATH
+- export PATH  // 모든 path에 적용
+- . ./.bashrc : bashrc를 다시 실행 (새로운 환경설정을 적용하기 위해)
+
+gedit 삭제 & 재설치
+- [root@server1 file]# rpm -e gedit-3.8.3*
+- [root@server1 file]# gedit
+- bash: gedit: 명령을 찾을 수 없습니다...    
+// 삭제완료
+- cp /run/media/root/CentOS\ 7\ x86_64/Packages/gedit-3.8.3-6.el7.x86_64.rpm . 
+// 파일복사
+- rpm -Uvh gedit-3.8.3-6.el7.x86_64.rpm 
+// 설치
 ```
 
 
@@ -237,6 +283,109 @@ chown .nusers nusersfile
 chown .musers musersfile
 ```
 
+yum
+
+```
+yum -y install mysql-connector-odbc-5.2.5-6.el7.x86_64.rpm
+=> yum에 있는 url을 찾아 해당파일을 설치한다.
+
+yum localinstall mysql-connector-odbc-5.2.5-6.el7.x86_64.rpm 
+=> 만약 loacl에 설치파일이 저장된경우에는 localinstall을 사용한다.
+
+
+```
+
+
+
+파일위치검색
+
+```
+find ~ -size 0k -exec ls -l {} \;
+=> 현재 사용자의 홈 디렉터리 하위에 파일 크기가 0인 파일의 목록 출력
+
+find ~ -size 0k -exec cp {} temp  \;
+=> 크기가 0k인 파일을 찾아서 temp폴더로 복사하기
+```
+
+
+
+방화벽설정
+
+```
+firewall-config
+
+oracle 연동시 포트에 추가해주자
+```
+
+
+
+압축
+
+```
+xz 파일이름
+
+압축은 하나의 파일만 가능하다
+(여러개의 파일을 압축하려면 하나의 폴더에 넣고서 압축한다)
+
+파일묶기
+tar cvf 생성파일명 묶을폴더명
+
+압축풀기
+tar xcf my.tar
+```
+
+
+
+링크
+
+```
+하드 링크 : 사이즈가 원본파일과 동일
+
+파일의 보존성을 위해 사용
+
+ln linktest/ltest hlink
+
+심볼릭 링크 : 원본파일 + 위치지정
+
+위치를 가르키기 위해 사용 (바로가기 파일과 비슷한 느낌)
+
+ln -s linktest/ltest slink
+
+lrwxrwxrwx. 1 root root 22  7월 19 02:19 java -> /etc/alternatives/java
+-> 심볼릭 링크
+
+cp -r jdk1.8 /etc
+= > jdk1.8을 etc밑에 copy하겠다 (cp -r  => 해당 디렉토리의 하위 디렉토리도 같이 복사)
+
+error
+- cp: omitting directory 'spark-2.2.0-bin-hadoop2.7'
+- 이때 cp -r을 써준다
+
+
+
+cd /usr/bin 로 이동 후
+ln -s /etc/jdk1.8/bin/java java    // 기본적으로 /etc 밑에 java가 있다(?)
+= > 'java' 라는 이름으로 심볼릭링크를 걸어준 것
+
+
+usr/bin
+일반 사용자들이 사용가능한 명령어 파일들이 존재하는 디렉토리.
+
+java 삭제 & 재설치
+- 파일 -> 내폴더 -> file(생성) -> jdk파일 paste
+- which java    // java 위치 확인
+- cd /usr/bin   // java 위치로 이동
+- rm java       // java 삭제(심볼릭을 삭제한다 즉, 연결고리만 끊는 것)
+- cd file       // jdk 파일이 있는 폴더로 이동
+- tar vxf jdk-8u221-linux-x64.tar.gz // tar -xvf [파일명.tar] 압축풀기
+- java          // 아직 심볼릭 링크가 지정되지않아 찾을 수 없다
+- mv jdk1.8.0_221 jdk1.8   // 이름 간단하게 바꿔주자
+- cp -r jdk1.8 /etc        // recursive : 디렉토리를 복사할 경우 하위 디렉토리와 파일을 모두 복사
+- cd /usr/bin         // usr/bin 경로로 심볼릭을 지정해주기 위해 이동
+- ln -s /etc/jdk1.8/bin/java java    // 심볼릭 링크를 지정해주자
+- java -version         // 이제 확인이 가능하다
+```
+
 
 
 vi 모드
@@ -249,6 +398,7 @@ ex) touch t1.txts
 :wq file name = 저장하고 나가기
 :q! = 강제로 나가기 ( 저장 x )
 
+vi /etc/profile => path / export 설정
 
 INSERT MODE
  i   = 왼쪽 삽입/커서
@@ -309,6 +459,32 @@ ls
 
  #released updates ~ 삭제
  
+```
+
+
+
+톰캣 설치
+
+```
+- tomcat ~.tar.gz 파일 (for linux) download
+- linux의 file 폴더에 paste
+- cd file
+- tar xvf tomcat ~.tar.gz   // 압축풀기
+- cd apache-tomcat-9.0.22   // tomcat은 이동만되어도 설치가 완료된다
+- cd conf    // 설정을 위해 이동
+- firewall-config  // (런타임 / 영구적) 적용 http
+- vi server.xml // 포트 설정 80   (69 line)
+- startup.sh   // 톰캣을 실행한다  (cd /file/apache-tomcat/bin 에서)
+
+vi /etc/profile 에서
+
+JAVA_HOME=/etc/jdk1.8
+export JAVA_HOME
+CLASSPATH=$JAVA_HOME/lib
+export CLASSPATH
+PATH=.:$JAVA_HOME/bin:$PATH
+
+삽입
 ```
 
 
@@ -437,8 +613,6 @@ ex) 192.168.111.200 server2
 ```
 다른 windows에서 다른 리눅스 os의 oracle과 통신하는 방법?
 ```
-
-
 
 
 
