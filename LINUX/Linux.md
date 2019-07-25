@@ -690,6 +690,8 @@ ex) umount /dev/cdroom/
 4. rpm, yum(localinstall , install)
 	yum은 open source만 있다
 	
+	ex) yum -y localinstall oracle~
+	
 5. Program install
 	tomcat , eclipse , jdk
 	/etc/profile 환경설정
@@ -724,7 +726,7 @@ systemctl restart crond    // 적용을 위해 재시작
 	
  실행을 위해 입력 : 01 * * * * root run-parts /etc/cron.hourly
 	
-	run-parts : 디렉터리안의 명령을 모두 실행한다
+	run-parts : 디렉터리안의 명령을 모두 실행한다 (모든 script 실행)
  
  
  at 명령어
@@ -735,9 +737,62 @@ at> reboot
 at> reboot<EOT>       // ctrl + D 누름
 job 1 at Wed Jul 24 11:25:00 2019
 [root@server1 ~]# at -l      // 작업 상세 정보 ( 가장 앞에 출력되는 번호가 작업번호)
-1	Wed Jul 24 11:25:00 2019 a root
+1	Wed Jul 24 11:25:00 2019 a root	
 
-	
+```
 
+
+
+Oracle 설치
+
+```
+p571
+- Oracle Database Express Edition 11g Release2 다운로드
+- unzip oracle*
+
+oracle 설치
+
+용량 늘리기 ( 초기설정시 용량이 2GB / Oracle 설치 메모리 최소 1990MB)
+dd if=/dev/zero of=/swapfile bs=1024 count=4194304  // 가상 메모리용 파일 생성(4GB)
+mkswap /swapfile     // 파일을 가상 메모리로 포멧
+swapon /swapfile     // 가상 메모리 활성화
+swapon -s            // 가상 메모리 용량 확인
+
+```
+
+
+
+https://m.jobkorea.co.kr/company/1923233/keyword/view?Pfl_Tip_No=5369
+
+네트워크
+
+```
+
+- TCP/IP
+컴퓨터끼리 네트워크상으로 의사소통하는 약속(규칙)
+
+- 호스트 이름
+각가의 컴퓨터에 지정된 이름
+
+도메인 이름 (도메인 주소)
+- (Public) 외부에서 누구나 접근 가능하도록 지정한 이름
+ 
+ 브라우저 IP요청 -> DNS -> 브라우저 -> IP접속
+
+넷마스크
+- 네트워크의 규모를 결정
+
+클래스
+- 
+
+게이트웨이
+- 내부 네트워크를 외부로 연결하는 컴퓨터 / 장비
+
+DHCP
+- 자동 IP 할당 / setting
+- ex) smartPhone on시에 기지국에 ip를 요청
+
+
+linux network security
 ```
 
