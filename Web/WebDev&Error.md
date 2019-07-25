@@ -1,4 +1,4 @@
-# 웹 개발환경 구축하기
+# 웹 개발환경 구축하기 & 에러
 
 ### eclipse / jdk 설정
 
@@ -30,7 +30,9 @@ properties -> Java Build Path -> Add Library -> Tomcat
 
 - Tomcat이 사용하고 있는 기본 포트(8080,8009,8005)가 이미 사용중이라 생기는 오류
 
-![캡쳐1](C:\Users\student\TIL\img\캡쳐1.PNG)
+![tcp](https://user-images.githubusercontent.com/49560745/61844314-f00c8780-aed9-11e9-9533-61ea17bef39a.png)
+
+
 
 ```
 cmd창에 
@@ -40,7 +42,11 @@ cmd창에
 
 ```
 
-![캡처](C:\Users\student\TIL\img\캡처.PNG)
+![pid4520](https://user-images.githubusercontent.com/49560745/61844301-e7b44c80-aed9-11e9-9627-e72113036ed3.png)
+
+
+
+
 
 ```
 Tomcat이 사용하는 기본 포트는 0.0.0.0:8080, 0.0.0.0:8009와 127,0,0,1:8005이다.
@@ -63,9 +69,9 @@ Tomcat이 사용하는 기본 포트는 0.0.0.0:8080, 0.0.0.0:8009와 127,0,0,1:
 
 - servlet의 이름이 중복되어 생기는 오류
 
-  ​
+  
 
-![캡처123](C:\Users\student\TIL\img\캡처123.PNG)
+![tomcat9 0](https://user-images.githubusercontent.com/49560745/61844160-6a88d780-aed9-11e9-95d3-11b9e5fff094.png)
 
 
 
@@ -81,10 +87,6 @@ Tomcat이 사용하는 기본 포트는 0.0.0.0:8080, 0.0.0.0:8009와 127,0,0,1:
 @WebServlet({ "/UserServlet", "/User" }) s
 
 ```
-
-​
-
-
 
 
 
