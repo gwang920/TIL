@@ -2,7 +2,7 @@
 
 
 
-리눅스 배경
+##### 리눅스 배경
 
 ```
 - unix : 비싸다 / 접근제한이있다 
@@ -44,7 +44,7 @@ SWAP -  메모리 영역이 부족할 때 사용한다
 
 
 
-리눅스를 사용하는 이유?
+##### 리눅스를 사용하는 이유?
 
 ```
 1. 리눅스는 오픈소스고 윈도우는 유료
@@ -58,14 +58,14 @@ SWAP -  메모리 영역이 부족할 때 사용한다
 
 
 
-Virtual Machine
+##### Virtual Machine
 
 - Vmware(가상의 환경 만들기)
 - Virtual Box
 
 
 
-단축키
+##### 단축키
 
 ```
 ctrl + R : 화면빠져나오기
@@ -81,7 +81,7 @@ window + space : 한/영 전환
 
 
 
-설치
+##### 설치
 
 ```
 
@@ -97,7 +97,7 @@ VMware virtual machine configuration(.vmx)  워드패드로 OPEN
 
 
 
-리눅스 clone 복사
+##### 리눅스 clone 복사
 
 ```
 복사 후 실행하고 I moved it 선택해주자
@@ -105,7 +105,7 @@ VMware virtual machine configuration(.vmx)  워드패드로 OPEN
 
 
 
-DHCP[Dynamic Host Configuration Protocol]
+##### DHCP[Dynamic Host Configuration Protocol]
 
 ```
 자동으로 ' ~ ' 부분에 ip address 할당
@@ -119,7 +119,7 @@ DHCP[Dynamic Host Configuration Protocol]
 
 
 
-가상세계 setting 법
+##### 가상세계 setting 법
 
 ```
 1) cmd 실행
@@ -136,7 +136,7 @@ paste -> rundll32 "C:\Program Files (x86)\VMware\VMware Player\vmnetui.dll" VMNe
 
 
 
-' / ' 의 개념
+##### ' / ' 의 개념
 
 ```
 (1) /GAME/PUZZLE 
@@ -151,7 +151,7 @@ paste -> rundll32 "C:\Program Files (x86)\VMware\VMware Player\vmnetui.dll" VMNe
 
 
 
-터미널 ( 기본 명령어 p182)
+##### 터미널 ( 기본 명령어 p182)
 
 ```
 ls : 디렉토리 정보 반환
@@ -243,7 +243,7 @@ gedit 삭제 & 재설치
 
 
 
-사용자 및 그룹 접근권한
+##### 사용자 및 그룹 접근권한
 
 ```
 해당 디렉토리에는 해당 그룹원만 접근가능하고
@@ -283,7 +283,9 @@ chown .nusers nusersfile
 chown .musers musersfile
 ```
 
-yum
+
+
+##### yum
 
 ```
 yum -y install mysql-connector-odbc-5.2.5-6.el7.x86_64.rpm
@@ -297,7 +299,35 @@ yum localinstall mysql-connector-odbc-5.2.5-6.el7.x86_64.rpm
 
 
 
-파일위치검색
+##### 파이프, 필터, 리다이렉션
+
+```
+
+리다이렉션 
+- ls -la /etc > 20190725.txt // 조회한것을 txt 파일에 저장 한다
+
+
+포그라운드 프로세서
+- 화면에 나타나서 사용자와 상호작용하는 프로세스
+_ yes
+
+백그라운드 프로세서
+- 화면에 보이지 않고 뒤에서 실행되는 프로세스
+- yes &
+
+프로세스 종료
+- kill 프로세스name
+
+ex)
+root      4481  3636  5 13:25 pts/0    00:00:00 yes
+root      4483  4442  0 13:25 pts/1    00:00:00 grep --color=auto yes
+
+kill 4481
+```
+
+
+
+##### 파일위치검색
 
 ```
 find ~ -size 0k -exec ls -l {} \;
@@ -309,7 +339,7 @@ find ~ -size 0k -exec cp {} temp  \;
 
 
 
-방화벽설정
+##### 방화벽설정
 
 ```
 firewall-config
@@ -319,7 +349,7 @@ oracle 연동시 포트에 추가해주자
 
 
 
-압축
+##### 압축
 
 ```
 xz 파일이름
@@ -336,7 +366,7 @@ tar xcf my.tar
 
 
 
-링크
+##### 링크
 
 ```
 하드 링크 : 사이즈가 원본파일과 동일
@@ -388,7 +418,7 @@ java 삭제 & 재설치
 
 
 
-vi 모드
+##### vi 모드
 
 ```
 vi filename = 해당 파일 수정하기
@@ -443,7 +473,7 @@ ex):%s/test/test1
 
 
 
-업데이트 중지하는 방법
+##### 업데이트 중지하는 방법
 
 ```
 p116
@@ -471,7 +501,7 @@ eclipse 설치
 
 
 
-톰캣 설치
+##### 톰캣 설치
 
 ```
 - tomcat ~.tar.gz 파일 (for linux) download
@@ -497,7 +527,7 @@ PATH=.:$JAVA_HOME/bin:$PATH
 
 
 
-네트워크 설정
+##### 네트워크 설정
 
 ```
 P117
@@ -550,7 +580,7 @@ reboot 다시시작
 
 
 
-VM 안의 Windows설정
+##### VM 안의 Windows설정
 
 ```
 pc설정 - 제어판 - 네트워크 및 인터넷 - 네트워크 및 공유센터 - 어댑터 설정 변경 - 이더넷 속성 - 
@@ -589,7 +619,7 @@ N6KXJ - P6YWY - 4C92Q - J7BVB - R6XGM
 
 
 
-IP /  host name 연동
+##### IP /  host name 연동
 
 ```
 * ipaddress가 진짜 이름
@@ -626,7 +656,7 @@ ex) 192.168.111.200 server2
 
 
 
-마운트
+##### 마운트
 
 ```
 
@@ -702,7 +732,7 @@ ex) umount /dev/cdroom/
 
 
 
-CRON 과 AT
+##### CRON 과 AT
 
 ```
 주기적으로 반복되는 일을 자동으로 실행하기 위한 명령어
@@ -743,7 +773,7 @@ job 1 at Wed Jul 24 11:25:00 2019
 
 
 
-Oracle 설치
+##### Oracle 설치
 
 ```
 p571
@@ -762,9 +792,7 @@ swapon -s            // 가상 메모리 용량 확인
 
 
 
-https://m.jobkorea.co.kr/company/1923233/keyword/view?Pfl_Tip_No=5369
-
-네트워크
+##### 네트워크
 
 ```
 

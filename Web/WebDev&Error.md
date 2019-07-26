@@ -90,5 +90,8 @@ Tomcat이 사용하는 기본 포트는 0.0.0.0:8080, 0.0.0.0:8009와 127,0,0,1:
 
 
 
+1) window -> preferences -> general -> workspace -> refresh
 
-window -> preferences -> general -> workspace -> refresh
+2) window -> preferences -> server -> Runtim Enviroments에서 
+
+TOMCAT 삭제하고 다시 넣기
