@@ -1,34 +1,23 @@
 # 하드디스크 관리
 
-
-
 IDE방식 (cd-rom)-> SATA(Serial ATA)방식
 
+IDE 방식 : IN - OUT 속도가 느리다
 
 
 
-
-Vmware 
-
-
-
-server
-
-
-
-하드디스크 추가하기
+##### 하드디스크 추가하기
 
 ```
 하드디스크 용량이 부족할 때
 
 store 방식 : for single
 split 방식 : for multifle (큰 용량을 추가할 때)
-
+  
 
 ls -l /dev/sd*     // HardDisk 조회
 				   // 포맷 (포맷 후에 데이터 저장이 가능)
-				   
-				   
+				   				   
 				   
  1004  mkfs.ext4 /dev/sdb1
  1005  ls -l /dev/sd*
@@ -63,9 +52,145 @@ ls -l /dev/sd*     // HardDisk 조회
  Partition number : 2   // 새로운 파티션 번호 선택
  First sector: enter    // enter 누르면 default (sdc2의 시작 값)
  Last sector : enter    // 용량 1GB로 지정 ( 2GB-1GB=1GB)
- 
- 
+
+```
 
 
+
+##### 하드디스크 제거
+
+```
+/fstab에서 mount를 제거한후에 edit창에서 삭제해주자
+mount 제거 전에 edit 창에서 제거되면 시스템 오류가 발생한다
+(alert창 반복)
+
+
+vi /etc/fstab
+
+dd 누르면 해당 line 삭제
+u 누르면 원복
+
+script에서
+```
+
+
+
+##### 여러 개의 하드디스크를 하나처럼 사용하기
+
+```
+RAID 와 LVM 방식을 이용하자
+
+RAID(Redundant Array Of Inexpensive/Independetn Disk)
+- 저렴하게 독립적인 디스크들을 묶어서 사용한다
+- 신뢰성을 높이고, 성능을 향상시킨다
+
+Linear RAID 
+- 순차적으로 첫번째부터 저장
+
+RAID0
+- 2개 이상 동시 저장 / 가장 빠르다
+- 데이터 안전성 보장 x
+
+RAID1
+- 2개 동시 저장 (디스크 복구 용)
+- 미러링 (똑같은 데이터의 거울을 만든다 - backup)
+ 즉, 용량을 절반밖에 사용하지 못한다 
+- 데이터 안전성을 보장
+
+RAID5
+- 3개 이상
+- in/out 속도가 빠르다(큰 파일에 대한 빠른 Access)
+- 패리티를 이용하기에 DISK가 한 장 날라가도 복구가 가능하다 (두장 이상은 불가능) 
+- 101 에서 10이 되면 자동으로 101로 복구 (짝수패티리 사용 예)
+
+
+```
+
+
+
+##### RAID 생성 실습
+
+```
+md9 이라는 곳에 두개를 묶어 사용하겠다
+포맷도하고 mount도하고
+
+1. 각각의 Disk  fdisk - fd
+
+2. mdadm - 디스크 묶기
+   mdadm --create /dev/md9 --level=linear --raid-devices=2 /dev/sdb1 /dev/sdc1
+
+--create /dev/md9      // md9 장치에 RAID 생성
+--level=linear         // Linear RAID를 지정
+--raid-devices=2 /dev/sdb1/ /dev/sdc1      // 2개의 하드디스크를 사용하며, 이어서 나오는 것은 장치이름
+
+3. mkfs.ext4 - 포맷
+    mkfs.ext4 /dev/md9
+ 
+4. 폴더 생성
+    mkdir /linear
+ 
+5. mount
+	mount /dev/md9 /linear
+
+6. /etc/fstab - 영구적용하기
+	vi /etc/fstab
+
+==> /dev/md9  /linear ext4 defaults 1 2
+```
+
+
+
+##### 생성된 RAID 다시 원복하는 방법
+
+```
+1. vi /etc/fstab 에서 적용 삭제
+2. umount /dev/md9
+3. df를 통해 확인하자
+4. mdadm --stop /dev/md9
+5. rm -rf /dev/md/*
+
+stop을 하고 삭제까지 해주자
+
+(5. fdisk /dev/sdb
+   fdisk /dev/sdc
+   
+   command (m for help) : d
+   command (m for help) : w)
+   
+   fdisk는 의미 없었다,,
+   
+   
+   reid 장점
+   
+```
+
+
+
+##### RAID1 / RAID5
+
+```
+- data backup 기능을 갖는다
+(RAID1 - mirroring / RAID5 - 패리티)
+
+p363
+
+디스크를 망가트리고 , RAID1 / RAID5의 복구기능을 확인해보자
+
+- edit 에서 디스크 삭제
+- 안전모드 입장 (비밀번호 입력)
+- df     // mount된 RAID가 존재하지 않는 것을 확인할 수 있다
+- mdadm --run /dev/md1      // 복구완료
+
+
+안전모드에서 벗어나려면
+망가진 디스크를 전부 STOP 시키고
+
+- mdadm --stop /dev/md0
+
+복구가능한 디스크 전부 RUN을 시킨후에
+
+- mdadm --run /dev/md1
+
+reboot 을 해줘야한다
 ```
 
