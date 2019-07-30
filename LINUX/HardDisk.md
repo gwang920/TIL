@@ -103,6 +103,17 @@ RAID5
 - 패리티를 이용하기에 DISK가 한 장 날라가도 복구가 가능하다 (두장 이상은 불가능) 
 - 101 에서 10이 되면 자동으로 101로 복구 (짝수패티리 사용 예)
 
+RAID 1+0
+- 안전성 + 속도
+
+
+RAID 6
+- default 4장(패리티 검사 2장 + 나머지 2장의 저장공간)
+
+
+RAID 1 + 6
+- 고 신뢰성
+- 금융결제원과 같은 곳에 사용된다
 
 ```
 
@@ -194,3 +205,137 @@ p363
 reboot 을 해줘야한다
 ```
 
+
+
+
+
+##### LVM(Logical Volume Manager)
+
+```
+- 사용자들에게 할당되어지는 하드디스크 
+- 가변적이다
+
+ LVM 구현
+fdisk - > pvcreate -> vgcreate -> lvcreate -> mkfs.ext4 -> mount -> etc/fstab
+
+
+1) 파티션을 나누자
+ fdisk /dev/sdb
+ 
+command : n
+select : p
+partition number : 1
+firstsector : enter
+lastsector : enter
+command : t
+Hex Code : 8e
+
+command : p
+command : w   
+
+2) 물리적인 볼륨 생성
+ pvcreate /dev/sdb1  pvcreate /dev/sdc1
+
+3) 볼륨 그룹 생성
+ vgcreate myVG /dev/sdb1 /dev/sdc1
+ 
+4) 볼륨 그룹의 파티션 생성
+ lvcreate --size 1G --name myLG1 myVG   // 1GB할당
+ lvcreate --size 3G --name myLG2 myVG
+ lvcreate --extents 100%FREE --name myLG3 myVG  //나머지 용량 모두 할당
+
+
+5) 포맷
+ mkfs.ext4 /dev/myVG/myLG1
+ mkfs.ext4 /dev/myVG/myLG2
+ mkfs.ext4 /dev/myVG/myLG3
+
+6) 마운트하자
+ mkdir /lvm1 /lvm2 /lvm3    // 폴더생성
+ mount /dev/myVG/myLG1 /lvm1
+ mount /dev/myVG/myLG2 /lvm2
+ mount /dev/myVG/myLG3 /lvm3
+
+7) 영구 적용
+vi /etc/fstab
+에
+/dev/myVG/myLG1  /lvm1  ext4 default 1 2
+/dev/myVG/myLG2  /lvm2  ext4 default 1 2
+/dev/myVG/myLG3  /lvm3  ext4 default 1 2
+
+```
+
+
+
+##### RAID에 CENTOS 설치
+
+```
+P393을 참고하여 RAID안에 CENTOS를 설치하자
+
+swap개념
+
+swap : 
+
+- 리눅스에서 물리적 메모리(RAM)의 용량이 가득 차게될 경우 사용되는 여유 공간
+
+- 시스템이 처리하고 있는 데이터를 저장할 RAM이 충분하지 않을 때 스왑 공간에 이 데이터를 기록
+
+- 소량의 RAM을 사용하는 시스템에는 도움이 되지만, RAM을 대체할거라는 생각을 가지면 안된다
+
+
+1) 이제 RAID 1의 결함 허용(BACKUP)이 잘되는지 확인하자
+
+- RAID1의 하드디스크 2개중 하나 삭제하고 reboot
+- mdadm --detail /dev/md/root     // RAID1 장치 확인
+
+하드디스크 하나가 고장나도 운영체제는 잘 동작한다는 것을 확인할 수 있다
+
+2) 다시 원상복귀 해보자
+
+- 우선 하드디스크를 추가해주자 (새로 추가한 빈 디스크가 SCSI 0:0이면 부팅이 안 될 수 있기에 SCSI 0:2로 변경하자)
+- fdisk -l /dev/sda 를 입력해 파티션을 확인하고 , 동일하게 /dev/sdb 장치의 파티션을 지정해주자
+
+- fdisk /dev/sdb
+
+/ sdb1 / 
+ 
+command : n
+select : p
+partition number : 1
+firstsector : enter
+lastsector : sda1의 lastsector 값
+command : t
+Hex Code : fd
+
+/ sdb2 / 
+
+command : n
+select : p
+partition number : 2
+firstsector : enter
+lastsector : sda2의 lastsector 값
+command : t
+Hex Code : fd
+
+command : w     // 설정저장
+
+
+- 파티션이 지정 되면
+   mdadm /dev/md/swap --add /dev/sdb1   //sda1와 동일하게
+   mdadm /dev/md/root --add /dev/sdb2   //sda2와 동일하게
+   
+   지정해주자
+
+```
+
+
+
+
+
+server1
+
+jdk / tomcat
+
+
+
+gnom

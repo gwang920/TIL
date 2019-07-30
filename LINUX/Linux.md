@@ -126,7 +126,7 @@ VMware virtual machine configuration(.vmx)  워드패드로 OPEN
 
 2) dos창 header 우클릭 빠른 편집모드
 
-3) ip seeting
+3) ip setting
 
 paste -> rundll32 "C:\Program Files (x86)\VMware\VMware Player\vmnetui.dll" VMNetUI_ShowStandalone 
 
@@ -707,8 +707,21 @@ ex) umount /dev/cdroom/
 
 ```
 1. network 설정
-	/etc/sysconfig/network-scripts/ifcfg-ens33
-	systemctl restart network
+	vi /etc/sysconfig/network-scripts/ifcfg-ens33
+	
+	
+	
+BOOTPROTO=none
+IPADDR=192.168.111.104
+NETMASK=255.255.255.0
+GATEWAY=192.168.111.2
+DNS1=192.168.111.2
+
+
+추가
+
+systemctl restart network   // 적용을 위해 재실행
+
 
 2. user 설정
 	useradd
@@ -788,6 +801,9 @@ mkswap /swapfile     // 파일을 가상 메모리로 포멧
 swapon /swapfile     // 가상 메모리 활성화
 swapon -s            // 가상 메모리 용량 확인
 
+
+cd /root/file    // 파일 위치 디렉터리 이동
+yum -y localinstall oracle*    // 오라클 설치
 ```
 
 
@@ -823,4 +839,8 @@ DHCP
 
 linux network security
 ```
+
+
+
+
 
