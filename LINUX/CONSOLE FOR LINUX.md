@@ -66,7 +66,7 @@ Cannot find a valid baseurl for repo: base/7/x86_64
 ##### IFCONFIG
 
 ```
-ip addr == ifconfig
+ip addr  // ifconfig와 동일한 명령어
 
 yum -y install net-tools   // tool을 설치하자 (ifconfig도 사용 가능)
 ```
