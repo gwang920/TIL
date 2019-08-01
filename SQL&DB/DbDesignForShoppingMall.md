@@ -1,11 +1,5 @@
 # DB설계 - 쇼핑몰
 
-
-
-
-
-
-
 ![3조ERD](C:\Users\student\Desktop\3조ERD.PNG)
 
 ```SQL
