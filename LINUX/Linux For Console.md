@@ -84,7 +84,7 @@ yum -y install net-tools   // tool을 설치하자 (ifconfig도 사용 가능)
 // 이 방법은 link 연결이 http로 걸려서 file이 down 되지 않는다(압축이 풀리지 않음)
 
 
-2) scp apache-tomcat-9.0.22.tar.gz root@192.168.111.115/root/
+2) scp apache-tomcat-9.0.22.tar.gz root@192.168.111.115:/root/
 
 // 그래서 파일전송을 이용하자. gitBash나 locallinstall이 가능한 server 에서 전송해주자
 
@@ -138,4 +138,39 @@ cd file/apache-tomcat-9.0.22/bin
 ```
 
 
+
+##### 브릿지 설정
+
+1) cmd 창에서 입력 후 edit에서 Bridged를 선택
+
+![브릿지_1](https://user-images.githubusercontent.com/49560745/62188211-ad015700-b3a6-11e9-8213-a31d9744b4ba.jpg)
+
+
+
+2) Network Adapter 에서 Bridged로 변경
+
+![브릿지_2](https://user-images.githubusercontent.com/49560745/62188251-c4404480-b3a6-11e9-91ec-1b829584285b.jpg)
+
+
+
+3) ifcfg-ens33 접근 (console모드에서도 같다)
+
+![브릿지_3](https://user-images.githubusercontent.com/49560745/62188262-cbffe900-b3a6-11e9-9505-3aee939509a0.jpg)
+
+
+
+
+4) IP 설정
+
+![브릿지_4](https://user-images.githubusercontent.com/49560745/62188266-cd311600-b3a6-11e9-908c-c277179ae042.jpg)
+
+
+
+5) RESTART 해주자
+
+![브릿지_5](https://user-images.githubusercontent.com/49560745/62188269-ce624300-b3a6-11e9-9b76-60516308b7a6.jpg)
+
+```
+
+```
 

@@ -127,27 +127,27 @@
   git branch --set -upstream-to=origin/master master
   ```
 
-  ​
+  
 
 ### IIIII. Clone (다른 컴퓨터로 master change)
 
 * git clone https://github.com/gwang920/TIL.git
 
-  clone만 해주면 자동으로 전환됨
+  clone만 해주면 자동으로 전환됨 (for git pull)
 
 * git config --global user.name "gwang920"
 
 * git config --global user.email "gwang92@naver.com"
 
-  ​
+  
 
-  ​
+  
 
-  ​
+  
 
   ##### * 빠져나오기 - esc키를 누른다음 [:wq]
 
-  ​
+  
 
 ### 오류 참고
 

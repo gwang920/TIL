@@ -523,6 +523,8 @@ export CLASSPATH
 PATH=.:$JAVA_HOME/bin:$PATH
 
 삽입
+
+profile 은 컴퓨터가 부팅이되면 자동으로 setting 되도록 설정하는 기능(값)
 ```
 
 

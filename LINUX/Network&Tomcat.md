@@ -37,7 +37,8 @@ Tomcat - Web
 - export 하자
   war file로 export , linux내의 file에 paste
 	
-  ps -ef | grep oracle   // 대상 프로세스(oracle)를 조회한다
+  ps -ef | grep oracle   
+  // 대상 프로세스(oracle)를 조회한다(상태표시 on이냐 off냐 등등)
 
   829  cd apache-tomcat-9.0.22/
   830  cd webapps/
@@ -59,3 +60,24 @@ Tomcat - Web
 
 ```
 
+
+
+
+
+
+
+70.12.114.190~ 사용가능
+
+
+
+ip:70.121.114.200
+
+netmask:255.255.255.0
+
+gateway:70.12.114.1
+
+dns1:168.126.63.1
+
+
+
+200 web 201 db

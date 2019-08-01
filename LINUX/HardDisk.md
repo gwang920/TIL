@@ -330,12 +330,3 @@ command : w     // 설정저장
 
 
 
-
-
-server1
-
-jdk / tomcat
-
-
-
-gnom
