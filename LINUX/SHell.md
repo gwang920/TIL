@@ -135,7 +135,7 @@ mv aaa /bbb    /// bbb로 이름이 변경된다
 
 
 
-Case 문을 통해 Tomcat을 제어하자
+- Case 문을 통해 Tomcat을 제어하자
 
 ```
 1) profile 설정
@@ -150,22 +150,23 @@ export TOMACAT_HOME
 . /etc/profile        // profile 재가동 (적용)
 
 
-#!/bin/sh
-case "$1" in
-  start)
-    echo "Start Tomcat ......"
-        $TOMCAT_HOME/bin/startup.sh
-echo "started";;
- stop)
-    echo "Stop Tomcat ....."
-        $TOMCAT_HOME/bin/shutdown.sh
-echo "stoped";;
-  check)
-    echo "Check Tomcat,,,"
-        ps -f | grep apache-tomcat-9.0.22
-        echo "checked";;
-esac
-exit 0        
+      1 #!/bin/sh
+      2 case "$1" in
+      3   start)
+      4     echo "Start Tomcat ......"
+      5         $TOMCAT_HOME/bin/startup.sh
+      6 echo "started";;
+      7  stop)
+      8     echo "Stop Tomcat ....."
+      9         $TOMCAT_HOME/bin/shutdown.sh
+     10 echo "stoped";;
+     11   check)
+     12     echo "Check Tomcat,,,"
+     13         ps -f | grep apache-tomcat-9.0.22
+     14         echo "checked";;
+     15 esac
+     16 exit 0
+
 
 		case1.sh start
 		case1.sh stop
@@ -174,17 +175,250 @@ exit 0
 
 
 
-For 문
+- For 문
+
+```
+1) .sh로 끝나는 파일을 모두 조회하고 , 파일 개수를 return, var1.sh일 때 OK! : var1.sh를 출력하자
+
+      1 #!/bin/sh
+      2 for i in $(ls *.sh)
+      3 do
+      4  if [ $i = "var1.sh" ]
+      5  then
+      6     echo "OK!: $i"
+      7  fi
+      8  cnt=`expr $cnt + 1`
+      9 done
+     10 echo "$cnt"
+     11 exit 0
+     
+     
+        for1.sh
+                           
+
+```
+
+- While 문
+
+```
+while [ var ]     //while 다음에 한칸 띄우자
+
+
+
+```
+
+
+
+window의 eclipse 에 jdk / eclipse / tomcat  paste (web 폴더 밑에)
+
+ftp / telnet : 해킹에 치명적이다
+
+window에 있는 web서버가 파일서버가 된다
+
+
+
+```
+1) eclipse내의 Dynamic WebProject 생성
+2) eclipse의 web 아래 설치파일 paste
+3) server 연결
+4) windows의 cmd 창에서 ipconfig로 ip 확인후
+
+linux 터미널에서
+
+yum -y install wget
+
+wget http://70.12.114.55/test/jdk1.8.tar.gz
+
+를 입력하면
+
+download 된다
+```
+
+
+
+
 
 ```
 #!/bin/sh
-for i in $(ls *.sh)
+
+set $(date)
+
+startTomcat(){
+echo "Input Number is .. "$1
+echo "$(date)"
+set $(date)
+echo $1 $2
+
+echo "start Tomcat Function...."
+echo $4 $5 $6
+  return
+}
+
+stopTomcat() {
+
+   echo "Input Number is .. "$1 $2
+   echo "stop Tomcat Function...."
+
+   return
+
+
+
+}
+
+echo "Tomcat Management Tool...."
+
+while [ 1 ]
 do
- echo "$i"
- cnt=`expr $cnt + 1`
+   echo "Input Command (start,stop,check,q): "
+   read cmd
+
+   case $cmd in
+        start)
+        echo $1 $2
+
+        startTomcat 10
+          echo "Tomcat Started";;
+
+        stop)
+        stopTomcat 40 50
+          echo "Tomcat Stopped";;
+
+        q)
+
+           echo "Exit"
+           break;;
+   esac
 done
-echo "$cnt"
+echo "EXit Shell Program"
 exit 0
 
+
+```
+
+
+
+##### sh로 파일 설치 경로 설정
+
+```
+1. jdk 설치
+
+   /etc/jdk1.8
+
+   /usr/bin/java symbolic link
+
+2. tomcat 설치
+
+   /etc/tomcat  
+
+   /usr/bin/startcat  symbolic link
+
+   /usr/bin/stopcat  symbolic link
+
+3. eclipse 설치
+
+   /etc/eclipse
+
+   /usr/bin/eclipse symbolic link
+
+4. 메뉴를 구성하여 설치를 진행한다
+
+5. 단, 설치가 되어 있을 경우 삭제 후 설치 진행
+
+6. 중간에 사용자에게 물어보면서 진행 (ex 삭제하시겠습니까?)
+
+
+
+
+#!/bin/sh
+while [ 1 ]
+do
+echo "Input what you wanna install (jdk , tomcat, eclipse) or quit (q) "
+read cmd
+case $cmd in
+        jdk)
+                wget http://70.12.114.58/test/jdk1.8.tar.gz
+                tar xvfz jdk1.8.tar.gz
+                if [ -e /etc/jdk1.8 ]
+                then
+                        echo "Already exits. wanna delete? (Y/N)"
+                        read cmdd
+                        if [ "$cmdd" = "Y" ]
+                        then
+                                rm -rf /etc/jdk1.8
+                        fi
+                fi
+                mv jdk1.8.0_221 /etc/jdk1.8
+                if [ -e /usr/bin/java ]
+                then
+                        rm /usr/bin/java
+                fi
+                ln -s /etc/jdk1.8/bin/java /usr/bin/java
+                echo "JDK install Complete";;
+        tomcat)
+                wget http://70.12.114.57/test/tomcat.tar.gz
+                tar xvf tomcat.tar.gz
+                fname=/etc/tomcat
+                if [ -e $fname ]
+                then
+                        echo "Already exits. wanna delete? (Y/N)"
+                        read cmdd
+                        if [ $cmdd = 'Y' ]
+                                then
+                                        rm -rf $fname
+                        fi
+                fi
+                mv apache-tomcat-9.0.22 tomcat
+                mv tomcat /etc/
+                if [ -e /usr/bin/startcat ]
+                then
+                  rm /usr/bin/startcat
+                fi
+ 
+                if [ -e /usr/bin/stopcat ]
+                then
+                 rm /usr/bin/stopcat
+                fi
+                ln -s /etc/tomcat/bin/startup.sh /usr/bin/startcat
+                ln -s /etc/tomcat/bin/shutdown.sh /usr/bin/stopcat
+               echo "Tomcat install Complete";;
+       eclipse)
+                 if [ -d /etc/eclipse ]
+                        then
+                       echo "eclipse is already installed. do you want remove and reinstall it?[Y,N]"
+                       read reinstall
+                       until [ "$reinstall" = "Y" ] || [ "$reinstall" = "N" ]
+                            do
+                               echo "please input Y or N"
+                               read reinstall
+                             done
+                        if [ $reinstall = "N" ]
+                        then
+                                echo "install system stop.."
+                                return
+                        else
+                        rm -rf /etc/eclipse/
+                        fi
+                else
+                        echo "install system is start"
+                fi
+                echo "eclipse install start"
+                wget http://70.12.114.51/test/eclipse.tar.gz
+                tar xvfz eclipse.tar.gz
+               mv eclipse /etc/eclipse
+                if [ -e /usr/bin/eclipse ]
+                then
+                        rm /usr/bin/eclipse
+                fi
+                ln -s /etc/eclipse/eclipse /usr/bin/eclipse
+                echo "Tomcat install Complete";;
+        q)
+                break;;
+        	*)
+	                ;;
+	esac
+ 
+	done
+ 
+	exit 0
 ```
 
