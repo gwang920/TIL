@@ -806,6 +806,13 @@ swapon -s            // 가상 메모리 용량 확인
 
 cd /root/file    // 파일 위치 디렉터리 이동
 yum -y localinstall oracle*    // 오라클 설치
+
+service oracle-xe configure    // 환경설정 시작
+
+vi /etc/bashrc ->맨마지막줄에 추가하자
+. /u01/app/oracle/product/11.2.0/xe/bin/oracle_env.sh  // 오라클 환경설정
+
+/etc/init.d/oracle-xe start  // 서비스 시작
 ```
 
 

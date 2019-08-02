@@ -62,6 +62,14 @@ Tomcat - Web
 
 
 
+yum -y localinstall ora~
+
+service oracle-xe configure
+
+ default로 설정하고 비밀번호만 설정하자
+
+
+
 
 
 

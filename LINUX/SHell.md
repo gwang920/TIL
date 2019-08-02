@@ -327,7 +327,7 @@ exit 0
 6. 중간에 사용자에게 물어보면서 진행 (ex 삭제하시겠습니까?)
 
 
-
+- jdk / eclipse / tomcat setup
 
 #!/bin/sh
 while [ 1 ]
