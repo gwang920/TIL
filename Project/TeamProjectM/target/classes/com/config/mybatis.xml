@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+PUBLIC "-//mybatis.org/DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<typeAliases>
+		<typeAlias type="com.vo.User" alias="user"/>
+		<typeAlias type="com.vo.Board" alias="board"/>
+		<typeAlias type="com.vo.Food" alias="food"/>
+	</typeAliases>
+	
+	<mappers>
+		<mapper resource="com/config/boardMapper.xml"/>
+		<mapper resource="com/config/categoryMapper.xml"/>
+		<mapper resource="com/config/foodMapper.xml"/>
+		<mapper resource="com/config/hintMapper.xml"/>
+		<mapper resource="com/config/ignoreMapper.xml"/>
+		<mapper resource="com/config/preferenceMapper.xml"/>
+		<mapper resource="com/config/userMapper.xml"/>
+	</mappers>
+</configuration>
+
+
+
+
+
+
