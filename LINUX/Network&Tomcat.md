@@ -78,7 +78,7 @@ service oracle-xe configure
 
 
 
-ip:70.121.114.200
+ip:70.12.114.200
 
 netmask:255.255.255.0
 
