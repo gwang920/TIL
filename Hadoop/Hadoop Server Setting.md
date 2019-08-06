@@ -45,7 +45,6 @@ GATEWAY=70.12.116.2
 
 DNS1=70.12.116.2
 
-00:50:56:24:29:E5
 
 4) etc/profile
 
@@ -54,7 +53,7 @@ CLASSPATH=/etc/jdk1.8/lib
 TOMCAT_HOME=/etc/tomcat
 HADOOP_HOME=/etc/hadoop-1.2.1       // 추가
 
-export JAVA_HOME CLASSPATH TOMCAT_HOME
+export JAVA_HOME CLASSPATH TOMCAT_HOME HADOOP_HOME
 PATH=.:$JAVA_HOME/bin:$TOMCAT_HOME/bin:$HADOOP_HOME/bin:$PATH  // 추가
 export PATH USER LOGNAME MAIL HOSTNAME HISTSIZE HISTCONTROL
 ```
@@ -145,7 +144,7 @@ cd /etc/hadoop-1.2.1/
 
 </configuration>
 
-
+systemctl stop firewalld : firewall을 죽이겠다
 systemctl disable firewalld  
 // firewall 사용하지 않겠다 : server들끼리 port를 열겠다
 
@@ -162,7 +161,7 @@ systemctl disable firewalld
 
 <property>
 
-  <name>dfs.replication</name>
+  <name>dfs.replication</name>   
 
   <value>1</value>
 
@@ -285,7 +284,7 @@ systemctl disable firewalld
 
 
 
-##### 디렉토리 컨트롤
+##### Directory controll
 
 ```
 - Test 라는 디렉토리에 README.txt 올리고 가져오는 과정
@@ -319,3 +318,4 @@ hadoop jar hadoop-examples-1.2.1.jar wordcount /data/input1 /data/output1
 ```
 
 ![patr](https://user-images.githubusercontent.com/49560745/62455365-263ae880-b7b1-11e9-9437-5c80d4454e1f.png)
+
