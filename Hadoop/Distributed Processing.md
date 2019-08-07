@@ -211,6 +211,25 @@ jobtracker가 tasktracker에게 분석을 요청하고, 받을 수 있다
 
 
 
+windows에서 서버 접근시 안될 때
+
+
+C:\Windows\System32\drivers\etc
+
+hosts파일에 설정해주기 
+70.12.114.201 hadoopserver2
+추가!
+
++
+
+firewalld 켰다 끄기 
+
+systemctl start firewalld
+systemctl enable firewalld
+
+systemctl stop firewalld
+systemctl disable firewalld
+
 
 ```
 

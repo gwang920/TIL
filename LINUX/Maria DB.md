@@ -13,7 +13,7 @@ Download
 
 1)
 cd /file/maria
-yum -y remove mairadb-libs   // 충돌나는 패키지 삭제
+yum -y remove mairadb-libs   // 충돌나는 패키지 삭제 in root
 yum -y localinstall Maria*   // Maria로 시작하는 파일 전부 설치
 
 2)
