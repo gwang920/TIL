@@ -51,4 +51,4 @@ window showview project exploler
 
 
 
-* JRE  : 자바를 구현할 수 있는
+* JRE  : JVM(자바)을 구현할 수 있게 하는 환경설정 / 라이브러리
