@@ -511,3 +511,34 @@ case $cmd in
 	exit 0
 ```
 
+
+
+
+
+* 참고
+
+```
+입력
+for1.sh 1.sh 2.sh 3.txt
+
+
+echo "$0" 
+echo "$1"
+echo "$2"
+echo "$3"
+
+
+	for1.sh
+	
+	
+	
+결과 
+
+	for1.sh
+	1.sh
+	2.sh
+	3.txt
+
+
+```
+

@@ -182,7 +182,6 @@
 
 ##### - Data의 la,lo  즉, 위도,경도의 정보만 가져와서 지도에 표시하자
 
-![1561549912397](C:\Users\student\AppData\Roaming\Typora\typora-user-images\1561549912397.png)
 
 ```html
 <!DOCTYPE html>
