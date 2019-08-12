@@ -8,8 +8,9 @@
 		<filter-name>enc</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping> 어떻게 들어오든간에 utf 8로 바꿔라
-	
-	
+
+
+​	
 	  <servlet>
 			<servlet-name>action</servlet-name>  서블렛 이름
 			<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>   // spring에서 제공해주는 서블렛
@@ -18,8 +19,9 @@
 				<param-name>contextConfigLocation</param-name>			<param-		value>/WEB-INF/config/spring.xml</param-value>   
 			</init-param>
 		</servlet>
-	
-	
+
+
+​	
 
 
 
@@ -110,9 +112,7 @@ WEB-INF -> config 에 paste
  
  가상의 error page 
  
- 
- 
- 
+  
  
  * root 설정
  

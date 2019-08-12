@@ -771,7 +771,13 @@ systemctl restart crond    // 적용을 위해 재시작
 	
  실행을 위해 입력 : 01 * * * * root run-parts /etc/cron.hourly
 	
+		// 매시간 1분에 /etc/cron.hourly 디렉터리 안에 있는 명령들을 자동으로 실행
+	
 	run-parts : 디렉터리안의 명령을 모두 실행한다 (모든 script 실행)
+	
+	
+	
+	
  
  
  at 명령어

@@ -297,6 +297,95 @@ exit 0
 
 
 
+```
+substr
+
+A=aaabcd
+${a:0:4}
+
+결과 aaab
+
+
+
+******* 주의 ********
+
+date 사용시
+
+date=`date` // ` `  (~) 사용하자
+
+date='date' // 작은따옴표 x
+
+
+"${date:0:4}-${date:6:2}-${date:10:2}"
+
+date : 20190710
+
+결과
+2019-07-10
+
+
+
+
+-----------------------------------------------------------------------------
+1)
+
+#!/bin/sh
+date=`date`
+echo "$date"
+partitionName="${date:0:4}-${date:6:2}-${date:10:2}"
+echo $partitionName
+fileName="work.log"
+echo $fileName
+if [ -f /root/log/$fileName  ]
+then
+
+
+ hive << EOF
+
+LOAD DATA LOCAL INPATH '/root/log/$fileName' OVERWRITE INTO LOGINFO PARTITION (cDate="$partitionName")
+
+EOF
+      echo "OK"
+
+      echo "OK"
+      else
+        echo "File Not Found"
+      fi
+      
+      
+      
+2)
+
+vi /etc/ crontab
+
+
+SHELL=/bin/bash
+PATH=/sbin:/bin:/usr/sbin:/usr/bin
+MAILTO=root
+
+# For details see man 4 crontabs
+
+# Example of job definition:
+# .---------------- minute (0 - 59)
+# |  .------------- hour (0 - 23)
+# |  |  .---------- day of month (1 - 31)
+# |  |  |  .------- month (1 - 12) OR jan,feb,mar,apr ...
+# |  |  |  |  .---- day of week (0 - 6) (Sunday=0 or 7) OR sun,mon,tue,wed,thu,fri,sat
+# |  |  |  |  |
+# *  *  *  *  * user-name  command to be executed
+  15 11 12 8  * root run-parts /root/cron.daily
+  
+  
+
+
+```
+
+
+
+
+
+
+
 ##### sh로 파일 설치 경로 설정
 
 ```
