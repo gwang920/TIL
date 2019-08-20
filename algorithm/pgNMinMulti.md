@@ -2,6 +2,10 @@
 
 - 실패의 else문과 성공의 gcd / lcm 을 비교하자..
 
+- 기초적인 문제
+
+- 코드를 일반화 시키는 연습을 하자
+
   
 
 # 실패
@@ -75,6 +79,7 @@ int gcd(int a, int b)        // 최대공약수 구하기
 	}
 	return a;
 }
+
 int lcm(int a, int b)         // 최소공배수 구하기
 {
     return a * b / gcd(a, b);
