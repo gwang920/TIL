@@ -28,7 +28,7 @@ int dfs(int i,int bgcount){
     }   
 }
 
-이 코드의 문제점은 int 형인 dfs의 반환 값이 모두 지정 되지 않는 점이다.
+ 이 코드의 문제점은 int 형인 dfs의 반환 값이 모두 지정 되지 않는 점이다.
 꼬리물기로 dfs()->dfs()->... 로 그려질텐데
 
 if문의 조건에 만족해야만 return을 해준다.
@@ -108,7 +108,7 @@ int solution(string begin, string target, vector<string> words) {
             flag=1;
         }
     }
-    if(!flag) return 0;   
+    if(flag==0) return 0;   
     
     // 순차적으로 탐색
     for(int i=0;i<words.size();i++){
