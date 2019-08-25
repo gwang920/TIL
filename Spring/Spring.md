@@ -8,7 +8,6 @@ Model 1
  Container : JSP(Controller + View)
 
 
-
 Model 2
 
  Container : Servlet(Controller) + JSP(VIEW) + JavaBeans(Model)
