@@ -23,6 +23,7 @@ vector<int> solution(int brown, int red) {
         x--;
         y=sum/x;        
     } 
+
 }
 ```
 
