@@ -257,9 +257,3 @@ class captionTest{
 11
 ```
 
-
-
-
-
-##### 다형성(polymorphism)
-
