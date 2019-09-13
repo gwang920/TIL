@@ -186,13 +186,9 @@ Log.e("[Error]...","Error");
 
 
 
-drawable
+drawable - 배경
 
-배경
-
-mipmap
-
-아이콘
+mipmap - 아이콘
 
 
 
