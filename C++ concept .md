@@ -1,4 +1,4 @@
-# C++ concept - Daily Update
+# C++ concept
 
 
 
