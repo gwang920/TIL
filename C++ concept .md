@@ -46,3 +46,73 @@ Person::~Person()
 
 ```
 
+##### inline함수
+
+```
+inline함수는 프로르램의 실행 속도를 
+향상시키기 위해 사용
+
+일반함수와는 다르게 호출되어 실행되지 않고, 
+컴파일 된 함수 코드가 코드안에 직접 삽입된다
+
+
+- 일반함수 호출시
+
+#include <stdio.h> 
+
+
+void print() 
+{ 
+printf("Hello, world!\n"); 
+} 
+
+int main() 
+{ 
+
+print(); 
+return 0; 
+}
+
+
+코드 실행 과정
+
+1.main 시작
+2.print 함수 호출
+3.main 복귀
+
+
+
+- inline함수 호출시
+
+#include <stdio.h> 
+
+void print() 
+{ 
+
+printf("Hello, world!\n"); 
+} 
+
+int main() 
+{ 
+print(); 
+return 0; 
+
+}
+
+
+코드 실행 과정
+
+1.일반 함수와 달리 코드자체에 컴파일 되어
+삽입되므로 아래의 코드처럼 컴파일 된다
+
+#include <stdio.h> 
+int main()
+{ 
+
+printf("Hello, world!\n"); 
+return 0; 
+}
+
+
+
+```
