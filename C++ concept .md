@@ -50,6 +50,9 @@ Person::Person()
 
 - 소멸자 (Destructor)
 
+생성자와는 반대로 객체소멸시 반드시
+호출되는 것이 소멸자
+
 ex)
  
 Person::~Person()
