@@ -64,7 +64,7 @@ export PATH USER LOGNAME MAIL HOSTNAME HISTSIZE HISTCONTROL
 
 ```
 - SERVER끼리 왕래하는데 PASSWORD 묻는 과정을 없애기 위해서
- key가 맞는 놈들끼리는 password를 묻지 말아라!
+ 즉,key가 맞는 놈들끼리는 password를 묻지 말아라!
 
 1) $ ssh-keygen -t dsa -P '' -f ~/.ssh/id_dsa  
 
