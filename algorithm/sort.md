@@ -31,3 +31,18 @@ sort(d.begin(),d.end(),greater<int>());  // 내림차순정리
 sort(d.begin(),d.end(),compare)     // 사용자 정의 함수 사용
 ```
 
+#초기화
+
+
+방문처리 배열을 초기화할 때 for문안에
+선언하고 초기화해주면 매번 초기화가 자동으로
+돈다
+
+for(int i=0;i<N;i++){
+
+
+ int visited[10001]={};
+
+
+
+}
