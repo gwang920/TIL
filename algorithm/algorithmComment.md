@@ -33,3 +33,13 @@ J
 vector<bool> visit(tickets.size(), false); 
 ```
 
+
+
+
+
+##### 트러블 슈팅 **signal: floating point exception (core dumped)**
+
+```
+나누기 할시 변수/0꼴이 있으면 발생
+```
+
