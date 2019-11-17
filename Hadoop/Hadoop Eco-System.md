@@ -5,8 +5,6 @@
 ```
 - map reduce를 쉽게하기 위해서 Hive를 도입 (map reduce 프로그래밍이 상당히 복잡)
 - 요청한 sql문장을 Map Reduce 프로그램으로 변환해준다
-
-
 ```
 
 ##### HIVE 데이터구조
