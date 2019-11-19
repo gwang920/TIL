@@ -31,6 +31,8 @@ J
 
 ```c++
 vector<bool> visit(tickets.size(), false); 
+
+// (크기,초기값) 지정 가능
 ```
 
 
