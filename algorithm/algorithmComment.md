@@ -30,9 +30,15 @@ J
 ##### vector 초기화(크기 및 값 지정)
 
 ```c++
+1) 1차원 배열
 vector<bool> visit(tickets.size(), false); 
 
 // (크기,초기값) 지정 가능
+
+2) 2차원 배열
+vector<vector<int> > arr(6, vector<int>(5, 0));
+
+// int arr[6][5] 배열 선언. 0으로 값 초기화
 ```
 
 
