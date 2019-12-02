@@ -116,3 +116,115 @@ int solution(vector<vector<int>> land, int height) {
 }
 ```
 
+
+
+```
+#include <string>
+#include <vector>
+#include <iostream>
+#include <math.h>
+#include <queue>
+using namespace std;
+int check[300][300]={(0,0),};
+int visited[300][300]={(0,0),};
+int dx[4]={0,1,0,-1};
+int dy[4]={1,0,-1,0};
+int con[300][300]={(0,0),};
+queue<pair<int,int>> q;
+vector<int> v[300];
+vector<int> sum;
+priority_queue<int> pq;
+
+void line(int y,int x,vector<vector<int>> land){
+    
+    visited[y][x]=1;
+    int ny=0,nx=0;
+    for(int i=0;i<4;i++){
+        
+        ny=y+dy[i];
+        nx=x+dx[i];
+        
+        if(ny<0 || nx<0 || ny>land.size()-1 || nx>land.size()-1 || 3ㅊ 98visited[ny][nx]) continue;
+        
+        if(check[y][x]==check[ny][nx]) line(ny,nx,land);
+        if(check[y][x]!=check[ny][nx]) 
+        {   int temp=0;
+            if(!con[check[y][x]][check[ny][nx]]) con[check[y][x]][check[ny][nx]]=10000;
+            temp=abs(land[y][x]-land[ny][nx]);
+            con[check[y][x]][check[ny][nx]]=min(temp,con[check[y][x]][check[ny][nx]]);
+            
+         }   
+    }
+  
+}
+
+        
+void level(int y,int x,vector<vector<int>> land,int height,int cnt){
+    q.push({y,x});
+    check[y][x]=cnt;
+    while(!q.empty()){
+        auto now=q.front(); q.pop();
+        for(int i=0;i<4;i++){
+        int ny=now.first+dy[i]; int nx=now.second+dx[i];
+        if(ny<0 || nx<0 || ny>land.size()-1 || nx>land.size()-1) continue;
+        int temp=0;
+            temp=abs(land[now.first][now.second]-land[ny][nx]);
+            //  temp=abs(land[y][x]-land[ny][nx]);
+        if(temp>height || check[ny][nx]) continue;
+        
+        check[ny][nx]=cnt;    
+        q.push({ny,nx});    
+    }    
+    }
+
+}
+
+int solution(vector<vector<int>> land, int height) {
+    int answer = 0;
+    int cnt=0;
+    
+    for(int i=0;i<land.size();i++){
+        for(int j=0;j<land.size();j++){
+            if(!check[i][j]) {
+                cnt++;
+                level(i,j,land,height,cnt); 
+                 }
+        }
+    }
+    for(int i=0;i<land.size();i++){
+        for(int j=0;j<land.size();j++){
+            if(!visited[i][j]) {
+                line(i,j,land); 
+                 }
+        }
+    }
+    for(int i=0;i<land.size();i++){
+        for(int j=0;j<land.size();j++){   
+            cout << check[i][j];
+        }
+        cout<< ""<< endl;
+    }
+    
+ 
+    for(int i=1;i<=cnt;i++){
+        for(int j=1;j<=cnt;j++){
+            if(con[i][j]) {pq.push(con[i][j]); }
+ 
+        }
+    }
+   
+   while(1){
+       if(pq.size()==cnt-1) break;
+       
+       pq.pop();
+   } 
+ 
+   
+       for(int i=0;i<cnt-1;i++){
+       answer+=pq.top(); pq.pop();    
+       }
+       
+    return answer;
+}
+```
+
