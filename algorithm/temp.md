@@ -118,7 +118,7 @@ int solution(vector<vector<int>> land, int height) {
 
 
 
-```
+```c++
 #include <string>
 #include <vector>
 #include <iostream>
