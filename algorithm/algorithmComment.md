@@ -51,3 +51,13 @@ vector<vector<int> > arr(6, vector<int>(5, 0));
 나누기 할시 변수/0꼴이 있으면 발생
 ```
 
+
+
+
+
+##### int 형 범위 초기화
+
+```c++
+int answer = 0x7f7f7f7f;
+```
+
