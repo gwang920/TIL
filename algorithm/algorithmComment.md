@@ -61,3 +61,25 @@ vector<vector<int> > arr(6, vector<int>(5, 0));
 int answer = 0x7f7f7f7f;
 ```
 
+
+
+
+
+##### 플로이드 와샬 알고리즘
+
+```c++
+기본 구조
+
+// k = 거쳐가는 노드
+for(int k=0;k<N;k++){
+	// i = 시작 노드
+	for(int i=0;i<N;i++){
+		// j = 도착 노드
+		for(int j=0;j<N;j++){
+			if(map[i][j]<map[i][k]+map[k][j])
+            	map[i][j]=map[i][k]+map[k][j];
+		}	
+	}
+}
+```
+
