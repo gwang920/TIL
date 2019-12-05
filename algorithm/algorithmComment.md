@@ -83,3 +83,106 @@ for(int k=0;k<N;k++){
 }
 ```
 
+
+
+
+
+##### queue VS stack
+
+```
+queue : 선입 선출
+	q.top()						
+  		   [][][][][][][][] 
+	q.pop()				
+stack : 후입 선출
+						  s.top()
+  		 [][][][][][][][]
+  		 				  s.pop();
+  		 				  
+  		 				  
+ ex)
+ arr[4]={1,2,3,4};
+ 
+ 배열을 각각 queue와 stack에 넣어주면
+ 
+ queue [1][2][3][4]
+ stack [1][2][3][4]
+ 
+ 가 된다.
+ 
+ 이때 queue.top() = [1]
+ 	  stack.top() = [4]
+ 	  
+ 	  가 됨
+ 	  
+ 즉, queue와 stack은 top()의 위치가 다르다
+ 
+```
+
+
+
+##### 자료형 크기
+
+```c++
+#include <string>
+#include <vector>
+#include <iostream>
+using namespace std;
+long long solution(int n) 
+{
+    vector<long> v;  // vector<int> v; 로 두면 효율성 오류 발생
+    v.push_back(1);
+    v.push_back(1);
+    // int sum=0; 으로 두면 효율성 오류 발생
+    long long answer = 0;
+    long long sum=2;
+    for(int i=0;i<n-2;i++){
+         v.push_back(v[i]+v[i+1]);
+         sum+=v[i+2];
+     }
+    answer=4*sum-2*(sum-1);
+    return answer;
+}
+
+```
+
+
+
+##### 배열 초기화 ( 전역 / 지역)
+
+```c++
+1) 전역변수 선언
+int map[20001][20001];
+int solution(int n, vector<vector<int>> edge) {
+
+     for(int i=1;i<=n;i++){
+        for(int j=1;j<=n;j++){
+          cout << map[i][j];
+        }
+        cout << endl;
+    }
+}
+
+출력
+000000
+000000
+000000
+000000
+000000
+000000
+
+2) 지역변수 선언
+int solution(int n, vector<vector<int>> edge) {
+	int map[20001][20001];  // 쓰레기값이 들어간다
+     for(int i=1;i<=n;i++){
+        for(int j=1;j<=n;j++){
+          cout << map[i][j];
+        }
+        cout << endl;
+    }
+}
+
+출력
+signal: segmentation fault (core dumped)
+```
+

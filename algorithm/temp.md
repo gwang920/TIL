@@ -228,3 +228,122 @@ int solution(vector<vector<int>> land, int height) {
 }
 ```
 
+
+
+
+
+##### 가장 먼 노드
+
+```
+#include <string>
+#include <vector>
+#include <iostream>
+#include <queue>
+#include <math.h>
+using namespace std;
+int map[20001][20001];
+bool visited[20001][20001];
+queue<pair<int,int>> q;
+int solution(int n, vector<vector<int>> edge) {
+    int answer = 0;
+    int maximum=0;
+    for(int i=0;i<edge.size();i++){
+            map[edge[i][0]][edge[i][1]]=1;
+            map[edge[i][1]][edge[i][0]]=1;
+    }
+    for(int i=1;i<=n;i++){
+        for(int j=1;j<=n;j++){
+            if(map[i][j]) {
+               q.push({j,1});
+                while(!q.empty()){
+                    auto now=q.front(); q.pop();
+                    int y=now.first;
+                    int depth=now.second;
+                    for(int k=2;k<=n;k++){
+                        if(y==k) continue;
+                        if(map[y][k]){
+                            if(!map[1][k]) map[1][k]=depth+1;
+                            else if(map[1][k]>depth+1){
+                                map[1][k]=depth+1;
+                                maximum=map[1][k];
+                                q.push({k,depth+1});
+                            }else{
+                                maximum=depth+1;
+                            }
+                        }        
+                    }
+                }
+            }
+        }
+        
+    }
+    for(int i=1;i<=n;i++){
+        for(int j=1;j<=n;j++){
+            
+            cout << map[i][j];
+        }
+        cout << endl;
+    }
+    
+   for(int i=1;i<=n;i++){
+       
+       if(map[1][i]==maximum) answer++;
+   }
+
+    return answer;
+}
+```
+
+
+
+##### 브라이언의 고민
+
+```
+#include <string>
+#include <stdio.h>
+#include <iostream>
+using namespace std;
+
+// 전역 변수를 정의할 경우 함수 내에 초기화 코드를 꼭 작성해주세요.
+string solution(string sentence) {
+    string answer = "";
+    
+    // a=97 b=98 ...
+
+    int idx=0;
+    while(1){
+    if(sentence[idx]>='a') 
+    {   
+        for(int i=idx+1;i<sentence.length();i++){
+            if(sentence[i]==sentence[idx])
+            {   
+                if(i!=sentence.length()-1) answer+=" ";
+                idx=i+1;
+                break; 
+            }   
+            answer+=sentence[i];
+        }
+    }
+    else if(sentence[idx+1]>='a') 
+    {
+        for(int i=idx+1;i<=sentence.length();i+=2){
+           if(sentence[i]==sentence[idx+1]){
+               
+               answer+=sentence[i-1];
+           }else{
+               answer+=sentence[i-1];
+               if(i!=sentence.length()) answer+=" ";
+               idx=i;
+               break;
+           }
+            
+        }
+    }
+    else if(idx>=sentence.length()-1) break;
+    }
+   	
+    
+    return answer;
+}
+```
+
