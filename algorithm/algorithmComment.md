@@ -89,9 +89,12 @@ for(int k=0;k<N;k++){
 
 ##### queue VS stack
 
-```
+```c++
+간단하게 queue의 반대는 stack이다(?)
+
+
 queue : 선입 선출
-	q.top()						
+	q.front()						
   		   [][][][][][][][] 
 	q.pop()				
 stack : 후입 선출
@@ -117,6 +120,21 @@ stack : 후입 선출
  	  
  즉, queue와 stack은 top()의 위치가 다르다
  
+ ex)
+ 	queue<int> q1;
+    stack<int> s1;
+    
+    for(int i=0;i<5;i++){
+        
+        q1.push(i);
+        s1.push(i);
+    }
+    
+    cout << "q1=" << q1.front() <<"s1=" <<s1.top();
+    q1.pop(); s1.pop();
+    cout << "q1="<<q1.front() << "s1="<<s1.top();
+    
+    출력 	q1=0 s1=4 q1=1 s1=3
 ```
 
 
