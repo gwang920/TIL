@@ -39,6 +39,12 @@ vector<bool> visit(tickets.size(), false);
 vector<vector<int> > arr(6, vector<int>(5, 0));
 
 // int arr[6][5] 배열 선언. 0으로 값 초기화
+
+3) vector형을 갖는 우선순위큐
+#include <functional>  // greater를 위함
+
+typedef pair<int,pair<int,int>> PAIR;
+priority_queue<PAIR,vector<PAIR>,greater<PAIR>> pq;
 ```
 
 
@@ -52,6 +58,12 @@ vector<vector<int> > arr(6, vector<int>(5, 0));
 ```
 
 
+
+##### 배열 최대크기
+
+```
+[20001] x [20001]
+```
 
 
 
