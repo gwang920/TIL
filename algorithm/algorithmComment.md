@@ -216,3 +216,15 @@ int solution(int n, vector<vector<int>> edge) {
 signal: segmentation fault (core dumped)
 ```
 
+
+
+##### string -> int
+
+```c++
+string numbers=155;
+int temp=5;
+if(numbers[j]-'0'==temp)
+
+와 같이 string -> int로 변환하여 비교가 가능하다.
+```
+
