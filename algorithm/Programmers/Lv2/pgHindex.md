@@ -2,7 +2,7 @@
 
 - 카테고리 : 정렬
 
-- 테스트케이스 하나가 계속 안맞는다.
+- 테스트케이스 하나가 계속 안맞아 구글링을 참고했다.
 
 
 
@@ -29,6 +29,26 @@ int solution(vector<int> citations) {
         }
         count++;
     }
+}
+```
+
+
+
+# 성공
+
+```c++
+#include <vector>
+#include <algorithm>
+using namespace std;
+
+int solution(vector<int> citations) {
+    int answer = 0;
+    sort(citations.begin(),citations.end(),greater<int>());
+    while(answer<citations.size()){
+        if(citations[answer]<=answer) break;
+        answer++;
+    }
+    return answer;
 }
 ```
 
