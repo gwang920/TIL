@@ -72,7 +72,7 @@ ex) TV의 속성과 기능
 
   * 'time' 을 활용하여 객체지향을 느껴보자
   * attribute - 날짜 / 시간 /  
-  * fucntion - 스탑워치 / 
+  * function - 스탑워치 / 
 
   ```java
   package time;
