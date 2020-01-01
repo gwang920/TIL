@@ -73,9 +73,6 @@ https://commin.tistory.com/106
 추상화, 인터페이스 사용 이유
 https://marobiana.tistory.com/58
 
-|인터페이스|추상클래스|
-|클래스가 아니다|클래스다|
-|클래스와 관련이 없다|클래스와 관련이 있다
 ```
 
 ### 4. object에 대해 설명하시오.
