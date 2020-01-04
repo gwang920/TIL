@@ -500,10 +500,10 @@ DB에 입력하는 것은 서비스 성능에 저하를 가져 올 수
 http://kiise.or.kr/e_journal/2015/8/KTCP/pdf/02.pdf
 
 
+
 오래된 로그 삭제 / 동시에 수집
 오래된 로그 압축하여 관리
 분산처리 시스템
-
 
 
 시내버스 정류장·노선 및 유동인구 데이터의 특성에 맞추어 지도를 이용한 시각화 결과를 활용
@@ -520,6 +520,74 @@ http://kiise.or.kr/e_journal/2015/8/KTCP/pdf/02.pdf
  실제로 LOG데이터 수집, 프로젝트를 직접 사용해보며 문제점, 개선해야 할 부분을 찾아보며 검증해보았음.
  
 ```
+
+
+
+```xml
+log - 콘솔 / 파일
+
+https://m.blog.naver.com/PostView.nhn?blogId=byebird&logNo=20140995455&proxyReferer=https%3A%2F%2Fwww.google.com%2F
+
+- log의 다섯가지 레벨
+ debug, info, warn, error, fatal
+ 
+자 개발시에 필요한 DEBUG정보들은 DEBUG로 레벨로 로그를 남기고 실제 운영시에는 로그레벨을 ERROR 레벨로 설정하면 로그가 쌓이는데 소모되는 시스템부하를 줄일 수가 있겠죠? 또한 문제가 발생시에는 로그레벨을 DEBUG로 설정하여 로그를 확인하면 오류를 쉽게 컨트롤 할 수 있을 것이라 봅니다.
+
+
+log4j.rootCategory=DEBUG, console, filelog
+
+log4j.appender.console=org.apache.log4j.ConsoleAppender
+log4j.appender.console.layout=org.apache.log4j.PatternLayout
+log4j.appender.console.layout.ConversionPattern=%-5p,%d{yyyy/MM/dd HH:mm:ss.SSS},%-5X{APP}, %-8X{TSC}, %m %n
+
+log4j.appender.filelog=org.apache.log4j.DailyRollingFileAppender
+log4j.appender.filelog.Append=true
+log4j.appender.filelog.DatePattern='.'yyyy-MM-dd-HH
+log4j.appender.filelog.File=./log/application.log
+log4j.appender.filelog.layout=org.apache.log4j.PatternLayout
+log4j.appender.filelog.layout.ConversionPattern=%-5p,%d{yyyy/MM/dd HH:mm:ss.SSS},%-5X{APP}, %-8X{TSC}, %m %n
+```
+
+
+
+```java
+package org.power.test;
+
+import org.apache.log4j.Logger;
+import org.power.dao.BbsDAO;
+import org.power.dao.BbsMybatisDAOImpl;
+import org.power.vo.BbsVO;
+import junit.framework.TestCase;
+
+public class BbsMybatisDAOImplTest extends TestCase {
+
+             private BbsDAO bbsdao;
+             public Logger logger;
+
+		protected void setUp() throws Exception {
+                           super.setUp();
+
+                           bbsdao = new BbsMybatisDAOImpl();
+                           logger = Logger.getLogger(this.getClass());
+
+             }
+
+             public void testSelect() {
+
+                           BbsVO vo = new BbsVO();                            
+                           try {
+                     vo = bbsdao.select(1500);
+                    logger.info(vo.toString());
+                    logger.warn(vo.toString());
+                    logger.error(vo.toString());
+                    logger.fatal(vo.toString());
+                            } catch (Exception e) {                           
+                         e.printStackTrace();                 
+                            }          
+             }
+```
+
+
 
 
 
