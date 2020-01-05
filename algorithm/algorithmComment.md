@@ -228,3 +228,23 @@ if(numbers[j]-'0'==temp)
 와 같이 string -> int로 변환하여 비교가 가능하다.
 ```
 
+
+
+##### rotate (90 도 회전)
+
+```c++
+for (int y = 0; y < n; ++y) {
+			for (int x = 0; x < n; ++x) {
+				temp[y][x] = map[n - x - 1][y];           ///90 도 회전 ?  
+			} 
+		}
+
+		for (int y = 0; y < n; ++y) {			// map[y][x]=map[n-x-1][y] 하지 않는 이유는  
+			for (int x = 0; x < n; ++x) {		// map[y][x]의 값이 먼저 바뀌기 때문에 원래의 map[y][x]  값은 사라진다. 
+				map[y][x] = temp[y][x];
+			}
+		}
+```
+
+
+
