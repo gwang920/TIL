@@ -45,6 +45,18 @@ vector<vector<int> > arr(6, vector<int>(5, 0));
 
 typedef pair<int,pair<int,int>> PAIR;
 priority_queue<PAIR,vector<PAIR>,greater<PAIR>> pq;
+
+
+* 참고
+Queue 
+- 기본 생성자 형식
+queue<자료형> 변수명;
+ex) queue<int> q;
+
+- 내부 컨테이너 구조를 바꾸는 생성자 형식
+queue<자료형,컨테이녀 자료형> 변수명;
+ex) queue<int,list<int>> q;
+	queue<string,list<string>> q;	
 ```
 
 
