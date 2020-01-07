@@ -258,5 +258,48 @@ for (int y = 0; y < n; ++y) {
 		}
 ```
 
+### 실수
+
+##### BFS - 단순한 실수를 놓치지 말자
+
+```
+map[y][x]로 두면 값이 다르게 된다.
+이미 queue에 (1,2)가 저장된 상태에서
+bfs(3,4)를 해주면
+
+(q.front().first = 1) != (y=3)
+(q.front().second=2) != (x=4)
+
+으로 두 값이 같지 않다.
+```
+
+
+
+```C++
+void bfs(int y,int x){
+    q.push({y,x});
+    while(!q.empty()){
+        auto now=q.front(); q.pop();
+        for(int i=0;i<4;i++){
+            int ny=now.first+dy[i];
+            int nx=now.second+dx[i];
+            
+            if(ny>size-1 || nx>size-1 || ny<0 || nx<0) continue;
+            int dist=abs(map[y][x]-map[ny][nx]); //(X) ************************
+			// int dist= abs(map[now.first][now.second]-map[ny][nx]);
+            if(visited[ny][nx]) continue;
+            
+            if(dist<=level){
+                q.push({ny,nx});
+                visited[ny][nx]=1;
+            }else if(dist>level){
+                pq.push({dist,{ny,nx}});
+            }
+        }
+    }
+    return;
+}
+```
+
 
 

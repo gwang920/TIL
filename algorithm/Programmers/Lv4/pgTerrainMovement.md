@@ -2,7 +2,7 @@
 
 - 카테고리 : BFS
 
-  ### 내가 짠 코드는 90000 x 90000 의 index를 갖는 배열이 필요했다. ( 사실상 불가능한 코드 )
+  ### 실패 코드는 90000 x 90000 의 index를 갖는 배열이 필요했다. ( 사실상 불가능한 코드 )
 
 - testcase 30개중 15개만 통과했다. ( 최대 배열 사이즈  20000 x 20000 으로 만족 가능한 testcase 개수가 15개인 것 같다. )
 
@@ -210,6 +210,77 @@ int solution(vector<vector<int>> land, int height) {
         answer+=pq.top().first;
         visited[pq.top().second.first][pq.top().second.second]=1;
         bfs(land,height);
+    }
+    return answer;
+}
+```
+
+
+
+# 추가 ( 실패 - 실수 : ************************ 지점)
+
+```c++
+#include <string>
+#include <vector>
+#include <algorithm>
+#include <queue>
+#include <math.h>
+#include <functional>
+#include <iostream>
+using namespace std;
+queue<pair<int,int>> q;
+
+typedef pair<int,pair<int,int>> PAIR;
+priority_queue<PAIR,vector<PAIR>,greater<PAIR>> pq;
+
+vector<vector<int>> map;
+const int dx[]={0,1,0,-1};
+const int dy[]={1,0,-1,0};
+int visited[300][300]={0,};
+int size,level;
+
+void bfs(int y,int x){
+    q.push({y,x});
+    while(!q.empty()){
+        auto now=q.front(); q.pop();
+        for(int i=0;i<4;i++){
+            int ny=now.first+dy[i];
+            int nx=now.second+dx[i];
+            
+            if(ny>size-1 || nx>size-1 || ny<0 || nx<0) continue;
+            int dist=abs(map[y][x]-map[ny][nx]); //(X) ************************
+			// int dist= abs(map[now.first][now.second]-map[ny][nx]); (O)
+            if(visited[ny][nx]) continue;
+            
+            if(dist<=level){
+                q.push({ny,nx});
+                visited[ny][nx]=1;
+            }else if(dist>level){
+                pq.push({dist,{ny,nx}});
+            }
+        }
+    }
+    return;
+}
+
+
+
+int solution(vector<vector<int>> land, int height) {
+    int answer = 0;
+    size=land.size(); map=land; level=height;
+    visited[0][0]=1;
+    bfs(0,0);
+    while(!pq.empty()){
+        
+        while(!pq.empty() && visited[pq.top().second.first][pq.top().second.second]) pq.pop();
+        
+        if(pq.empty()) break;
+        
+        answer+=pq.top().first;
+        cout << answer << endl;
+        cout << pq.top().second.first << " " << pq.top().second.second << endl;
+        visited[pq.top().second.first][pq.top().second.second]=1;
+        bfs(pq.top().second.first,pq.top().second.second);
     }
     return answer;
 }
