@@ -303,3 +303,61 @@ void bfs(int y,int x){
 
 
 
+##### DFS 인자 넘겨주기
+
+- Case 1 - 인자를 변형시키고 넘겨주는 경우
+- Case2 - DFS호출 함수 안에 인자를 번형시키는 경우
+- 두 Case의 함수 결과 값은 당연히 다르다.
+
+```c++
+Case 1 -
+
+void Dfs(int idx,int sum,vector<int> &Case){
+	
+	cout << Case[2] << endl;	
+	if(idx==number.size()){
+		Maximum=max(Maximum,sum);
+		Minimum=min(Minimum,sum);
+		return;
+	}
+	
+	if(Case[0]){
+		Case[0]--;
+		Dfs(idx+1,sum+number[idx],Case);
+	}
+	if(Case[1]){
+		Case[1]--;
+		Dfs(idx+1,sum-number[idx],Case);	
+	}
+	if(Case[2]){
+		Case[2]--;
+		Dfs(idx+1,sum*number[idx],Case);	
+	}
+	if(Case[3]){
+		Case[3]--;
+		Dfs(idx+1,sum,Case);	
+	}
+}
+
+Case 2 -
+
+void Dfs(int plus,int minus,int multiply,int divide,int idx,int sum){
+	
+	
+	if(idx==number.size()){
+		
+		Maximum=max(Maximum,sum);
+		Minimum=min(Minimum,sum);
+		
+		return;
+	}
+	
+	if(plus>0) Dfs(plus-1,minus,multiply,divide,idx+1,sum+number[idx]);
+	if(minus>0) Dfs(plus,minus-1,multiply,divide,idx+1,sum-number[idx]);
+	if(multiply>0) Dfs(plus,minus,multiply-1,divide,idx+1,sum*number[idx]);
+	if(divide>0) Dfs(plus,minus,multiply,divide-1,idx+1,sum/number[idx]);
+}
+```
+
+
+
