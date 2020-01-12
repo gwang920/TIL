@@ -258,6 +258,60 @@ for (int y = 0; y < n; ++y) {
 		}
 ```
 
+##### 재귀 return 
+
+```c++
+
+bj15684참고
+
+int Connect(int Count,int Goal,int Idx){
+	
+	if(Count==Goal){
+		if(Check()==true){
+            cout << true << endl;
+		return 1;
+		}
+		return 0;
+	}
+   	 ( 생략 )
+    
+        .
+        .
+        .
+	Connect(Count+1,Goal,i);
+}
+
+
+int main(){
+	for(int i=0;i<4;i++){
+		if(Connect(0,i,1)==1){  
+			cout << i << endl;
+			return 0;
+		}
+	}
+	cout << "-1" << endl;
+	return 0;
+}
+------------------------------------------------------------------------------------
+출력 값
+true
+true
+true
+true
+true
+-1
+------------------------------------------------------------------------------------
+    
+true 가 출력 될 때마다 해당 i 값이 출력 되어야하는데 그렇지 않다! 
+    
+=> 재귀에서 조건에 만족하는 모든 경우의 수가 return 된다.
+   그렇기에 main함수의 if 조건문은 적절하지 않다.
+   세부 재귀 함수가 아닌 Top 재귀 함수의 값이 return 되기 때문(?)
+
+```
+
+
+
 ### 실수
 
 ##### BFS - 단순한 실수를 놓치지 말자
