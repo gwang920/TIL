@@ -88,7 +88,38 @@ https://marobiana.tistory.com/58
 
 어떠한 인터페이스를 구현한 객체에 대해서 동일한 동작을 보장한다
 
+
 ```
+
+- 추상클래스 보충
+
+```
+
+어미고양이(부모클래스) - 야생고양이
+
+  - 자는법 (메소드) 
+  - 집에서 사는법 (추상화 메소드)
+
+새끼고양이(자식클래스) - 집고양이
+
+  - 자는법 (메소드)
+  - 집에서 사는법 (메소드)
+----------------------------------------
+어미고양이는 야생고양이기에 집에서 사는법을 모른다. 그렇기 때문에 추상화 메소드를 만든다. (대신 구현은 하지 않음)
+
+어미고양이는 자는법이 있었고, 자식에게 전수하였다.
+그러나 자식은 집고양이라 어미고양이와 자는법이 달랐다.
+
+그래서 자식고양이 나름대로 자는법을 새로 터득하였다.
+그게 이미 구현되어있는 부모클래스의 내용을 Override를 하는 것이다.
+
+새끼고양이는 집 생활을 하며, 어미고양이가 모르는, 집에 사는법을 더 많이 터득하였다.
+(부모 클래스보다 더 많이 구현되는 경우가 대부분이다)
+
+출처: https://marobiana.tistory.com/58 [Take Action]
+```
+
+
 
 ### 4. object에 대해 설명하시오.
 
@@ -142,7 +173,7 @@ public class Main{  // 클래스
 
 
 
-### 6. Overloadin,Overriding 차이
+### 6. Overloading,Overriding 차이
 
 ```
 오버로딩 - 하나의 클래스 내에서 이름이 같은 여러 개의 메소드를 정의하는 것
@@ -150,6 +181,103 @@ public class Main{  // 클래스
 
 오버라이딩 - 부모 클래스에서 상속받은 메소드를 재정의하는 것
 		 리턴타입, 인수, 인수 자료형은 반드시 같아야 하며 접근 제어자는 같거나 더 넓은 개념으로 사용해			야한다.
+```
+
+#### 6 - 1. Overloading
+
+- OverLoading.java
+
+```java
+class OverLoading{
+  //함수의 이름은 모두 같지만,
+  //전달받는 인자의 타입과 갯수는 전부 다르다.
+  public void overLoad(){
+    System.out.println("This is overLoad()");
+  }
+  public void overLoad(int i){
+    System.out.println("This is overLoad(int i) : "+i);
+  }
+  public void overLoad(String str){
+    System.out.println("This is overLoad(String str) : "+str);
+  }
+  public void overLoad(int i, String str){
+    System.out.println("This is overLoad(int i, String str) : "+i+", "+str);
+  }
+}
+```
+
+- Main.java
+
+```java
+public class Main {
+  public static void main(String[] args) {
+    OverLoading ol = new OverLoading();
+    //메소드의 이름은 모두 같지만 인자값은 다르다.
+    //인자의 타입에 맞는 메소드가 자동으로 실행된다.
+    ol.overLoad();
+    ol.overLoad(10);
+    ol.overLoad("over load");
+    ol.overLoad(20, "over load2");
+  }
+}
+```
+
+```
+This is overLoad()
+This is overLoad(int i) : 10
+This is overLoad(String str) : over load
+This is overLoad(int i, String str) : 20, over load2
+```
+
+#### 6 - 2. Overriding
+
+```
+오버라이딩이란 상속을 받은 하위 객체가 상위 객체의 메소드를 새롭게 정의하고 그대로 덮어쓰고 사용하는 것을 말한다.
+하위 객체의 메소드 이름과 인자값의 타입은 상위 객체의 메소드와 반드시 일치해야 한다.
+```
+
+- SuperClass.java
+
+```java
+public class SuperClass {
+  public void method1(){
+    System.out.println("SuperClass method1()");
+  }
+  public void method2(String str){
+    System.out.println("SuperClass method2(String str)"+str);
+  }
+}
+```
+
+- ChildClass.java
+
+```java
+public class ChildClass extends SuperClass {
+  public void method1(){
+    System.out.println("ChildClass method1()");
+  }
+  public void method2(String str){
+    System.out.println("ChildClass method2(String str) : "+str);
+  }
+}
+```
+
+- Main.java
+
+```java
+public class Main {
+  public static void main(String[] args) {
+    ChildClass cc = new ChildClass();
+
+    cc.method1();
+    cc.method2("world");
+  }
+}
+```
+
+```
+ChildClass method1()
+ChildClass method2(String str) : world
 ```
 
 
@@ -186,5 +314,218 @@ MVC 구동원리
 7. JSP는 전달받은 값을 참조하여 출력할 결과 화면을 만들고 컨트롤러에게 전달한다.
 8. 뷰로부터 받은 화면을 웹 서버에게 전달한다.
 9. 웹 브라우저는 웹 서버로부터 요청한 결과값을 응답받으면 그 값을 화면에 출력한다.
+```
+
+
+
+### 8. java 변수
+
+```
+● 지역 변수 local variables : 지역 변수를 선언한 곳에서부터 생명이 시작되고, 지
+							역 변수를 선언한 중괄호가 끝나면 소멸
+● 매개 변수 parameters : 메소드가 호출될 때 생명이 시작되고, 메소드가 끝나면
+					소멸 (정확히 호출될 때 시작하지는 않지만, 이렇게 기억해두어도 무방)
+● 인스턴스 변수 instance variables : 객체가 생성될 때 생명이 시작되고, 그 객체를
+								참조하고 있는 다른 객체가 없으면 소멸
+● 클래스 변수 class variables : 클래스가 생성될 때 생명이 시작되고, 자바 프로그
+							램이 끝날 때 소멸
+```
+
+ex)
+
+````java
+public class VariableTypes {
+ int instanceVariable;
+ static int classVariable;
+ public void method(int parameter) {
+ int localVariable;
+ }
+}
+````
+
+#### 8 - 1. 클래스변수 (static int) vs 인스턴스 변수 (int)
+
+```
+1.클래스를 설계할 때, 멤버변수 중 모든 인스턴스에 '공통적으로 사용'해야하는 것에 static을 붙인다.
+
+ - 인스턴스를 생성하면, 각 인스턴스들은 서로 독립적기 때문에 서로 다른 값을 유지한다. 경우에 따라서는 각 인스턴스들이 공통적으로 같은 값이 유지되어야 하는 경우 static을 붙인다.
+
+2. static이 붙은 멤버변수는 인스턴스를 생성하지 않아도 사용할 수 있다.
+
+ - static이 붙은 멤버변수(클래스변수)는 클래스가 메모리에 올라갈때 이미 자동적으로 생성되기 때문이다.
+
+3. static이 붙은 메서드(함수)에서는 인스턴스 변수를 사용할 수 없다.
+
+ - static이 메서드는 인스턴스 생성 없이 호출가능한 반면, 인스턴스 변수는 인스턴스를 생성해야만 존재하기 때문에... static이 붙은 메서드(클래스메서드)를 호출할 때 인스턴스가 생성되어있을수도 그렇지 않을 수도 있어서 static이 붙은 메서드에서 인스턴스변수의 사용을 허용하지 않는다. (반대로, 인스턴스변수나 인스턴스메서드에서는 static이 붙은 멤버들을 사용하는 것이 언제나 가능하다. 인스턴스변수가 존재한다는 것은 static이 붙은 변수가 이미 메모리에 존재한다는 것을 의미하기 때문이다.)
+
+4. 메서드 내에서 인스턴스 변수를 사용하지 않는다면, static을 붙이는 것을 고려한다.
+
+ - 메서드의 작업내용중에서 인스턴스 변수를 필요로 한다면, static을 붙일 수 없다. 반대로 인스턴스변수를 필요로 하지 않는다면, 가능하면 static을 붙이는 것이 좋다. 메서드 호출시간이 짧아지기 때문에 효율이 높아진다. (static을 안붙인 메서드는 실행시 호출되어야할 메서드를 찾는 과정이 추가적으로 필요하기 때문에 시간이 더 걸린다.)
+
+5. 클래스 설계시 static의 사용지침
+
+ - 먼저 클래스의 멤버변수중 모든 인스턴스에 공통된 값을 유지해야하는 것이 있는지
+    살펴보고 있으면, static을 붙여준다.
+ - 작성한 메서드 중에서 인스턴스 변수를 사용하지 않는 메서드에 대해서 static을
+    붙일 것을 고려한다.
+ - static키워드를 쓰면, 객체를 생성하지 않고도 변수나 함수를 사용한다.
+ - 객체를 생성하지 않아도 되니까 편리하고 속도도 빠르다.
+
+
+일반적으로 인스턴스변수와 관련된 작업을 하는 메서드는 인스턴스메서드(static이 안붙은 메서드)이고 static변수(클래스변수)와 관련된 작업을 하는 메서드는 클래스메서드static이 붙은 메서드)라고 보면 된다.
+
+
+출처: https://vaert.tistory.com/101 [Vaert Street]
+```
+
+[예제]
+
+```java
+[예제6-4] CardTest.java
+
+ 
+
+class CardTest{
+
+      public static void main(String args[]) {
+
+            // 클래스변수(static 변수)는 객체생성없이 '클래스이름.클래스변수'로 직접 사용 가능하다.
+
+            System.out.println("Card.width = " + Card.width);
+            System.out.println("Card.height = " + Card.height);
+
+            Card c1 = new Card();
+            c1.kind = "Heart";
+            c1.number = 7;
+
+            Card c2 = new Card();
+            c2.kind = "Spade";
+            c2.number = 4;
+
+            System.out.println("c1은 " + c1.kind + ", " + c1.number + "이며, 크기는 (" + c1.width + ", " + c1.height + ")" );
+
+            System.out.println("c2는 " + c2.kind + ", " + c2.number + "이며, 크기는 (" + c2.width + ", " + c2.height + ")" );             System.out.println("이제 c1의 width와 height를 각각 50, 80으로 변경합니다.");
+
+            c1.width = 50;
+            c1.height = 80;
+
+            System.out.println("c1은 " + c1.kind + ", " + c1.number + "이며, 크기는 (" + c1.width + ", " + c1.height + ")" );
+
+            System.out.println("c2는 " + c2.kind + ", " + c2.number + "이며, 크기는 (" + c2.width + ", " + c2.height + ")" );
+
+      }
+
+}
+
+ 
+
+class Card {
+
+     String kind ;                         // 카드의 무늬 - 인스턴스 변수
+     int number;                         // 카드의 숫자 - 인스턴스 변수
+     static int width = 100;             // 카드의 폭 - 클래스 변수
+     static int height = 250;             // 카드의 높이 - 클래스 변수
+
+}
+
+* 참고
+Card클래스의 클래스변수(static변수)인 width, height 그리고 color는 Card클래스의 인스턴스를 생성하지 않고도 '클래스이름.클래스변수'와 같은 방식으로 사용할 수 있다.
+
+Card인스턴스인 c1과 c2는 클래스 변수인 width와 height를 공유하기 때문에, c1의 width와 height를 변경하면 c2의 width와 height값도 바뀐 것과 같은 결과를 얻는다.
+
+Card.width, c1.width, c2.width는 모두 같은 저장공간을 참조하므로 항상 같은 값을 갖게 된다.
+
+인스턴스 변수는 인스턴스가 생성될 때 마다 생성되므로 인스턴스마다 각기 다른 값을 유지할 수 있지만, 클래스 변수는 모든 인스턴스가 하나의 저장공간을 공유하므로, 항상 공통된 값을 갖는다.
+
+출처: https://vaert.tistory.com/101 [Vaert Street]
+```
+
+[실행결과]
+
+```
+Card.width = 100
+Card.height = 250
+c1은 Heart, 7이며, 크기는 (100, 250)
+c2는 Spade, 4이며, 크기는 (100, 250)
+이제 c1의 width와 height를 각각 50, 80으로 변경합니다.
+c1은 Heart, 7이며, 크기는 (50, 80)
+c2는 Spade, 4이며, 크기는 (50, 80)
+
+
+출처: https://vaert.tistory.com/101 [Vaert Street]
+```
+
+#### 8 - 2. 클래스메소드 vs 인스턴스 메소드
+
+```
+클래스는 '데이터(변수)와 데이터에 관련된 메서드의 집합'이라고 할 수 있다. 같은 클래스 내에 있는 메서드와 멤버변수는 아주 밀접한 관계가 있다. 인스턴스메서드는 인스턴스변수와 관련된 작업을 하는, 즉 메서드의 작업을 수행하는데 인스턴스변수를 필요로 하는 메서드이다.
+
+그래서 인스턴스변수와 관계없거나(메서드 내에서 인스턴스변수를 사용하지 않거나), 클래스변수만을 사용하는 메서드들은 클래스메서드로 정의한다.
+
+출처: https://vaert.tistory.com/101 [Vaert Street]
+```
+
+[예제]
+
+```java
+[예제6-12] MyMathTest2.java
+
+class MyMath2 {
+
+      long a, b;     
+
+      // 인스턴스변수 a, b를 이용한 작업을 하므로 매개변수가 필요없다.
+
+      long add() {       return a + b; }
+      long subtract() {       return a - b; }
+      long multiply() {       return a * b; }
+      double divide() {       return a / b; }
+
+      // 인스턴스변수와 관계없이 매개변수만으로 작업이 가능하다.
+      static long add(long a, long b) {       return a + b; }
+      static long subtract(long a, long b) {       return a - b; }
+      static long multiply(long a, long b) {       return a * b; }
+      static double divide(double a, double b) {       return a / b; }
+
+}
+
+class MyMathTest2 {
+
+      public static void main(String args[]) {
+
+            // 클래스메서드 호출
+            System.out.println(MyMath2.add(200L, 100L));
+            System.out.println(MyMath2.subtract(200L, 100L));
+            System.out.println(MyMath2.multiply(200L, 100L));
+            System.out.println(MyMath2.divide(200.0, 100.0));
+            
+            MyMath2 mm = new MyMath2();
+            mm.a = 200L;
+            mm.b = 100L;
+            // 인스턴스메서드는 객체생성 후에만 호출이 가능함.
+            System.out.println(mm.add());
+            System.out.println(mm.subtract());
+            System.out.println(mm.multiply());
+            System.out.println(mm.divide());
+
+}
+
+
+출처: https://vaert.tistory.com/101 [Vaert Street]
+```
+
+[결과]
+
+```
+300
+100
+20000
+2.0
+300
+100
+20000
+2.0
+
+출처: https://vaert.tistory.com/101 [Vaert Street]
 ```
 
