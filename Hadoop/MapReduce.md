@@ -6,6 +6,8 @@
 
 - Map + Reduce라는 두 가지 단계로 데이터를 처리
 
+- Map은 특정 데이터를 가져와서 key와 value쌍으로 묶는다.
+- Reduce는 맵에서 가져온 ket와 value의 쌍을 다시 내가 필요한 정보들을 키와 쌍으로 묶는다.
 
 
 mapreduce 프로그램이 wordcount 밑에 있다
