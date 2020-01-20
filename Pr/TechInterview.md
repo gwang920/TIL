@@ -139,6 +139,11 @@ Object(객체)는 저장 공간에 할당되어 값을 가지거나 식별자에
 객체를 만들어 내기 위한 설계도 
 맴버 변수와 메서드 들의 집합
 
+* 참고
+- java내에서 파일명.java와 public class 클래스이름 에서 파일명==클래스이름이 되어야 한다.
+- 자바 파일명과 public class의 클래스 명은 일치해야함
+- 한 파일 내에 클래스가 여러 개 있을 수 있는데, public class는 하나만 존재할 수 있으며, 파일명과 같아야 함
+
 - 오브젝트
 
 소프트웨어 세계에 구현할 대상
@@ -538,5 +543,112 @@ class MyMathTest2 {
 2.0
 
 출처: https://vaert.tistory.com/101 [Vaert Street]
+```
+
+
+
+#### 추가
+
+```java
+import java.util.*;
+class Example{
+    
+    static private int K=1;  // static이라 static 클래스에서 접근 가능
+    
+    static void display(){
+        System.out.println("St");
+        
+    }
+     static class Innerclass{
+        private int a =36;
+        public void printK(){
+                System.out.println(K+a);
+                display();
+        }
+    }
+    class Innerclass2{
+        private int a=37;
+        public void printL(){
+            System.out.println(K+a);
+        }
+        
+    }
+}
+
+public class Test{
+    public static void main(String args[]){
+        Example ex=new Example();
+        ex.display();
+        Example.Innerclass Inner=new Example.Innerclass();
+        Inner.printK();
+        //Example.Innerclass2 Inner2=new Example.Innerclass2();
+        //Inner2.printL(); 
+        // 주석문을 실행하면 오류난다.
+        // Innerclass2는 static이 아니기에 접근할 수 없다.
+    }
+}
+
+[결과]
+St
+37
+St
+
+```
+
+### 9. Getter/Setter
+
+- 클래스의 특성중 정보 은닉을 가장 잘 보여주는 메소드
+
+- 보통 클래스의 멤버변수는 private로 접근제한자를 설정한 후
+
+  getter/setter를 통해 멤버변수의 값을 변경,호출하게 된다.
+
+```java
+예제)
+
+
+import java.util.*;
+class Student{
+	// 은닉된 멤버변수 --> 현재 클래스 내에서만 접근 가능
+	private String name;
+	private int age;
+	
+	// 은닉된 멤버변수에 값을 넣는 방법
+	public void setName(String name){
+		this.name=name;
+	}
+	public void setAge(int age){
+		this.age=age;
+	}
+	
+	// 은닉된 멤버변수의 값을 읽는 방법
+	public String getName(){
+		return name;
+	}
+	public int getAge(){
+	
+		return age;
+	}
+}
+
+
+public class Exam{
+		public static void main(String args[]){
+		
+			Student s= new Student();
+			s.setName("미래현차그룹직원");
+			s.setAge(29);
+			
+			String name=s.getName();
+			System.out.println(name);
+			int age=s.getAge();
+			System.out.println(age);
+		
+		}
+}
+
+[결과]
+미래현차그룹직원
+29
 ```
 

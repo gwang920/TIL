@@ -29,7 +29,7 @@ return; // a==i가 아닌 경우도 꼭 return 해주자.
 
 ## Queue 사용법
 
-```
+```java
 import java.util.Queue;
 import java.util.LinkedList;
 
@@ -53,7 +53,7 @@ Queue q=new LinkedList();
 
 ## ArrayList 사용법
 
-```
+```java
 import java.util.ArrayList;
 
 1) 선언

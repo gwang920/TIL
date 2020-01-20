@@ -37,8 +37,20 @@ ex) TV의 속성과 기능
 * 예제
 
   ```java
+  import java.util.*;
+  
+  public class Main{
+  	public static void main(String args[]){
+  		Tv tv;
+  		tv = new Tv();
+  		tv.channel = 7;
+  		tv.channelDown();
+  		System.out.println(tv.channel);
+  	}
+  }
+  
   class Tv{
-  	string color;
+  	String color;
   	boolean power;
   	int channel;
   	
@@ -53,18 +65,21 @@ ex) TV의 속성과 기능
   	}
   }
   
-  clase TvTest;{
-  	public static void main(String args[]){
-  		Tv tv;
-  		tv = new Tv();
-  		tv.channel = 7;
-  		tv.channelDown();
-  		System.out.println("t.channel");
-  	}
-  }
-  
-  실행결과 => 6
+  [결과]
+  6
   ```
+
+* 참고
+
+  ```
+  자바 파일명과 public class의 클래스 명은 일치해야한다.
+  
+  한 파일 내에 클래스가 여러 개 있을 수 있는데, public class는 하나만 존재할 수 있으며, 파일명과 같아야 한다.
+  ```
+
+  
+
+
 
 
 
@@ -82,13 +97,9 @@ ex) TV의 속성과 기능
   import java.util.Scanner;
   
   public class TimeApp {
-  
-   
-  
   	public static void main(String[] args) {
   
   		Time time;
-  
   		time = new Time();
   
   		System.out.println(time.changeStandard());
@@ -107,11 +118,7 @@ ex) TV의 속성과 기능
   
   	}
   
-  
   	public static class Time {
-  
-  		
-  
   		// attribute  (속성)
   		private int year;
   		private int month;
@@ -145,8 +152,6 @@ ex) TV의 속성과 기능
   		
   
   		// function   (기능)
-  
-  
   		public String getTime() {
   
   			return  Integer.toString(hour)+ ":" +
@@ -184,7 +189,7 @@ ex) TV의 속성과 기능
   	}
   }
   ```
-
+  
   
 
 ##### * SW설계 메커니즘 

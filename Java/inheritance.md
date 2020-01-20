@@ -66,7 +66,7 @@ class Point {
 	int y;  // y좌표
 }
 
-Point 클래스르 재사용해서 Circle클래스를 작성하자
+Point 클래스를 재사용해서 Circle클래스를 작성하자
 
 class Circle{
 	Point c = new point(); // 원점
