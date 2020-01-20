@@ -37,6 +37,7 @@ ex) TV의 속성과 기능
 * 예제
 
   ```java
+<<<<<<< HEAD
   import java.util.*;
   
   public class Main{
@@ -73,6 +74,36 @@ ex) TV의 속성과 기능
 
   ```
   자바 파일명과 public class의 클래스 명은 일치해야한다.
+=======
+import java.util.*;
+
+public class Main{
+	public static void main(String args[]){
+		Tv tv;
+		tv = new Tv();
+		tv.channel = 7;
+		tv.channelDown();
+		System.out.println(tv.channel);
+	}
+}
+
+class Tv{
+	String color;
+	boolean power;
+	int channel;
+	
+	void power(){
+		power= !power;
+	}
+	void channelUp(){
+		++channel;
+	}
+	void channelDown(){
+		--channel;
+	}
+}
+
+>>>>>>> 36159715cb7fdac06c91ed16f45dae8142a3a826
   
   한 파일 내에 클래스가 여러 개 있을 수 있는데, public class는 하나만 존재할 수 있으며, 파일명과 같아야 한다.
   ```
