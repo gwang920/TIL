@@ -37,31 +37,34 @@ ex) TV의 속성과 기능
 * 예제
 
   ```java
-  class Tv{
-  	string color;
-  	boolean power;
-  	int channel;
-  	
-  	void power(){
-  		power= !power;
-  	}
-  	void channelUp(){
-  		++channel;
-  	}
-  	void channelDown(){
-  		--channel;
-  	}
-  }
-  
-  clase TvTest;{
-  	public static void main(String args[]){
-  		Tv tv;
-  		tv = new Tv();
-  		tv.channel = 7;
-  		tv.channelDown();
-  		System.out.println("t.channel");
-  	}
-  }
+import java.util.*;
+
+public class Main{
+	public static void main(String args[]){
+		Tv tv;
+		tv = new Tv();
+		tv.channel = 7;
+		tv.channelDown();
+		System.out.println(tv.channel);
+	}
+}
+
+class Tv{
+	String color;
+	boolean power;
+	int channel;
+	
+	void power(){
+		power= !power;
+	}
+	void channelUp(){
+		++channel;
+	}
+	void channelDown(){
+		--channel;
+	}
+}
+
   
   실행결과 => 6
   ```
