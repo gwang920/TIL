@@ -1,9 +1,9 @@
 # 제네릭(Generics)
 
 ##### - 다양한 타입의 객체들을 다루는 메서드나 컬렉션 클래스에 컴파일 시 '타입체크'
-
+##### => 실행시 타입 에러가 나는 것보다 컴파일 시에 미리 타입을 강하게 체크해서 에러를 사전에 방지
 ##### - 데이터 타입을 인스턴스 생성시 확정하는 것
-
+##### => 비제네릭 코드는 불필요하게 타입 변환(Casting)을 하기 때문에 프로그램 성능에 악영향을 미친다
 ##### - 장점
 
 ##### 	객체의 타입  안전성이 높다
@@ -22,6 +22,17 @@ class Box<T> {   // 지네릭 타입 T 선언
 }
 	
 }
+
+-----
+// Casting 
+List list = new ArrayList();
+list.add("Come");
+String str = (String) list.get(0); // 타입 변환 필요
+
+// 제네릭 사용
+List<String> list2 = new ArrayList<>();
+list2.add("Come");
+String str2 = list.get(0); // 불필요
 
 -----
  Box<string> b = new Box<string>();  // 지네릭 타입 호출
