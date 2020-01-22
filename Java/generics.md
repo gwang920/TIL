@@ -35,6 +35,24 @@ list2.add("Come");
 String str2 = list.get(0); // 불필요
 
 -----
+// 비제네릭 타입 이용시
+public class Corn{
+    private Object obj;
+    public Object get(){return obj;}
+    public void set(Object obj){this.obj = obj;}
+}
+
+// 제네릭 타입 이용시
+public class Corn<T>{
+    private T t;
+    public T get() {return t;}
+    public void set(T t){this.t = t;}
+}
+
+// Object를 사용하면 모든 타입을 받을 수 있지만 매번 형 변환이 일어난다.
+// 제네릭을 사용하면 형 변환을 최소화 할 수 있다.
+------
+
  Box<string> b = new Box<string>();  // 지네릭 타입 호출
 ```
 
