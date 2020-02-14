@@ -109,6 +109,45 @@ for(int k=0;k<N;k++){
 
 
 
+##### priority_queue
+
+```c++
+우선순위큐에 여러개의 값이 들어갈 때 순차적으로 비교한다.
+first -> second -> ...
+    첫 번쨰 위치의 원소들을 비교하고 정렬, 두 번째 위치의 원소들을 비교하고 정렬 
+
+[예제]
+#include <iostream>
+#include <queue>
+
+using namespace std;
+priority_queue<pair<int,int>> pq;
+
+int main(){
+	
+	pq.push({2,1});
+	pq.push({2,2});
+	pq.push({1,3});
+	pq.push({1,4});
+	pq.push({3,5});
+	int size=pq.size();
+	for(int i=0;i<size;i++){
+		cout << pq.top().first << " " << pq.top().second << endl;
+		pq.pop();	
+	}
+	
+	
+	return 0;
+}
+
+[출력]
+3 5
+2 2
+2 1
+1 4
+1 3
+```
+
 
 
 ##### queue VS stack
