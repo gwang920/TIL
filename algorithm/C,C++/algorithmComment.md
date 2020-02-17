@@ -349,6 +349,51 @@ true 가 출력 될 때마다 해당 i 값이 출력 되어야하는데 그렇�
 
 ```
 
+#### 조합 속도
+
+```c++
+
+case2 >>>>>> case1
+
+8!*2 vs 8!+1
+
+[Case1] 실패
+void set(int idx){
+	if(idx==10){
+		game();
+		return;
+	}
+	for(int i=2;i<10;i++){
+		if(visit[i]) continue;
+		if(idx!=4){
+			arr[idx]=i;	visit[i]=1;
+		} 
+		set(idx+1);
+		if(idx!=4) visit[i]=0;
+	}
+}
+
+[Case2] 통과
+void set(int idx){
+	if(idx==4){
+		set(idx+1);
+		return;
+	}
+	if(idx==10){
+		game();
+		return;
+	}
+	for(int i=2;i<10;i++){
+		if(visit[i]) continue;
+		arr[idx]=i;	
+		visit[i]=1;
+		set(idx+1);
+		visit[i]=0;
+	}
+}
+
+```
+
 
 
 ### 실수
