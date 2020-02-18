@@ -499,3 +499,16 @@ void Dfs(int plus,int minus,int multiply,int divide,int idx,int sum){
 
 
 
+##### index
+
+```c++
+line3,line5 에서 y를 바꾸면, 뒤의 x값 변경시 오류 발생
+
+int now_y=v[map[y][x]][0].first; int now_x=v[map[y][x]][0].second;
+			if(now_y==y && now_x==x){
+				y=v[map[y][x]][1].first; x=v[map[y][x]][1].second; -- line3
+			}else{
+				y=v[map[y][x]][0].first; x=v[map[y][x]][0].second; -- line5
+			}
+```
+
