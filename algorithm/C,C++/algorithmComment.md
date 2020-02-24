@@ -25,8 +25,6 @@ J
 
 
 
-
-
 ##### vector 초기화(크기 및 값 지정)
 
 ```c++
@@ -427,9 +425,30 @@ BEE = 1011 1110 1110
 70C558 = 0111 0000 1100 0101 0101 1000
 ```
 
+##### HEADER : climits
+
+```c++
+#include <climits>
+#include <iostream>
+using namespace std;
+int main(){
+
+int min=INT_MIN;
+int max=INT_MAX;
+
+cout << "min:" << min << endl;
+cout << "max:" << max << endl;
+return 0;
+}
+
+[결과]
+min:-2147483648
+max:2147483647
+```
 
 
-### 실수
+
+# 실수
 
 ##### BFS - 단순한 실수를 놓치지 말자
 
