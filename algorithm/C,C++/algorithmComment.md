@@ -446,6 +446,43 @@ min:-2147483648
 max:2147483647
 ```
 
+##### 백준 감시
+
+````c++
+실패코드의 재귀와 성공코드의 재귀를 비교하자.
+
+cam개의 카메라를 4방향으로 탐색하는 모든 경우의수를 구하는 재귀
+
+[예시]
+cam=4
+0000 0001 0002 0003 
+0010 0011 0012 ...
+4440 4441 4442 4443
+
+[실패]
+void dfs(int cnt){
+	if(cnt==pow(4,cam)) return;
+	Camera();
+	for(int i=0;i<cam;i++){
+		int tmp=d[i].dir;
+		d[i].dir=(d[i].dir+1)%4;
+		dfs(cnt+1);
+		d[i].dir=tmp;
+	}
+}
+
+[성공]
+void dfs(int cnt){
+	if(cnt==cam+1) return;
+	Camera();
+	for(int i=0;i<4;i++){
+		d[cnt].dir=(d[cnt].dir+1)%4;
+		dfs(cnt+1);
+	}
+}
+
+````
+
 
 
 # 실수
