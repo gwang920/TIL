@@ -446,7 +446,9 @@ min:-2147483648
 max:2147483647
 ```
 
-##### 백준 감시
+# 백준
+
+##### 감시
 
 ````c++
 실패코드의 재귀와 성공코드의 재귀를 비교하자.
@@ -481,6 +483,55 @@ void dfs(int cnt){
 	}
 }
 
+````
+
+##### 사다리조작
+
+````c++
+[실패]
+void connect(int cnt,int idx){
+	if(cnt>3) return; 
+	check(cnt);
+	for(int j=idx+1;j<=H;j++){ // (1) j의 시작
+		for(int i=1;i<=N;i++){ // (2) i의 범위
+			if(bridge[j][i-1] || bridge[j][i] || bridge[j][i+1]) continue;
+			bridge[j][i]=1;
+			connect(cnt+1,j);
+			bridge[j][i]=0;		
+		}
+	}
+}
+
++ 함수 변수를 cnt만 선언시 인덱스 조절이 안되어 시간초과
+
+    
+  1  2  3  4    
+1 .--.  .  . 
+2 .--.  .  .
+3 .  .  .  . 
+    
+   j=idx+1일 경우에 가로선이 하나만 설치 된다.  
+    
+  1  2  3  4    
+1 .--.  .--. 
+2 .--.  .  .
+3 .  .  .  .
+    
+    j=idx일 때 위와 같이 하나의 행에 두 개의 다리 설치 가능
+    
+[성공]
+void connect(int cnt,int idx){
+	if(cnt>3) return; 
+	check(cnt);
+	for(int j=idx;j<=H;j++){
+		for(int i=1;i<N;i++){
+			if(bridge[j][i-1] || bridge[j][i] || bridge[j][i+1]) continue;
+			bridge[j][i]=1;
+			connect(cnt+1,j);
+			bridge[j][i]=0;		
+		}
+	}
+}
 ````
 
 
