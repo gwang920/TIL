@@ -446,6 +446,27 @@ min:-2147483648
 max:2147483647
 ```
 
+##### 우선순위큐 오름차순(struct)
+
+```c++
+우선순위큐에 구조체에 여러개의 인자를 넣어줄 때 비교연산이 모호해진다.
+[예시]
+struct INFO{
+	int y,x,z;
+}
+priority_queue<INFO> pq;
+
+위와 같이 선언하면 y,x,z 중 우선순위를 결정할 수 없다.
+    
+차라리,
+typedef pair<int,pair<int,int>> INFO;
+priority_queue<INFO> pq;
+
+와 같이 선언하면 순차적(first->second)으로 우선 순위를 결정할 수 있다.
+```
+
+
+
 # 백준
 
 ##### 감시
