@@ -498,6 +498,19 @@ NOT(~)연산
 
 
 
+# SWEA
+
+##### 오래된 스마트폰
+
+```c++
+1) DFS 리턴 범위 설정
+  if(cnt>M || cnt>=res) return; -> if(cnt>=M || cnt>=res) return;
+2) 가지 생성과 visit처리
+   visit에 cnt를 저장해 visit[s]<cnt가 클 경우에만 return 시켰다.
+```
+
+
+
 
 
 # 백준
