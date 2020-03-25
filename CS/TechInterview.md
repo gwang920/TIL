@@ -68,6 +68,169 @@ Queue
 참고로 Java Collection에서 Queue는 인터페이스이다. 이를 구현하고 있는 Priority queue 등을 사용할 수 있다.
 ```
 
+### 3. Tree
+
+```
+트리는 스택이나 큐와 같은 선형구조가 아닌 비선형구조이다. 트리는 계층적관계(Hierarchical Realtionship)을 표현하는 자료구조이다. 이 트리라는 자료구조는 표현에 집중한다. 무엇인가를 저정하고
+꺼내야한다는 사고에 벗어나 트리라는 자료구조를 바라보자.
+
+트리를 구성하고 있는 구성요소들
+- Node(노드) : 트리를 구성하고 있는 각각의 요소를 의미한다.
+- Edge(간선) : 트리를 구성하기 위해 노드와 노드를 연결하는 선을 의미한다.
+- Rood Node(루트 노드) : 트리구조에서 최상위에 있는 노드를 의미한다.
+- Terminal Node	(=leaf Node,단말노드) : 하위에 다른 노드가 연결되어 있지 않은 노드를 의미한다.
+- Internal Node (내부노드,비단말노드) : 단말 노드를 제외한 모든 노드로 루트 노드를 포함한다.
+
+Binary Tree(이진트리)
+- 루트노드를 중심으로 두 개의 서브트리(큰 트리에 속하는 작은트리)로 나뉘어진다. 또한 나뉘어진 서브트리도 모두 이진트리이어야 한다. 
+
+트리에서는 각 층별로 숫자를 매겨서 이를 트리의 Level(레벨)이라고 한다. 레벨의 값은 0부터 시작하고 따라서 루트노드의 레벨은 0이다. 그리고 트리의 최고레벨을 가리켜 해당 트리의 height(높이)라고한다.
+```
+
+- 이진 탐색 트리의 탐색 연산(시간복잡도 O(log n)) 예제
+
+```java
+* 이진 탐색 트리 - 자신보다 작은자료는 왼쪽에,자신보다 큰 자료는 오른쪽의 자식 노드에있다.
+
+package codingInterview;
+
+public class BinarySearchTree {
+    public static boolean search(int i, int[] array){
+        boolean result = false;
+        int left = 0;   
+        int right = array.length-1;
+        int mid = 0;                 //중간 값 인덱스
+        
+        while(left <= right){
+            mid = (left + right)/2;  // 루프 돌 때마다 중간 값 초기화
+            if(array[mid] == i){
+                result = true;
+                break;
+            }
+            else if(array[mid] > i){  // 찾는 값보다 큰 배열 값들 버리기
+                right = mid-1;
+            }
+            else{                     // 찾는 값보다 작은 배열 값들 버리기
+                left = mid+1;
+            }
+        }
+        return result;
+    }
+ 
+    public static void main(String[] args) {
+        int[] array = {1, 5, 7, 8, 12, 17, 23, 25}; // 배열 초기화
+        System.out.println(search(10, array));
+    }
+}
+```
+
+```java
+Perfect Binary Tree(포화 이진 트리) - 모든 잎의 레벨이 동일한 이진트리이며, 잎이 아닌 내부 노드들은
+									모두 2개의 자식을 가지는 트리
+									
+									1  - 높이 0 / 레벨 1
+								   / \
+								  2   3 - 높이 1 / 레벨 2
+								  /\  /\
+								 4 5  6 7 - 높이 2 / 레벨 3
+								 
+								 높이가 d인 포화 이진 트리의 노드의 개수는 2^(d+1)-1 이 된다.
+
+Complete Binary Tree(완전 이진 트리) - 포화 이진트리의 leaf들을 오른쪽에서부터 제거하여 얻어진 트리
+
+									1 - 높이 0 / 레벨 1
+								   / \
+								  2   3 - 높이 1 / 레벨 2
+								  /\  /
+								 4 5  6  - 높이 2 / 레벨 3
+								 
+								 	1  - 높이 0 / 레벨 1
+								   / \
+								  2   3 - 높이 1 / 레벨 2
+								  /\  
+								 4 5    - 높이 2 / 레벨 3
+								 
+								 모두 완전 이진 트리의 예시이다.
+								 높이가 d인 완전 이진 트리의 노드의 개수는 2^d 이상 2^(d+1)개
+								 미만이다.
+
+Full Binary Tree(정 이진 트리) - 모든 노드가 0개 혹은 2개의 자식노드만 갖는 이진트리
+
+배열로 구성된 Binary Tree는 노드의 개수가 n 개이고 root가 0이 아닌 1에서 시작할 때, i 번째 노드에 대해서 parent(i) = i, left_child(i) = 2i , right_child(i) = 2i + 1 의 index 값을 갖는다.
+```
+
+### 4. Binary Heap
+
+```
+- 자료구조의 일종으로 Tree의 형식을 하고 있으며 Tree중에서도 배열에 기반한 Complete Binary Tree이다.
+배열에 트리의 값들을 넣어 줄 때, 0번째는 건너뛰고 1번 index 부터 루트노드가 시작된다. 이는 노드의 고유번호값과 배열의 index를 일치시켜 혼동을 줄이기 위함이다.
+힙(Heap)에는 최대힙(max heap),최소힙(min heap) 두 가지가 있다.
+
+- Max Heap이란, 각 노드의 값이 해당 children의 값보다 크거나 같은 complete binary tree를 말한다.
+- Min Heap은 Max Heap의 반대로서 각 노드의 값이 해당 children의 값보다 작거나 같은 경우이다.
+
+Max Heap에서는 Root node 에 있는 값이 제일 크므로, 최대값을 찾는데 소요되는 연산의 time complexity 이 O(1)이다. 
+그리고 complete binary tree이기 때문에 배열을 사용하여 효율적으로 관리할 수 있다. 
+(즉, random access 가 가능하다. Min heap 에서는 최소값을 찾는데 소요되는 연산의 time complexity 가 O(1)이다.) 
+하지만 heap 의 구조를 계속 유지하기 위해서는 제거된 루트 노드를 대체할 다른 노드가 필요하다. 
+여기서 heap 은 맨 마지막 노드를 루트 노드로 대체시킨 후, 다시 heapify 과정을 거쳐 heap 구조를 유지한다. 이런 경우에는 결국 O(log n)의 시간복잡도로 최대값 또는 최소값에 접근할 수 있게 된다.
+
+배열에 저장하였을 때의 장점을 살리기 위해서는 인덱스 값을 알아야한다. 어떻게 알아낼 수 있을까.
+complete binary tree는 노드의 개수가 n개일 때 i번째 노드에 대해서 parent(i)=i/2, left_child(i)=2i, right_child(i)=2i+1의 index 값을 갖는다.
+```
+
+#### 4 - 1 Heapify
+
+```
+max-heapify는 root node의 값이 childe node 값보다 작으면 두 개의 child node중 값이 큰 노드와 root를 교체하고 이 과정을 교체할 노드가 없을 때 까지(처음에 root였던 노드가 leaf node가 될 때까지)
+반복해주면된다. 이와 마찬가지로 min-heapify도 진행한다.
+```
+
+### 5. Red Black Tree
+
+```
+ Red Blakc Tree = 이진 탐색 트리 + 균형
+ 
+ 	 2
+      \
+       3
+        \ 
+         4
+          \
+           5
+          
+          위와 같은 문제를 해결하기 위한 자료구조가 red black tree 이다.
+          (c++ stl의 map이 레드브랙트리로 만들어짐)
+ 
+ RBT는 BST를 기반으로하는 트리형식의 자료구조이다. 
+ 결론부터 말하자면 Red Blakc Tree에 데이터를 저장하게 되면 Search,Insert,Delete에 O(log n)의 시간복잡도가 소요된다. 
+ 동일한 노드의 개수일 때, depth를 최소화하여 시간 복잡도를 줄이는 것이 핵심아이디어이다. 
+ 동일한 노드의 개수 일 때, depth(높이)가 최소가 되는 경우는 tree가 complete binary tree인 경우이다.
+
+Red Black Tree의 정의
+- Red Black Tree는 다음의 성질을 만족하는 BST이다.
+1. 각 노드는 red or black이라는 색을 갖는다.
+2. root node의 색은 black이다.
+3. 각 leaf node는 black이다.
+4. 어떤 노드의 색이 red라면 두 개의 children의 색은 모두 black이다.
+5. 각 노드에 대해서 노드로부터 descendant(자손) leaves까지의 단순경로는 모두 같은 수의 black nodes들을 포함한다. 이를 해당 노드의 black-height라고 한다.
+cf) black-height : 노드 x로부터 노드 x를 포함하지 않는 leaf node까지의 simple path 상에 있는 black nodes의 개수들
+```
+
+```
+삽입
+
+삽입 상태에서 장애가 발생하는 지점은 신규 노드가 삽입되고 나서 
+레드 노드가 연속해서 2개가 붙게 될 때이다.
+
+해당 상황에 대해 해결방법이 크게 2가지 경우로 나뉩니다.
+Case 1. 부모 노드가 레드인데, 부모님의 형제가 없거나 블랙일 때 - 회전
+Case 2. 부모 노드가 레드인데, 부모님의 형제가 레드일 때 - 색상 변환
+
+* 참고
+https://m.blog.naver.com/PostView.nhn?blogId=min-program&logNo=221231697752&proxyReferer=http%3A%2F%2F59.29.251.41%2Ftm%2F%3Fa%3DCR%26b%3DWIN%26c%3D300019389618%26d%3D32%26e%3D5206%26f%3DbS5ibG9nLm5hdmVyLmNvbS9taW4tcHJvZ3JhbS8yMjEyMzE2OTc3NTI%3D%26g%3D1585101618430%26h%3D1585101617789%26y%3D0%26z%3D0%26x%3D1%26w%3D2019-07-24%26in%3D5206_1100_00001607%26id%3D20200325
+```
+
 
 
 ## 알고리즘
@@ -869,12 +1032,59 @@ public class Exam{
 ````
 static
 - 선언을 하게 되면 그 위치에 관계없이 프로그램의 시작부터 끝까지 메모리에 할당되어 있으면서 그 값을 마음대로 바꿀 수 없는 것. (전역,지역 변수 모두 가능)
+- 그렇기 때문에 인스턴스(객체) 생성 없이 바로 사용 가능하다. 그러므로, 객체를 생성하지 않아도 되니까 편리하고 속도도 빠르다.
+- 자주 변하지 않는 일정한 값이나 설정 정보같은 공용자원에 대한 접근에 있어서 매번 메모리에 로딩하거나 값을 읽어들이는 것보다 일종의 '전역변수'와 같은 개념을 통해서 접근하는 것이 비용도 줄이고 효율을 높일 수있다. 
+- 인스턴스 생성 없이 바로 사용가능 하기 때문에 프로그램 내에서 공통으로 사용되는 데이터들을 관리 할 때 이용한다.
 
 * 메모리 영역에는 static, 전역변수가 저장 된다.
+
+* java 개발자가 static사용을 꺼리는 이유
+
+Static 변수는 global state(역주: 전역 상태. 프로그램 혹은 한 모듈 전체의 상태)를 상징합니다. 
+Global state는 추론과 테스트가 매우 까다롭습니다. 
+가령 코드에서 static 변수를 사용한다고 하면, 이 변수의 상태는 코드 여러 부분에서 영향을 받을 수 있게 되고 따라서 변화를 추적하기가 어려워집니다. 
+반면에 이를 객체화하여 인스턴스로 생성하면 테스트 중에 그 변수가 어떤 상태를 가지고 있는지 추론하는 것이 보다 간단해집니다.
+프로그래머로서 제가 그동안 경험해온 바에 따르면 큰 개념에 대해서 그리기 위해선 일단 이해하고자 하는 범위를 좁혀 쉽게 추론할 수 있어야 합니다. 
+일반적으로 우리는 작으면 작을수록 그 대상을 쉽게 이해합니다. 
+다시 말해, 모듈화를 제대로 하지 않는다면 백만 줄 짜리 시스템의 상태에 대해서 추론하는 것은 굉장히 어려운 일입니다. 
+이것은 단순히 static 변수 뿐만 아니라 모든 프로그래밍 이슈에 대해서 적용할 수 있는 중요한 사실입니다.
 
 const
 - 해당 변수를 const로 초기화한 이후에는 절대 바꾸지 못하도록 하는 것.
 ````
+
+- static 예제(static의 문제점)
+
+```java
+public class FavoriteCoffee {
+	static String coffee = "아메리카노";
+
+	public static void main(String[] args) {
+		FavoriteCoffee kate = new FavoriteCoffee();
+		FavoriteCoffee kevin = new FavoriteCoffee();
+
+		System.out.println("kate가 좋아하는 커피 : " + kate.coffee);
+		System.out.println("kevin이 좋아하는 커피 : " + kevin.coffee);
+
+		kate.coffee = "라떼"; //kate가 좋아하는 커피를 라떼로 변경하고자 한다.
+		System.out.println("kate가 좋아하는 커피 : " + kate.coffee);
+		System.out.println("kevin이 좋아하는 커피 : " + kevin.coffee);
+	}
+}
+
+[결과]
+kate가 좋아하는 커피 : 아메리카노
+kevin이 좋아하는 커피 : 아메리카노
+kate가 좋아하는 커피 : 라떼
+kevin이 좋아하는 커피 : 라떼
+
+kate.coffee를 라떼로 변경했을 뿐인데 kevine.coffee도 라떼로 변경됨을 확인할 수 있다.
+이는 coffee라는 변수를 static키워드를 통해 정의 했기에 kate와 kevin은 같은 coffee변수를 공유하는 것이다.
+    
+위와 같이 static은 결코 남발해서는 안되며 공통으로 값을 유지하고 싶을 때만! 사용해야 한다.
+```
+
+
 
 ### 11.  스택(stack), 힙(Heap), 데이터(data) 영역
 
