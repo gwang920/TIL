@@ -104,9 +104,7 @@ int solution(int bridge_length, int weight, vector<int> truck_weights) {
         now=truck_weights[i];
         
         while(true){
-            
             if(q.empty()){
-                
                 q.push(now);
                 cnt++;
                 sum_weight+=now;
@@ -126,8 +124,6 @@ int solution(int bridge_length, int weight, vector<int> truck_weights) {
                     cnt++;
                     sum_weight+=now;
                     break;
-                    
-                    
                 } 
             } 
         }   
