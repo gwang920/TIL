@@ -697,6 +697,22 @@ backup배열이 필요하다.
 	visit배열로 중복제거하여 해결
 ```
 
+##### 치킨 배달
+
+```c++
+거리를 구하는 문제에서 두 좌표가 모두 주어진다면
+vector에 넣어 쉽게 계산할 수 있다.(굳이 bfs로 탐색하지 않아도 된다)
+
+vector<pair<int,int>> house,chicken;
+
+for(int i=0;i<house.size();i++){
+	for(int j=0;j<chicken.size();j++){
+		dist=abs(house[i].first-chicken[j].first)+abs(house[i].second-chicken[j].second);
+	}
+}
+
+```
+
 
 
 # 실수
