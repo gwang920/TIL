@@ -113,7 +113,8 @@ for(int k=0;k<N;k++){
 우선순위큐에 여러개의 값이 들어갈 때 순차적으로 비교한다.
 first -> second -> ...
     첫 번쨰 위치의 원소들을 비교하고 정렬, 두 번째 위치의 원소들을 비교하고 정렬 
-
+ 
+ 
 [예제]
 #include <iostream>
 #include <queue>
