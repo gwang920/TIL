@@ -80,6 +80,7 @@ long long fib(long long n){
 #include <algorithm>
 
 using namespace std;
+ 
 
 int N,K;
 int W[100],V[100];    
