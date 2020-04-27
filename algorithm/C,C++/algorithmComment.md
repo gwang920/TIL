@@ -530,6 +530,40 @@ NOT(~)연산
 
 # 백준
 
+##### 2048
+
+````c++
+1) rotate를 매번 갱신한 값을 저장해야한다.
+    
+void game(int cnt){
+	if(cnt==5){
+		for(int i=0;i<N;i++){
+			for(int j=0;j<N;j++){
+				if(res<map[i][j]) res=map[i][j];
+			}
+		}
+		return;
+	}
+	int board[21][21];
+	memcpy(board,map,sizeof(map));
+	for(int i=0;i<4;i++){
+		move();sum();move();
+		game(cnt+1);	
+		memcpy(map,board,sizeof(map));
+		rotate();
+		memcpy(board,map,sizeof(map));  // 이 코드가 없으면 rotate가 1회전만 한다.
+	}
+}
+
+2) 배열을 함수의 매개변수로 넘기면 참조하기 쉽지 않다.
+    vector로 넘기면 값이 넘어간다. 배열은 주소값이 전달된다.
+    
+    * 참고
+https://github.com/gwang920/TIL/blob/master/algorithm/C%2CC%2B%2B/Baekjoon/%EB%B0%B1%EC%A4%80%2012100%20-%202048.md
+````
+
+
+
 ##### 원판돌리기
 
 ````c++
