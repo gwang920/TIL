@@ -786,6 +786,46 @@ void connect(int cnt,int idx){
 		}
 	}
 }
+
+
+시간초과 조심하자
+[시간초과]
+void game(int cnt){
+	if(cnt>3 || cnt>=res) return;
+	if(check()){
+		res=min(res,cnt);
+		return;
+	}
+	for(int i=1;i<=H;i++){
+		for(int j=1;j<N;j++){
+			if(cnt>=res) return;
+			if(map[i][j] || map[i][j-1] || map[i][j+1]) continue;
+			map[i][j]=1;
+			game(cnt+1);
+			map[i][j]=0;
+		}
+	}
+}
+
+[통과]
+void game(int cnt,int idx){
+	if(cnt>3 || cnt>=res) return;
+	if(check()){
+		res=min(res,cnt);
+		return;
+	}
+	for(int i=idx;i<=H;i++){
+		for(int j=1;j<N;j++){
+			if(cnt>=res) return;
+			if(map[i][j] || map[i][j-1] || map[i][j+1]) continue;
+			map[i][j]=1;
+			game(cnt+1,i);
+			map[i][j]=0;
+		}
+	}
+}
+
+
 ````
 
 ##### 연구소3
