@@ -136,6 +136,48 @@ public class BinarySearchTree {
         System.out.println(search(10, array));
     }
 }
+
+
+=> 참고문제
+프로그래머스 - 예산
+https://programmers.co.kr/learn/courses/30/lessons/12982
+
+#include <string>
+#include <vector>
+#include <algorithm>
+#include <iostream>
+using namespace std;
+
+int solution(vector<int> budgets, int M) {
+    int answer = 0;
+    long long sum=0;
+    sort(budgets.begin(),budgets.end());
+    for(int i=0;i<budgets.size();i++)
+            sum+=budgets[i];
+    if(sum<=M) return budgets[budgets.size()-1];
+    else{
+        
+        int left=1,right=budgets[budgets.size()-1];  // left=budgets[0]; 로 두면 오답
+        while(left<=right){
+            int mid=(left+right)/2;
+            sum=0;
+            for(int i=0;i<budgets.size();i++){
+              if(budgets[i]>=mid) sum+=mid;
+              else sum+=budgets[i];
+            }
+            if(sum<M){
+                if(answer<mid) answer=mid;
+                left=mid+1;
+            }else if(sum>M){
+                right=mid-1;
+            }
+          //  else{
+          //      answer=mid;
+           // }
+        }
+    }
+    return answer;
+}
 ```
 
 ```java
