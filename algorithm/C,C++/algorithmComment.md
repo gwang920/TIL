@@ -529,6 +529,48 @@ NOT(~)연산
 
 # 백준
 
+##### 괄호 추가하기
+
+````c++
+단순하게 생각하자
+
+#include <iostream>
+
+using namespace std;
+int N,res=-987654321;
+string s;
+
+int calc(int a,int b,char oper){
+	int result=a;
+	switch(oper){
+		case '+':result+=b; break;
+		case '-':result-=b; break;
+		case '*':result*=b; break;
+	}
+	return result;
+}
+
+void game(int idx,int cur){
+	if(idx>N-1){
+		res=max(res,cur); return;
+	}
+	char oper=(idx==0)?'+':s[idx-1];
+	int next=calc(s[idx]-'0',s[idx+2]-'0',s[idx+1]);
+	game(idx+2,calc(cur,s[idx]-'0',oper));
+	game(idx+4,calc(cur,next,oper));
+}
+
+int main(){
+	cin >> N;
+	cin >> s;
+	game(0,0);
+	cout << res << "\n";
+	return 0;
+}
+````
+
+
+
 ##### 아기상어
 
 ```c++
