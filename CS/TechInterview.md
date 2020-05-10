@@ -748,17 +748,14 @@ JSP가 실행되면 자바 서블릿(Servlet)으로 변환되며
 
 ![image](https://user-images.githubusercontent.com/49560745/77242906-0294b780-6c47-11ea-8d36-030a7ea0c151.png)
 
+#### * 동작 과정
+
 ```
 1. 클라이언트가 어떤 동작을 함으로써 hello.jsp 를 요청하였다.
-
 2. JSP 컨테이너가 JSP 파일을 읽는다.
-
 3. JSP 컨테이너가 Generete (변환) 작업을 통해 Servlet ( .java )  파일을 생성한다.
-
 4. .java 파일은 다시 .class 파일로 컴파일된다.
-
 5. Execute (실행) 을통해 HTML 파일을 생성하여 JSP 컨테이너 에게 전달한다.
-
 6. JSP 는 HTTP 프로토콜을 통해 HTML 페이지를 클라이언트 에게 전달한다.
 ```
 
