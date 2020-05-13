@@ -1,4 +1,5 @@
-
+뿌요뿌요 st 문제
+카테고리 : 시뮬레이션+BFS
 
 ```
 #include <string>
