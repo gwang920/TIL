@@ -9,11 +9,26 @@
    하트를 터트리면 같은 색상의 모든 구슬이 다터지는 기능
    
    까지 구현완료했다.
+   
+   + 구슬이 터질 때만 층을 쌓아올렸다.(맨밑바닥 구슬 생성)
+     => 멀티스레드를 활용하여 1초마다 이를 갱신할 수 있는지 알아보기
+   + 슈팅되는 구슬이 하나가 아닌 여러 개,여러 모양으로 구현하기
+     (회전까지)
 ```
 
+## Main 화면
+
+![puyomain](https://user-images.githubusercontent.com/49560745/82028410-9081a180-96d0-11ea-9593-15c55c62de87.JPG)
 
 
-# TEMP
+
+## 게임 ing
+
+![puyoing](https://user-images.githubusercontent.com/49560745/82028496-aee79d00-96d0-11ea-8e7f-60da26c5509f.JPG)
+
+
+
+# 소스코드
 
 ```C++
 #include <iostream>
