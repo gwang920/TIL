@@ -1,6 +1,6 @@
 # Hive Java Connection
 
-##### java를 연동하기 위한 Hive Setting
+##### java 연동을 위한 Hive Setting
 
 ```
 hive> hive --service hiveserver2
