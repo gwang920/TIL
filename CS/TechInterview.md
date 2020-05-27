@@ -287,7 +287,152 @@ Case 2. 부모 노드가 레드인데, 부모님의 형제가 레드일 때 - �
 https://m.blog.naver.com/PostView.nhn?blogId=min-program&logNo=221231697752&proxyReferer=http%3A%2F%2F59.29.251.41%2Ftm%2F%3Fa%3DCR%26b%3DWIN%26c%3D300019389618%26d%3D32%26e%3D5206%26f%3DbS5ibG9nLm5hdmVyLmNvbS9taW4tcHJvZ3JhbS8yMjEyMzE2OTc3NTI%3D%26g%3D1585101618430%26h%3D1585101617789%26y%3D0%26z%3D0%26x%3D1%26w%3D2019-07-24%26in%3D5206_1100_00001607%26id%3D20200325
 ```
 
+### 6. Trie
 
+```C++
+문자열에서 검색을 빠르게 해주는 자료구조
+
+정수형 자료구조에 대하여 이진검색트리를 이용하면 O(logN)의 시간만에 원하는 데이터를 검색할 수 있다.
+그러나, 문자열에서 이진 검색트리를 이용한다면 문자열의 길이가 M이라고 할 때 O(MlogN)의 시간복잡도를 가지게 된다.
+
+이러한 이진트리 검색을 개선하기 위해 Trie 자료구조를 이용하면 O(M)의 시간만에 문자열 검색을 완료할 수 있다.
+
+아래 그림은 문자열 집합 = {"AB" , "ABC", "ACDE", "ACEV", "CD" ,"CE"} 가 존재할 때 트라이의 예이다.
+
+					  "      "
+				   /   			\
+				  A     		 C
+				 / \			/  \
+                AB  AC		   CD   CE
+               /    / \
+             ABC  ACD  ACE
+             	  /		 \
+                ACDE     ACEV
+                
+                
+   일반적인 트리형태를 띄는 트라이에서 검색할 경우 최대 트리높이까지 탐색하게된다.
+   따라서 트리의 높이를 H라고 할 때, 시간복잡도는 O(H)가 된다.
+   이때, 트라이 구조에서 트리의 높이는 문자열의 최대길이 M이 되므로
+   시간복잡도는 O(M)이 된다.
+
+```
+
+####  트라이 구현 for C++
+
+````c++
+struct Trie {
+    bool finish;    //끝나는 지점을 표시해줌
+    Trie* next[26];    //26가지 알파벳에 대한 트라이
+       
+    /*
+    *출처 https://k96-ozon.tistory.com/37
+    클래스를 가지고 객체를 생성 할 때 (클래스의 인스턴스화라고 함) 자동으로 이 생성자를 호출하고 클래	스가 소멸될 때 소멸자가 자동으로 호출 된다
+    
+    기본적인 생성자 , 1) 클래스의 이름과 동일 2) 반환형이 선언되어 있지 않고, 실제 반환 x
+    객체 생성시 딱 한번만 호출 
+    */ 
+    Trie() : finish(false) {   // finish = false로 초기화
+        memset(next, 0, sizeof(next));
+    }
+       
+    // 소멸자 (delete children), 할당된 메모리가 해제된다.
+    ~Trie() {
+        for (int i = 0; i < 26; i++)
+            if (next[i])
+                delete next[i];
+    }
+       
+    void insert(const char* key) {
+        if (*key == '\0')  // 숫자 0과 구분하기 위해 \0(문자 0 , 아스키코드 0x20) 사용,문자열의 								끝을 의미
+            finish = true;    //문자열이 끝나는 지점일 경우 표시
+        else {
+            int curr = *key - 'A';
+            /*
+            char *ptr = NULL 과 char *ptr = 0 은 같은 의미라 볼 수 있습니다. 
+			그러나 int a = NULL 과 int a = 0 의 의미는 다릅니다.
+			왜냐하면 전자의 경우, NULL의 의미는 a 변수에 주소값 0 을 넣는것이고 후자는 정수 0을 a변				수에 넣는다는 뜻입니다.
+			*/
+            if (next[curr] == NULL)
+                next[curr] = new Trie();    //탐색이 처음되는 지점일 경우 동적할당
+            next[curr]->insert(key + 1);    //다음 문자 삽입
+        }
+    }
+       
+    Trie* find(const char* key) {
+        if (*key == '\0') return this;//문자열이 끝나는 위치를 반환
+        int curr = *key - 'A';
+        if (next[curr] == NULL) return NULL;//찾는 값이 존재하지 않음
+        return next[curr]->find(key + 1); //다음 문자를 탐색
+    }
+};
+````
+
+#### 포인터 연산
+
+```c++
+#include <stdio.h>
+
+int main()
+{
+    int numArr[5] = { 11, 22, 33, 44, 55 };
+    int *numPtrA;
+    int *numPtrB;
+    int *numPtrC;
+    
+	char *charPtr="54321";
+    
+    for(int i=0;i<5;i++){
+    	printf("%c %s %p %p\n",*charPtr,charPtr,charPtr,&charPtr);
+    	charPtr++;
+	}
+    // char형 포인터 변수에 string 을 할당하면, 반환된 주소 값은 문자열의 첫 번째 문자의 주소값 
+
+    numPtrA = numArr;    // 배열 첫 번째 요소의 메모리 주소를 포인터에 저장
+
+    numPtrB = numPtrA + 1;    // 포인터 연산
+    numPtrC = numPtrA + 2;    // 포인터 연산
+    
+    printf("%p\n", numPtrA);    // 00A3FC00: 메모리 주소. 컴퓨터마다, 실행할 때마다 달라짐
+    printf("%p\n", numPtrB);    // 00A3FC04: sizeof(int) * 1이므로 numPtrA에서 4가 증가함
+    printf("%p\n", numPtrC);    // 00A3FC08: sizeof(int) * 2이므로 numPtrA에서 8이 증가함
+	
+	printf("%d\n", *numPtrA);    
+    printf("%d\n", *numPtrB);    
+    printf("%d\n", *numPtrC);    
+    return 0;
+}
+
+[결과]
+5 54321 0000000000404000 000000000023FE08
+4 4321 0000000000404001 000000000023FE08
+3 321 0000000000404002 000000000023FE08
+2 21 0000000000404003 000000000023FE08
+1 1 0000000000404004 000000000023FE08
+000000000023FE10
+000000000023FE14
+000000000023FE18
+11
+22
+33
+
+[출처]
+https://dojang.io/mod/page/view.php?id=509
+https://dojang.io/mod/page/view.php?id=328
+```
+
+![포인터](https://user-images.githubusercontent.com/49560745/82983030-5d250800-a02a-11ea-9494-ed9e801eef88.JPG)
+
+
+
+* int 형 배열은 원소를 4byte로 메모리 주소값에 할당한다
+
+* 따라서, 포인터 변수에 +1을 하면 자료형 값 * 1 (4)만큼 주소값이 이동한다.
+
+* char 포인터 변수도 마찬가지로 +1 해주면 char 자료형 크기(1) 만큼 주소값이 이동한다.
+
+* 출처 - https://dojang.io/mod/page/view.php?id=509
+
+  
 
 ## 알고리즘
 
