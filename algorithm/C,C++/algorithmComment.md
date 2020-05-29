@@ -667,7 +667,7 @@ void game(int cnt){
 2) 배열을 함수의 매개변수로 넘기면 참조하기 쉽지 않다.
     vector로 넘기면 값이 넘어간다. 배열은 주소값이 전달된다.
     
-    * 참고
+* 참고
 https://github.com/gwang920/TIL/blob/master/algorithm/C%2CC%2B%2B/Baekjoon/%EB%B0%B1%EC%A4%80%2012100%20-%202048.md
 ````
 
@@ -1038,9 +1038,11 @@ void Dfs(int plus,int minus,int multiply,int divide,int idx,int sum){
 line3,line5 에서 y를 바꾸면, 뒤의 x값 변경시 오류 발생
 
 int now_y=v[map[y][x]][0].first; int now_x=v[map[y][x]][0].second;
-			if(now_y==y && now_x==x){
+			if(now_y==y && now_x==x)
+            {
 				y=v[map[y][x]][1].first; x=v[map[y][x]][1].second; -- line3
-			}else{
+			}else
+            {
 				y=v[map[y][x]][0].first; x=v[map[y][x]][0].second; -- line5
 			}
 ```
