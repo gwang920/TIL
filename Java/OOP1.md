@@ -6,6 +6,8 @@
 
 #### 3. 신뢰성이 높은 프로그래밍을 가능하게 한다.
 
+* 객체지향 참고 : <https://woowabros.github.io/study/2016/07/07/think_object_oriented.html>
+
 
 
 # II. 객체의 구성요소
@@ -72,55 +74,48 @@ ex) TV의 속성과 기능
 
 * 참고
 
-  ```
+  ```java
   자바 파일명과 public class의 클래스 명은 일치해야한다.
-=======
-import java.util.*;
-
-public class Main{
-	public static void main(String args[]){
-		Tv tv;
-		tv = new Tv();
-		tv.channel = 7;
-		tv.channelDown();
-		System.out.println(tv.channel);
-	}
-}
-
-class Tv{
-	String color;
-	boolean power;
-	int channel;
-	
-	void power(){
-		power= !power;
-	}
-	void channelUp(){
-		++channel;
-	}
-	void channelDown(){
-		--channel;
-	}
-}
-
->>>>>>> 36159715cb7fdac06c91ed16f45dae8142a3a826
+  =======
+  import java.util.*;
   
-  한 파일 내에 클래스가 여러 개 있을 수 있는데, public class는 하나만 존재할 수 있으며, 파일명과 같아야 한다.
+  public class Main{
+  	public static void main(String args[]){
+  		Tv tv;
+  		tv = new Tv();
+  		tv.channel = 7;
+  		tv.channelDown();
+  		System.out.println(tv.channel);
+  	}
+  }
+  
+  class Tv{
+  	String color;
+  	boolean power;
+  	int channel;
+  	
+  	void power(){
+  	power= !power;
+  }
+  void channelUp(){
+  	++channel;
+  }
+  void channelDown(){
+  	--channel;
+  }
+  
+  }
+  //  한 파일 내에 클래스가 여러 개 있을 수 있는데, public class는 하나만 존재할 수 있으며, 파일명과 같아야 한다.
   ```
 
-  
 
-
-
-
-
+  ```java
 * 실습 (수정하자)
 
   * 'time' 을 활용하여 객체지향을 느껴보자
   * attribute - 날짜 / 시간 /  
   * function - 스탑워치 / 
 
-  ```java
   package time;
   
   import java.util.Date;
@@ -220,7 +215,7 @@ class Tv{
   	}
   }
   ```
-  
+
   
 
 ##### * SW설계 메커니즘 
