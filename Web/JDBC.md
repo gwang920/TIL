@@ -1,4 +1,42 @@
-# Statement
+# JDBC란 ?
+
+```
+- JAVA Database Connectivity
+- 자바 프로그램 내에서 DB와 관련된 일을 처리할 수 있도록 도와주는 일을 한다.
+- 이때, JDBC API를 이용하여 작업을 진행하는데 하나의 API로 모든 종류의 DBMS에 사용할 수 있다.
+```
+
+# 실행 순서
+
+```
+1. JDBC 드라이버 로딩
+2. DriverManager.getConnection을 통해 데이터베이스에 Connection 한다.
+3. Query 실행을 위해 Statement 객체를 생성한다.
+4. Query 실행
+5. statement 종료
+6. DB Connection 종료
+```
+
+# Statement / PreparedStatement
+
+```
+- SQL을 실행할 수 있는 객체이다.
+
+- 차이점
+1) Statement
+ - 단일로 사용될 때 빠른 속도를 지닌다.
+ - 쿼리에 인자를 부여할 필요가 없다.
+ - 매번 컴파일을 수행해야 한다.
+
+2) PreparedStatement
+  - 쿼리에 인자를 부여할 수 있다.
+  - 처음 프리 컴파일 이후, 컴파일을 수행하지 않아도 된다.
+  - 여러번 수행될 때 빠른 속도를 지닌다.
+```
+
+
+
+## 1. Statement
 
 ##### 매번 쿼리를 수행할 때 마다 1) - 3) 단계를 거친다.
 
@@ -14,7 +52,7 @@ Statement stmt = conn.credateStatement();
 ResultSet rst = stmt.executeQuerey(sqlstr);
 ```
 
-# PreparedStatement
+## 2. PreparedStatement
 
 ##### 1) ~ 3)의 단계를 최초 실행시 한번만 거친다.
 
@@ -37,25 +75,23 @@ ResultSet rst = pstmt.executeQuerey();
 
 ##### 단 하나라도 문제가 생기면 rollback 되어 작업 수행 전단계로 모든 과정이 회수 된다.
 
+**즉, 트랜잭션 내 모든 명령은 모두 성공이거나 실패이어야 한다.**
 
-
-* 트랜잭션을 위한 메소드 : commit(), rollback()
-  * commit() : 트랜잭션의 commit 수행
-  * rollback() : 트랜잭션의 rollback 수행
-
-* 자동 트랜잭션 메소드 : setAutoCommit(bollean autoCommit)
-
-  * setAutoCommit() : commit이 자동적으로 수행 됨. default 값이 true
-
-  * 트랜잭션 처리시 자동 오토커밋을 방지하기 위해 setAutoCommit(false); 로 설정
-
-    
+```
+- 트랜잭션을 위한 메소드 : commit(), rollback()
+  - commit() : 트랜잭션의 commit 수행
+  - rollback() : 트랜잭션의 rollback 수행
+- 자동 트랜잭션 메소드 : setAutoCommit(bollean autoCommit)
+  - setAutoCommit() : commit이 자동적으로 수행 됨. default 값이 true
+  - 트랜잭션 처리시 자동 오토커밋을 방지하기 위해 setAutoCommit(false); 로 설정
+```
 
 ```java
 Connection con = null;   //null로 초기화 1)
 		try {
 			con = DriverManager.getConnection(url, id, pwd); //2)  1)+2) db연결
 			con.setAutoCommit(false);  // 오토커밋 false로 지정
+            // 트랜잭션은 여러 개의 쿼리가 하나의 작업으로 수행 되어야 하기 때문에 자동으롤 커밋되지 			   않게 설정해야한다.
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -88,7 +124,7 @@ ResultSet rs = null;
 rs = psmt.executeQuery();
 
 ==> rs.next() 를 이용하여 한 줄씩 읽어들인다.
-PreparedStatement pstmt = null;
+	    PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		ArrayList<Factory> fs = new ArrayList<Factory>();
 		
@@ -232,7 +268,6 @@ INSERT INTO T_PRODUCTS VALUES(
 ### 5. 작성코드
 
 ```java
-
 @ Package : com
 
 - FactoryBiz
@@ -1069,8 +1104,6 @@ public class Products {
 	int pd_price;
 	int pd_amount;
 	
-	
-	
 	public Products() {
 	}
 	public Products(int pd_no, int pd_amount) {
@@ -1152,12 +1185,7 @@ public class Products {
 				+ fact_no + ", pd_date=" + pd_date + ", pd_cost=" + pd_cost + ", pd_price=" + pd_price + ", pd_amount="
 				+ pd_amount + "]";
 	}
-	
-	
 }
-
-		
-
 ```
 
 ```
