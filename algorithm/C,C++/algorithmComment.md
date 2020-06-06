@@ -24,6 +24,7 @@ J
 ```
 
 
+
 ##### vector 초기화(크기 및 값 지정)
 
 ```c++
@@ -1047,3 +1048,11 @@ int now_y=v[map[y][x]][0].first; int now_x=v[map[y][x]][0].second;
 			}
 ```
 
+```
+stirng to *char
+string str[20];
+const char* c=str[i];
+
+string을 *char로 변환하려면
+const를 붙여줘야한다.
+```
