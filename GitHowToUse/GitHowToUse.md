@@ -165,6 +165,18 @@
 2) 중복접근(?)오류 : ! [rejected]        master -> master (fetch first)
 
 => "git push -f origin master" 입력 (주의사항 : 모든 업로드 파일이 삭제 된다.)
+
+3) [git] commit or discard the untracked or modified content in submodules
+
+=> sub 모듈이 겹쳐서 나는 에러다. find -name ".git" 명령어를 입력하고, 모듈을 삭제해주자
+(삭제 명령어 rm -rf 파일명)
+
+4) [GIT err]! [rejected] master -> master (fetch first)
+
+ 기존 데이터 손실을 막기위해 push 할 때 발생하는 에러다.
+ 
+ 이를 강제로할 수 있다 => git push origin +master
+ (단, backup 데이터가 저장되어 있을 때 혹은 지금 push 하는 내용으로 원격저장소 renewal 되어도 상관 없을 때만 실행하자)
 ```
 
 
