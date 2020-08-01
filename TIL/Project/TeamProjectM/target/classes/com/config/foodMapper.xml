@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mapper.foodMapper">
+
+	
+<!-- 	<select id="select" parameterType="String" 
+	resultType="food">
+		SELECT * FROM food WHERE ID=#{id}
+	</select> -->
+	
+	<select id="select" parameterType="String"
+	resultType="food">
+		select food.* from food
+		where food.id not in( 
+			select food_id 
+			from (select * from preference union select * from ignore)
+			where user_id=#{id}
+		)
+	</select>
+	
+	
+	<select id="selectall" 
+	resultType="food">
+		SELECT * FROM food ORDER BY 1
+	</select>
+	<insert id="insert" parameterType="food">
+		INSERT INTO food VALUES (seq_food.nextval,#{name},#{imgName1},#{imgName2},#{imgName3},#{category})
+	</insert>
+	<update id="update" parameterType="food">
+		UPDATE food SET NAME=#{name},CATEGORY=#{category},IMGNAME1=#{imgName1 },IMGNAME2=#{imgName2 },IMGNAME3=#{imgName3 } WHERE ID=#{id}
+	</update>
+	<delete id="delete" parameterType="String">
+		DELETE FROM food WHERE ID=#{id}
+	</delete>
+	
+</mapper>
+
+
+
+
+
+

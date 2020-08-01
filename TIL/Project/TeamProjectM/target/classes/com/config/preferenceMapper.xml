@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mapper.preferenceMapper">
+
+	
+	<select id="select" parameterType="String" 
+	resultType="String">
+		SELECT food_id FROM Preference WHERE ID=#{id}
+	</select>
+	<select id="selectById" parameterType="String" 
+	resultType="food">
+		select * 
+		from food
+		where id in (
+			SELECT food_id FROM Preference WHERE user_ID=#{id}
+		)
+	</select>
+	<select id="selectall" 
+	resultType="String">
+		SELECT * FROM Preference ORDER BY 1
+	</select>
+	<insert id="insert" parameterType="String">
+		INSERT INTO Preference VALUES (#{param1},#{param2})
+	</insert>
+	<update id="update" parameterType="String">
+		UPDATE Preference SET FOOD_ID =#{param2} WHERE ID=#{param1}
+	</update>
+	<delete id="delete" parameterType="String">
+		DELETE FROM Preference WHERE ID=#{user_id}
+	</delete>
+	
+</mapper>
+
+
+
+
+
+
