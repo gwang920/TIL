@@ -7,7 +7,7 @@
 단순히, 물려받는 것에서 더 나아가 새로운 속성을 추가해 자식만의 특성을 가질 수 있게한다.
 ```
 
-
+- 함수형
 
 ```javascript
 Dog이라는 부모클래스로부터 bark속성을 상속받고,
@@ -34,6 +34,45 @@ blackDog.run();
 [결과]
 barking
 running
+```
+
+- class
+
+```javascript
+블로그에 있는 코드를 변형해보았다.
+PersonPlus는 Person으로부터 상속을 받았고,
+sum()함수를 재정의(오버라이드)하고 있다.
+따라서, kim.sum()은 PersonPlus의 sum()을 반환한다.
+-----------------------------------------------------------------------------------------
+class Person{
+	constructor(name, first, second){
+    this.name = name;
+    this.first = first;
+    this.second = second;
+    }
+    
+    sum(){
+    	return this.first + this.second
+        }
+}
+
+class PersonPlus extends Person{
+	avg(){
+    	return (this.first + this.second)/2;
+    }
+    sum(){
+        return this.name+this.first+this.second;
+    }
+}
+
+var kim = new PersonPlus('kim',10,20);
+//console.log("kim.sum()",kim.sum()); // kim.sum() 30
+console.log("kim.sum() 오버라이드 ",kim.sum()); //kim.sum() kim1020 <= string이된다.
+console.log("kim.avg()",kim.avg());  //kim.avg() 15
+
+[결과]
+kim.sum() kim1020
+kim.avg() 15
 ```
 
 

@@ -69,7 +69,8 @@ console.log(blackDuck.mouse);
 그리고 이 프로토타입을 통해 상속을 흉내낼 수 있다.
 ```
 
-
+-  참고 - [https://medium.com/@bluesh55/javascript-prototype-%EC%9D%B4%ED%95%B4%ED%95%98%EA%B8%B0-f8e67c286b67](https://medium.com/@bluesh55/javascript-prototype-이해하기-f8e67c286b67)
+- 프로토타입의 구조를 함수 생성에 빗대어 풀어쓴 글을 참고했다.
 
 
 
@@ -97,4 +98,3 @@ console.log(blackDuck.mouse);
 어디선가 구한 붕어빵을 가지고 붕어빵 장수를 찾아가 이 붕어빵과 똑같은 붕어빵을 만들어 달라고 할 뿐이다
 ```
 
-- 참고 : [https://medium.com/@bluesh55/javascript-prototype-%EC%9D%B4%ED%95%B4%ED%95%98%EA%B8%B0-f8e67c286b67](https://medium.com/@bluesh55/javascript-prototype-이해하기-f8e67c286b67)
