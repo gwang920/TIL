@@ -69,6 +69,66 @@ console.log(blackDuck.mouse);
 그리고 이 프로토타입을 통해 상속을 흉내낼 수 있다.
 ```
 
+```javascript
+생성자로부터 객체 kim,lee를 생성하고 sum을 출력한 코드이다.
+-----------------------------------------------------------------------------------------
+function Person(name,first,second){
+	this.name=name;
+	this.first=first;
+	this.second=second;
+	this.sum=function(){
+		return this.first+this.second;
+	}
+}
+
+var kim=new Person("kim",10,20);
+var lee=new Person("lee",20,30);
+
+console.log("kim.sum()",kim.sum());
+console.log("lee.sum()",lee.sum());
+
+[결과]
+kim.sum() 30
+lee.sum() 50
+```
+
+```javascript
+프로토타입을 이용해 Person의 원형(프로토타입)의 sum 메소드를 정의한 코드이다. 
+위 코드와 같은 출력값을 갖는 것을 확인할 수 있다.
+
+프로토타입을 사용하려면 생성자에 같은 이름으로 정의되어있지 않아야한다.
+즉, 생성자에 sum을 정의했다면 프로토타입으로 sum을 정의할 수 없다.
+
+그렇다면 왜 프로토타입을 사용하는가?
+생성자는 객체를 만들때마다 모든 생성자의 요소가 메모리상에 올라가게 된다.
+이러한 메모리를 효율적으로 관리하기 위해 프로토타입을 사용한다.
+프로토타입으로 정의를 하게되면 호출할때만 메모리에 적재되기에 메모리 관리에 효율적이다.
+그리고 생성자를 생성하는 시점이아닌 기능 혹은 요소가 필요한 시점에 정의 할 수 있다는 장점도 있다. 
+-----------------------------------------------------------------------------------------
+function Person(name,first,second){
+	this.name=name;
+	this.first=first;
+	this.second=second;
+	
+}
+
+person.prototype.sum=function(){
+	return this.first+this.second;
+}
+
+var kim=new Person("kim",10,20);
+var lee=new Person("lee",20,30);
+
+console.log("kim.sum()",kim.sum());
+console.log("lee.sum()",lee.sum());
+
+[결과]
+kim.sum() 30
+lee.sum() 50
+```
+
+
+
 -  참고 - [https://medium.com/@bluesh55/javascript-prototype-%EC%9D%B4%ED%95%B4%ED%95%98%EA%B8%B0-f8e67c286b67](https://medium.com/@bluesh55/javascript-prototype-이해하기-f8e67c286b67)
 - 프로토타입의 구조를 함수 생성에 빗대어 풀어쓴 글을 참고했다.
 
