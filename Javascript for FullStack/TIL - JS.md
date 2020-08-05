@@ -93,3 +93,27 @@ console.log(idx);
 0
 ```
 
+# 3. 배열 중복 제거(indexOf)
+
+```javascript
+filter 와 indexOf를 사용하면 배열 요소의 중복제거가 가능하다.
+filter는 조건에 부합하는 요소만을 가지고 새롭게 배열을 만들어준다.
+indexOf는 해당하는 요소의 index 값을 반환해준다.
+
+아래 예제에서
+첫번째 abc는 indexOf("abc") => 0 이된다.
+두번째 abc는 indexOf("abc") => 0 이된다. 중복이 되면 가장 앞에 있는 원소의 인덱스를 반환한다.
+그리고 bcd indexOf("bcd") => 2가 된다.
+
+따라서 indexof의 값과 index가 일치하는 0번째 abc와 2번째 bcd만이 filter로부터 추출된다.
+
+-----------------------------------------------------------------------------------------
+var nums=["abc","abc","bcd"];
+let filteredArray = nums.filter((item, index) => nums.indexOf(item) === index );
+
+console.log(filteredArray);
+
+[결과]
+[ 'abc', 'bcd' ]
+```
+
