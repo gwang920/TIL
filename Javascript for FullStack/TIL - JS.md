@@ -117,3 +117,7 @@ console.log(filteredArray);
 [ 'abc', 'bcd' ]
 ```
 
+# 4. JEST 오류
+
+![image](https://user-images.githubusercontent.com/49560745/89480502-78518800-d7d0-11ea-8749-1f968a3ed3c0.png)
+
