@@ -45,12 +45,10 @@ MBR (Memory Buffer Register)
 MAR(Memory Address Register)
 - MBR로부터 쓰여지거나 읽혀질 단어의 기억장치 주소를 저장
 
-IR (Instruction Register)
+IR (Instruction Register) === Program Counter
 - 실행될 명령어의 연산코드를 저장
 
 ```
-
-
 
 - cpu 동작과정
 
@@ -68,7 +66,6 @@ cpu 동작과정
 
 ```
 주기억장치 -> 명령어 인출 -> 명령어 해독 -> 명령어 실행 -> 저장 -> 명령어처리
-
 ```
 
 ## 1) 명령어 인출
