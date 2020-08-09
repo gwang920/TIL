@@ -121,3 +121,34 @@ console.log(filteredArray);
 
 ![image](https://user-images.githubusercontent.com/49560745/89480502-78518800-d7d0-11ea-8749-1f968a3ed3c0.png)
 
+# 5. parseFloat() , parseInt()
+
+```javascript
+parseFloat() 문자열을 실수로 바꾸는 함수
+
+문법 
+ParseFloat(string)
+
+1) 숫자만 바꾼다 (문자면 NaN반환)
+2) 띄어쓰기를 허용하고, 첫번째 문자만 반환
+
+parseFloat('12.34') => 12.34
+parseFloat(' 12,34') = 12.34
+parseFloat('12,34 56,78') => 12.34
+parseFloat('A 12.34') => NaN
+```
+
+```javascript
+parseInt() 문자열을 정수로 바꾸는 함수
+
+문법
+parseInt(stirng,n)
+
+1) string을 n진법일때의 값을 바꿈
+
+parseInt('12.68') => 12
+parseInt('100',10) => 100
+parseInt('100',2) => 4
+parseInt('0x100') => 256
+```
+
