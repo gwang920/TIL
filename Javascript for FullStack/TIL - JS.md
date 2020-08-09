@@ -152,3 +152,12 @@ parseInt('100',2) => 4
 parseInt('0x100') => 256
 ```
 
+# 6. cannot find module 'express'
+
+```
+링크참조
+```
+
+
+
+https://m.blog.naver.com/PostView.nhn?blogId=nasu0210&logNo=220202362638&proxyReferer=https:%2F%2Fwww.google.com%2F
