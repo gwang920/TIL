@@ -185,3 +185,22 @@ var index=arr.findIdx(i=>i.name==="내가찾는사람"); // i라는 변수명은
 console.log(index); // 1
 ```
 
+# 8. readline .txt 파일 받기
+
+```javascript
+const rl = readline.createInterface({
+    input: fs.createReadStream('./cmd.txt'),
+    output: process.stdout
+});
+```
+
+- cmd.txt
+
+```
+abc
+def
+.
+.
+.
+```
+
