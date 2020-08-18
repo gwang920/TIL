@@ -25,3 +25,48 @@ ex)
 example.com - 93.161.216.34
 ```
 
+
+
+## 도메인 이름 구조
+
+```
+DNS 서버는 전 세계에 수천, 수만대 존재한다.
+서로 협력해서 모든 URL에 접속 가능하게 한다!
+	
+	blog.example.com. 를 예제로 살펴보자
+
+blog   .example    .com    .   
+[sub]    [s-lv]   [T-lv] [root]
+(가장 우측에 점은 원래 보이지 않지만 사실 존재하는 것)
+
+
+우측에서부터 살펴보면
+1) 가장 오른쪽 dot은 Root
+2) .com은 Top-level 도메인
+3) example은 Second-level 도메인
+4) blog는 sub 도메인이 된다.
+
+1) ~ 4)에는 각각 1) ~ 4)를 담당하는 DNS가 존재한다.
+
+상위 DNS는 (맞)하위 DNS를 알고 있어야 한다.(가장 오른쪽 DNS가 상위 DNS)
+
+```
+
+### 컴퓨터가 도메인 이름을 물어보는 과정
+
+```
+1) 사용자가 Root Name Server에게 도메인 정보를 물어본다
+
+ => Root Name Server는 전체 ip를 알지 못하기 때문에
+ 자신이 알고있는 정보인 바로 하위 DNS '.com' 의 ip를 알려준다.
+ 
+2) 사용자는 .com의 ip에 접근해 .com을 담당하는 Top level DNS에 접근한다.
+
+3) 마찬가지로 Top은 second DNS ip를 전달하고
+최종적으로 sub에 접근해 sub는 해당 도메인의 ip를 사용자에게 전달한다.
+
+1) ~ 3)의 과정을 통해 
+전세계의 수많은 도메인을 쉽게 관리할 수 있다.
+ 
+```
+
