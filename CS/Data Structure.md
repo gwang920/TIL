@@ -50,6 +50,34 @@ http://www.nextree.co.kr/p6506/
 
 [![image](https://user-images.githubusercontent.com/49560745/77373920-cb401b00-6dac-11ea-9843-fe9e18e06a4b.png)](https://user-images.githubusercontent.com/49560745/77373920-cb401b00-6dac-11ea-9843-fe9e18e06a4b.png)
 
+#### 1-1. c++ / java / javascript 배열
+
+```
+Array를 정리하다 헷갈리는 부분이 생겼다.
+분명히 자바,c++에서는 할당된 배열의 크기를 변경하지 못했는데
+javascript에서는 배열 크기를 자유롭게 변경했던 기억이 있다.
+
+그렇다면 배열의 크기는 변경이 가능한 것인가? 궁금해졌다.
+
+결론부터 얘기하면, c++ 자바는 할당 후 배열의 크기를 변경할 수 없다.(기존배열 copy로만 변경을 흉내(?)낸다)
+그에 반해 자바스크립트에서 배열은 자유롭게 크기 변경이 가능하다.
+
+1) c++ / java는 배열의 크기를 변경하려면 새로운 배열을 할당해 기존배열을 copy하는 방식을 사용한다.
+
+2) 자바스크립트 배열
+
+자바스크립트 배열은 동적이다. 
+배열의 크기가 필요에 따라 커지거나 작아질 수 있다. 
+배열을 생성하거나, 크기가 변경되어 다시 할당을 할 때도 배열 크기를 선언할 필요가 없다. 
+자바스크립트 배열은 밀집도가 높지 않고, 각 원소의 인덱스가 연속적이지 않아도 되고, 원소들 사이에 빈자리가 있어도 된다. 
+자바스크립트 배열에는 length 프로퍼티가 존재한다.
+
+* reference
+https://jongmin92.github.io/2017/01/28/JavaScript/complete-guide-to-javascript-chapter-7/
+```
+
+
+
 ### 2. Stack vs Queue
 
 ```
