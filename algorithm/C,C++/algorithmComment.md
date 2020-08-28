@@ -541,6 +541,66 @@ int main(){
 
 # KAKAO
 
+##### 문자열 압축
+
+```c++
+# exception 처리
+
+​```c++
+오류메시지 : C++ exception with description "basic_string::substr: __pos (which is 18) > this->size() (which is 17)" thrown in the test body.
+
+
+substr 범위가 벗어나 오류가 발생한다.
+    
+    
+    아래 주석을 풀어주고
+    string b="";
+ 	바꿔주면 성공!
+-----------------------------------------------------------------------------------------
+
+#include <string>
+#include <vector>
+#include <iostream>
+#include <math.h>
+using namespace std;
+
+int answer = 987654321;
+
+void comp(string s,int cnt){
+    if(s.length()==1){
+        answer=1;
+        return;
+    }
+    if(cnt>s.length()/2) return;
+    string str="";
+    int compCnt=1;
+    for(int i=0;i<s.length();i+=cnt){
+        string a=s.substr(i,cnt);
+        string b=s.substr(i+cnt,cnt);
+     //   if(i+cnt<s.length()) b=s.substr(i+cnt,cnt);
+        if(a!=b){
+            if(compCnt==1) str+=a;
+            else str+=to_string(compCnt)+a;
+            compCnt=1;
+        }
+        else if(a==b){
+            compCnt++;
+        }
+    }
+    if(answer>str.length()) answer=str.length();
+    comp(s,cnt+1);
+}
+
+
+int solution(string s) {
+    comp(s,1);
+    return answer;
+}
+​```
+```
+
+
+
 ##### 기둥과 보설치
 
 ```
