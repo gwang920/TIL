@@ -257,3 +257,216 @@ long long solution(string expression) {
 }
 ```
 
+# 성공
+
+```c++
+#include <string>
+#include <vector>
+#include <iostream>
+#include <math.h>
+using namespace std;
+
+int visit[3],ch[3];
+long long answer = 0;
+// 0 : + , 1 : 0 , 2 : * 
+char oper(int idx){
+    if(idx==0) return '+';
+    if(idx==1) return '-';
+    if(idx==2) return '*';
+}
+
+long opCalc(char op,long a,long b){
+    long res=0;
+    if(op=='*') res=a*b;
+    if(op=='-') res=a-b;
+    if(op=='+') res=a+b;
+    return res;
+}
+
+bool checkOp(char a){
+    if(a-'0'>=0 && a-'0'<=9) return false;
+    return true;
+}
+bool isOper(string str){
+    for(int i=1;i<str.length();i++){
+        if(checkOp(str[i])) return false;
+    }
+    return true;
+}
+
+bool flag=false;
+void expCalc(string str,int cnt){
+    if(isOper(str)){
+       answer=max(answer,abs(stoll(str)));
+       return;
+    }
+    string newstr="";
+    char op=oper(visit[cnt]);
+    int idx=0;
+    string num="";
+    vector<long> number;
+    vector<char> o;
+    for(int i=0;i<str.length();i++){
+        if(checkOp(str[i])){
+            if(i==0 || checkOp(str[i-1])) num+=str[i];
+            else{
+                number.push_back(stol(num));
+                o.push_back(str[i]);  
+                num="";
+            } 
+        }else{
+            num+=str[i];
+        }
+        if(i==str.length()-1){
+            number.push_back(stol(num));
+            break;
+        }
+    }
+    
+    vector<long> new_number;
+    vector<char> new_o;
+    bool flag=false;
+    for(int i=0;i<o.size();i++){
+        if(o[i]==op){
+            if(flag){
+                long long temp=new_number[new_number.size()-1];
+                new_number.erase(new_number.end()-1);
+                new_number.push_back(opCalc(op,temp,number[i+1]));
+                continue;
+            }
+            flag=true;
+            new_number.push_back(opCalc(op,number[i],number[i+1]));
+        }else{
+            if(flag){
+                flag=false;
+            }else{
+                new_number.push_back(number[i]);
+            }
+            if(i==o.size()-1) new_number.push_back(number[i+1]);
+            new_o.push_back(o[i]);
+        }
+    }
+    newstr=to_string(new_number[0]);
+    for(int i=0;i<new_o.size();i++){
+        newstr+=new_o[i];
+        newstr+=to_string(new_number[i+1]);
+    }
+    expCalc(newstr,cnt+1);
+}
+
+void makeOp(int cnt,string str){
+    if(cnt==3){
+        expCalc(str,0);
+        return;
+    }
+    
+    for(int i=0;i<3;i++){
+           if(visit[cnt] || ch[i]) continue;
+           visit[cnt]=i; ch[i]=1;
+           makeOp(cnt+1,str);
+           ch[i]=0; visit[cnt]=0;
+    }
+}
+
+
+long long solution(string expression) {
+    makeOp(0,expression);
+    return answer;
+}
+```
+
+# 로직 최적화
+
+```c++
+#include <string>
+#include <vector>
+#include <iostream>
+#include <math.h>
+using namespace std;
+
+int visit[3],ch[3];
+long long answer = 0;
+// 0 : + , 1 : 0 , 2 : * 
+char oper(int idx){
+    if(idx==0) return '+';
+    if(idx==1) return '-';
+    if(idx==2) return '*';
+}
+
+long opCalc(char op,long a,long b){
+    long res=0;
+    if(op=='*') res=a*b;
+    if(op=='-') res=a-b;
+    if(op=='+') res=a+b;
+    return res;
+}
+
+bool checkOp(char a){
+    if(a-'0'>=0 && a-'0'<=9) return false;
+    return true;
+}
+
+pair<vector<long>,vector<char>> strToVector(string str){
+    vector<long> number;
+    vector<char> o;
+    string num="";
+    for(int i=0;i<str.length();i++){
+        if(checkOp(str[i])){
+            if(i==0 || checkOp(str[i-1])) num+=str[i];
+            else{
+                number.push_back(stol(num));
+                o.push_back(str[i]);  
+                num="";
+            } 
+        }else{
+            num+=str[i];
+        }
+        if(i==str.length()-1){
+            number.push_back(stol(num));
+            break;
+        }
+    }
+    return make_pair(number,o);
+}
+
+void expCalc(string str){
+    auto vec=strToVector(str);
+    vector<long> number;
+    vector<char> o;
+    number=vec.first;
+    o=vec.second;
+    
+    for(int i=0;i<3;i++){
+        char op=oper(visit[i]);
+        for(int j=0;j<o.size();j++){
+             if(o[j]==op){
+                 number[j]=opCalc(op,number[j],number[j+1]);
+                 number.erase(number.begin()+j+1);
+                 o.erase(o.begin()+j);
+                 j--;
+             }
+        }
+    }
+    if(answer<abs(number[0])) answer=abs(number[0]);
+}
+
+void makeOp(int cnt,string str){
+    if(cnt==3){
+        expCalc(str);
+        return;
+    }
+    
+    for(int i=0;i<3;i++){
+        if(visit[cnt] || ch[i]) continue;
+        visit[cnt]=i; ch[i]=1;
+        makeOp(cnt+1,str);
+        ch[i]=0; visit[cnt]=0;
+    }
+}
+
+long long solution(string expression) {
+    makeOp(0,expression);
+    return answer;
+}
+```
+
