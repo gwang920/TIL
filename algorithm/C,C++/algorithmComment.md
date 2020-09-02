@@ -675,6 +675,74 @@ int solution(string s) {
 	이 될 수 있어 '-' 연산자만 계산 된다.
 
 3) set 함수에서 cnt==3 일 때 계산하면 안된다!
+        
+        
+        
+        +
+        
+        
+수식최적화
+----------------------------------------------------------------------------------------
+1) 계산된 결과값 or 계산되지 않는 결과값을 새로운 벡터에 담는다.
+    ex) 현재 우선순위 연산자를 '-'라 할 때
+        1+2-3-4*5
+        
+        새로운 벡터 1+-1-7*5
+        가 담기게 된다.
+        즉,
+
+        1) 연속적으로 계산 operator가 나올 경우 갱신된 결과값에 계산을 할 수 없다.
+        
+        2) index를 쫓으면서 컨트롤하다보니 복잡해진다.(벡터에서 => 새로운 벡터로 이동)
+        => 디버깅을 통해 실행결과값을 확인하지 않고서는 모든 조건을 파악하기 쉽지 않다.
+        => 초기설계로 통과할 확률이 현저히 작아진다.
+
+for(int i=0;i<o.size();i++){
+        if(o[i]==op){
+            if(flag){
+                long long temp=new_number[new_number.size()-1];
+                new_number.erase(new_number.end()-1);
+                new_number.push_back(opCalc(op,temp,number[i+1]));
+                continue;
+            }
+            flag=true;
+            new_number.push_back(opCalc(op,number[i],number[i+1]));
+        }else{
+            if(flag){
+                flag=false;
+            }else{
+                new_number.push_back(number[i]);
+            }
+            if(i==o.size()-1) new_number.push_back(number[i+1]);
+            new_o.push_back(o[i]);
+        }
+    }
+  
+----------------------------------------------------------------------------------------- 2) 계산된 결과값을 바로 현재 벡터에 갱신해준다.
+    
+    ex) 1+2-3-4*5
+    
+    마찬가지로 현재 우선순위 연산자를 '-'라 할 때
+    v[0]=1;
+	v[1]=-1;
+	v[1]=-4;
+	v[2]=5;
+
+	가 된다.
+
+for(int i=0;i<3;i++){
+        char op=oper(visit[i]);
+        for(int j=0;j<o.size();j++){
+             if(o[j]==op){
+                 number[j]=opCalc(op,number[j],number[j+1]);
+                 number.erase(number.begin()+j+1);
+                 o.erase(o.begin()+j);
+                 j--;
+             }
+        }
+    }
+
+-----------------------------------------------------------------------------------------
 ```
 
 
