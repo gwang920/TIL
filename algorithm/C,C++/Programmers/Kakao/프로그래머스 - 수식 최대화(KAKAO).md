@@ -447,6 +447,7 @@ void expCalc(string str){
              }
         }
     }
+    
     if(answer<abs(number[0])) answer=abs(number[0]);
 }
 
