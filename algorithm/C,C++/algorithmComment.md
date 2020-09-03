@@ -1,8 +1,14 @@
+##### 1. map 컨테이너 iterator
 
+```c++
+for(auto it=map.begin(); it!=map.end(); ++it) {
+       string key=it->first;
+       string value=it->second;
+       cout << key << ' ' << value;
+   }
+```
 
-
-
-##### 2차원 배열의 원소가 문자열 일 때 
+##### 2. 2차원 배열의 원소가 문자열 일 때 
 
 ```c++
 tickets 배열 : [[ICN, JFK], [HND, IAD], [JFK, HND]]
@@ -23,9 +29,7 @@ printf("%c",a[0]);
 J
 ```
 
-
-
-##### vector 초기화(크기 및 값 지정)
+##### 3. vector 초기화(크기 및 값 지정)
 
 ```c++
 1) 1차원 배열
@@ -57,11 +61,7 @@ ex) queue<int,list<int>> q;
 	queue<string,list<string>> q;	
 ```
 
-
-
-
-
-##### 트러블 슈팅 **signal: floating point exception (core dumped)**
+##### 4.트러블 슈팅 **signal: floating point exception (core dumped)**
 
 ```
 나누기 할시 변수/0꼴이 있으면 발생
@@ -69,7 +69,7 @@ ex) queue<int,list<int>> q;
 
 
 
-##### 배열 최대크기
+##### 5. 배열 최대크기
 
 ```
 [20001] x [20001]
@@ -77,7 +77,7 @@ ex) queue<int,list<int>> q;
 
 
 
-##### int 형 범위 초기화
+##### 6. int 형 범위 초기화
 
 ```c++
 int answer = 0x7f7f7f7f;
@@ -87,7 +87,7 @@ int answer = 0x7f7f7f7f;
 
 
 
-##### 플로이드 와샬 알고리즘
+##### 7. 플로이드 와샬 알고리즘
 
 ```c++
 기본 구조
@@ -107,7 +107,7 @@ for(int k=0;k<N;k++){
 
 
 
-##### priority_queue
+##### 8. priority_queue
 
 ```c++
 우선순위큐에 여러개의 값이 들어갈 때 순차적으로 비교한다.
@@ -149,7 +149,7 @@ int main(){
 
 
 
-##### queue VS stack
+##### 9. queue VS stack
 
 ```c++
 간단하게 queue의 반대는 stack이다(?)
@@ -201,7 +201,7 @@ stack : 후입 선출
 
 
 
-##### 자료형 크기
+##### 10. 자료형 크기
 
 ```c++
 #include <string>
@@ -231,7 +231,7 @@ long long solution(int n)
 
 
 
-##### 배열 초기화 ( 전역 / 지역)
+##### 11. 배열 초기화 ( 전역 / 지역)
 
 ```c++
 1) 전역변수 선언
@@ -271,7 +271,7 @@ signal: segmentation fault (core dumped)
 
 
 
-##### string -> int
+##### 12. string -> int
 
 ```c++
 string numbers=155;
@@ -294,7 +294,7 @@ char character='B';// 알파벳 A는 65 B는 66이다.
 
 
 
-##### rotate (90 도 회전)
+##### 13. rotate (90 도 회전)
 
 ```c++
 for (int y = 0; y < n; ++y) {
@@ -310,7 +310,7 @@ for (int y = 0; y < n; ++y) {
 		}
 ```
 
-##### 재귀 return 
+##### 14. 재귀 return 
 
 ```c++
 
@@ -362,7 +362,7 @@ true 가 출력 될 때마다 해당 i 값이 출력 되어야하는데 그렇�
 
 ```
 
-##### 조합 속도
+##### 15. 조합 속도
 
 ```c++
 
@@ -407,7 +407,7 @@ void set(int idx){
 
 ```
 
-##### 16 진수 -> 10진수 / 16진수 ->2진수
+##### 16. 16 진수 -> 10진수 / 16진수 ->2진수
 
 ```c++
 [16 진수 -> 10진수]
@@ -442,7 +442,7 @@ BEE = 1011 1110 1110
 [7 7 0111] [15 f 1111]   
 ```
 
-##### HEADER : climits
+##### 17. HEADER : climits
 
 ```c++
 #include <climits>
@@ -463,7 +463,7 @@ min:-2147483648
 max:2147483647
 ```
 
-##### 우선순위큐 오름차순(struct)
+##### 18. 우선순위큐 오름차순(struct)
 
 ```c++
 우선순위큐에 구조체에 여러개의 인자를 넣어줄 때 비교연산이 모호해진다.
@@ -484,7 +484,7 @@ priority_queue<INFO> pq;
 
 
 
-##### 비트마스킹기법
+##### 19. 비트마스킹기법
 
 ```C++
 특정 알고리즘이 아닌 bit을 활용한 하나의 기술이라고 할 수 있다.
@@ -512,7 +512,7 @@ NOT(~)연산
 
 ```
 
-##### 반올림 (자릿수)
+##### 20. 반올림 (자릿수)
 
 ```c++
 #include <iostream>
