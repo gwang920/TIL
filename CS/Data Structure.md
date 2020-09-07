@@ -526,7 +526,15 @@ KEY  INDEX     VALUE
   	* 참고
   	선형 탐색(Linear Probing): 해시충돌 시 다음 버켓, 혹은 몇 개를 건너뛰어 데이터를 삽입한다.
 	제곱 탐색(Quadratic Probing): 해시충돌 시 제곱만큼 건너뛴 버켓에 데이터를 삽입(1,4,9,16..)
-	이중 해시(Double Hashing): 해시충돌 시 다른 해시함수를 한 번 더 적용한 결과를 이용함.
+	이중 해시(Double Hashing): 해시충돌 시 다른
+    해시함수를 한 번 더 적용한 결과를 이용함.
 	 https://preamtree.tistory.com/20 [Preamtree의 행복로그]
+```
+
+# * 참고
+
+```
+map - red black tree
+unordered map - hash table
 ```
 
