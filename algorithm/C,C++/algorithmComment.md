@@ -541,6 +541,208 @@ int main(){
 
 # KAKAO
 
+##### 방금그곡
+
+# 방금그곡 - 프로그래머스
+
+
+
+```C++
+무한 디버깅했던 문제다.
+    
+아래 풀이법 이외에도 C# => c , A# => a와 같이 하나의 문자로 대체해 풀이할 수 도 있다.
+
+```
+
+## 고려하지 못한 조건
+
+## #1
+
+```c++
+C#,D# 은 하나의 문자이다.
+    
+실행시간이 2, 악보는 "AC#"일 때 
+실행시간동안의 음악의 총 악보는 "AC"가 아닌 "AC#"이다.
+
+=> 아래 함수를 만들어 해결
+    
+-----------------------------------------------------------------------------------------
+int calcLength(string s){
+    int lg=s.length();
+    for(int i=0;i<s.length();i++){
+        if(s[i]=='#') lg--;
+    }
+    return lg;
+}
+
+-----------------------------------------------------------------------------------------
+```
+
+## #2
+
+```c++
+음악의 총 악보가 "BA#BA" 이고, 네오가 기억한 멜로디가 "BA"라 할때
+    
+-----------------------------------------------------------------------------------------
+[1]
+int idx=new_sco.find(m);
+if(new_sco[idx+m.length()]=='#') continue;
+if(diff_time>maxtime){
+	maxtime=diff_time;
+	answer=m_name;
+}
+
+-----------------------------------------------------------------------------------------
+위와 같이 처리하면 문제가 생긴다.
+    
+find는 문자열의 첫 인덱스부터 진행되기때문에 "BA#"을 찾고 continue 해버린다.
+따라서, while(new_sco[idx+m.length()]=='#') 반복문을 활용해 '#'을 찾지 못할 때까지 반복해줘야한다.
+    
+=> 위 [1]코드를 아래와 같이 변경해 해결
+    
+-----------------------------------------------------------------------------------------
+[2]
+int idx=new_sco.find(m);
+while(idx<new_sco.length() && new_sco[idx+m.length()]=='#'){
+            idx=new_sco.find(m,idx+1);
+        }
+        if(idx>new_sco.length()) continue;
+        if(new_sco[idx+m.length()]!='#'){
+            if(diff_time>maxtime){
+                maxtime=diff_time;
+                answer=m_name;
+            }
+        }
+
+-----------------------------------------------------------------------------------------
+```
+
+## #3
+
+```c++
+음악 길이보다 재생된 시간이 짧을 때는 처음부터 재생 시간만큼만 재생된다.
+
+    위 조건을 고려할 때도 A# , C#을 하나의 문자로 처리해야한다.
+
+-----------------------------------------------------------------------------------------
+[1]
+if(recur>=1){
+          while(recur--) new_sco+=sco;
+          if(rem){ 
+            new_sco+=sco;
+          }
+        }else{
+            new_sco=sco.substr(0,rem);
+        } 
+
+-----------------------------------------------------------------------------------------
+
+ => 위 [1]코드를 아래와 같이 변경해 해결
+-----------------------------------------------------------------------------------------
+[2]
+    
+if(recur>=1){
+          while(recur--) new_sco+=sco;
+          if(rem){ 
+            new_sco+=sco;
+          }
+        }else{
+            int cnt=0;
+            string s="";
+            for(int i=0;i<sco.length();i++){
+                if(sco[i]!='#') cnt++;
+                if(cnt>diff_time) break;
+                s+=sco[i];
+            }
+            new_sco=s;
+        } 
+-----------------------------------------------------------------------------------------
+```
+
+
+
+# 성공
+
+```c++
+#include <string>
+#include <vector>
+#include <iostream>
+using namespace std;
+string answer = "(None)";
+
+int searchIdx(string str){
+    for(int i=0;i<str.length();i++){
+        if(str[i]==',') return i;
+    }
+}
+
+int calcTime(string s){
+    string h=s.substr(0,2);
+    string m=s.substr(3);
+    int tmp=stoi(h)*60+stoi(m);
+    return tmp;
+}
+
+int calcLength(string s){
+    int lg=s.length();
+    for(int i=0;i<s.length();i++){
+        if(s[i]=='#') lg--;
+    }
+    return lg;
+}
+
+void game(string m,vector<string> mus){
+    int maxtime=0;
+    for(int i=0;i<mus.size();i++){
+        string s_time=mus[i].substr(0,5);
+        string e_time=mus[i].substr(6,5);
+        int tmp=13+searchIdx(mus[i].substr(12));
+        string m_name=mus[i].substr(12,tmp-13);
+        string sco=mus[i].substr(tmp);
+        
+        int e=calcTime(e_time),s=calcTime(s_time);
+        int diff_time=e-s;
+        int length=calcLength(sco);
+        int recur=diff_time/length;
+        int rem=diff_time%length;
+        string new_sco="";        
+        if(recur>=1){
+          while(recur--) new_sco+=sco;
+          if(rem){ 
+            new_sco+=sco;
+          }
+        }else{
+            int cnt=0;
+            string s="";
+            for(int i=0;i<sco.length();i++){
+                if(sco[i]!='#') cnt++;
+                if(cnt>diff_time) break;
+                s+=sco[i];
+            }
+            new_sco=s;
+        } 
+        int idx=new_sco.find(m);
+        
+        while(idx<new_sco.length() && new_sco[idx+m.length()]=='#'){
+            idx=new_sco.find(m,idx+1);
+        }
+        if(idx>new_sco.length()) continue;
+        if(new_sco[idx+m.length()]!='#'){
+            if(diff_time>maxtime){
+                maxtime=diff_time;
+                answer=m_name;
+            }
+        }
+    }
+}
+string solution(string m, vector<string> musicinfos) {
+    game(m,musicinfos);
+    return answer;
+}
+```
+
+
+
 ##### 추석트래픽( 부동소수점 비교 )
 
 ```
