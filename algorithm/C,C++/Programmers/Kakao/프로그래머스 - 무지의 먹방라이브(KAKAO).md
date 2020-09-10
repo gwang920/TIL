@@ -144,3 +144,54 @@ int solution(vector<int> food_times, long long k) {
 }
 ```
 
+# 성공2
+
+```c++
+#include <string>
+#include <vector>
+#include <queue>
+#include <algorithm>
+#include <iostream>
+using namespace std;
+
+priority_queue<pair<int,int>> pq;
+
+int solution(vector<int> food_times, long long k) {
+    if(k<food_times.size()) return k+1;
+    int answer = 0,size=food_times.size();
+    for(int i=0;i<size;i++){
+        pq.push({-food_times[i],-i});
+    }
+    long long amu=0;
+    int cnt=0;
+    while(!pq.empty()){
+        auto now=pq.top();
+        long long rot=-now.first-amu;
+        if(k-(size-cnt)*rot<0) break;
+        k-=(size-cnt)*rot;
+        cnt++;
+        amu+=rot;
+        pq.pop();
+
+    }
+    // k보다 food_times가 작다
+    if(pq.empty()) return -1;
+    vector<int> ans;
+    while(!pq.empty()){
+        auto now=pq.top(); pq.pop();
+        if(-now.first<=amu) continue;
+        ans.push_back(-now.second); 
+    }
+    sort(ans.begin(),ans.end());
+    k%=ans.size();
+    for(int i=0;i<ans.size();i++){
+        if(i==k){
+            answer=ans[k];
+            break;
+        }
+    }
+    
+    return answer+1;
+}
+```
+
