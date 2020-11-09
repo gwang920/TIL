@@ -4,8 +4,10 @@
 
 ```
 ECIPSE
-MY SQL
-Tomcat
+JAVA
+bootstrap
+MY SQL 8.0
+Tomcat 8.5
 ```
 
 ## JSP 태그
