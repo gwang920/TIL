@@ -1,5 +1,32 @@
 # 스프링 개발 환경 구축
 
+# * 환경변수 설정하는 이유
+
+```
+환경변수는 쉽게 말해 운영체제가 참고하는 변수이다.
+
+자바를 예로들어보자
+환경변수를 설정할 때는 JDK가 필요하다.
+WHY? 자바에는 JDK와 JRE라는 두 가지경로가 있는데 
+JDK는 개발과 실행이 가능한 디렉토리이고, JRE는 실행만 가능한 디렉토리이다.
+
+따라서, 개발을 위해 JDK를 환경변수에 설정해줘야한다.
+
+그렇다면, bin 경로는 왜 설정해주는것인가?
+그 이유는 bin에 실행파일이 있기때문이다.
+
+* java vs javac 
+
+cmd에서 javac 명령어는 .java 파일을 .class파일로 변환해주는 컴파일러를 의미한다.
+따라서, Hello.java 파일이 있다는 가정하에
+javac Hello.java 명령어를 실행하면 Hello.class 파일이 생성될 것이다.
+
+java 명령어는 javac로 컴파일된 .class 파일을 실행하는 것이다.
+따라서, java Hello.java 명령어를 실행하면 Hello.java 파일 안의 내용이 실행된다.
+```
+
+
+
 # 1. JDK
 
 ```shell
@@ -129,7 +156,33 @@ Oracle 11g
 	-> build path -> configuration build path
 	-> 우측 add library 클릭
 	-> tomcat 9.0 선택 후 적용
+    
+    
+4) dynamic web module 4.0은 톰캣 9.0 부터 지원한다.	
+
+
+5) import javax.annotation; 에 빨간줄
+
+pom.xml에 추가하기
+		<dependency>
+
+		<groupId>javax.annotation</groupId>
+		<artifactId>javax.annotation-api</artifactId>
+		<version>1.3.1</version>
+
+		</dependency>
 ```
 
 
+
+```
+create table user
+
+오류 ORA-00903: invalid table name
+
+C:\Users\User\.m2
+repository 폴더 삭제 후 maven update
+
+
+```
 
