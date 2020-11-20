@@ -775,3 +775,295 @@ DTO와 VO의 공통점은 넣어진 데이터를 getter를 통해 사용하므�
 
 
 
+# MenuController.java
+
+```java
+package com.controller;
+
+import java.util.ArrayList;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.support.AbstractApplicationContext;
+import org.springframework.context.support.GenericXmlApplicationContext;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.frame.ObjectBiz;
+import com.frame.StringBiz;
+import com.mapper.preferenceMapper;
+import com.vo.Food;
+
+@Controller
+public class MenuController {
+
+	@RequestMapping(value="/menu_add_table_add_list.mc", produces="application/text; charset=utf8")
+	@ResponseBody
+	public String addMenuList(@RequestParam("id") String id) {
+		ObjectMapper obm = new ObjectMapper();
+		AbstractApplicationContext factory = new GenericXmlApplicationContext("MySpring.xml");
+		ObjectBiz<String,Food> foodList = (ObjectBiz<String, Food>)factory.getBean("FoodBiz");
+		String val ="fail";
+		
+		try {
+			if(id == "") val = obm.writeValueAsString(foodList.selectAll());
+			else val = obm.writeValueAsString(foodList.select(id));
+			System.out.println(val);
+		} catch (JsonProcessingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return val;
+	}
+	@Autowired
+	preferenceMapper pm;
+	
+	@RequestMapping(value="/add_pre_roullet.mc",  produces="application/text; charset=utf8")
+	@ResponseBody
+	public String addPreInRoullet(@RequestParam("id") String id) {
+		
+		ObjectMapper obm = new ObjectMapper();
+		AbstractApplicationContext factory = new GenericXmlApplicationContext("MySpring.xml");
+		StringBiz<String,String> preBiz = (StringBiz<String,String>)factory.getBean("PreferenceBiz");
+		String val ="fail";
+
+		try {
+			val = obm.writeValueAsString(pm.selectById(id));
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+		}
+		return val;
+	}
+	
+	@RequestMapping("AddPre.mc")
+	@ResponseBody
+	public String addPreTable(@RequestParam("id") String id,@RequestParam("name") String name) {
+		
+//		
+		AbstractApplicationContext factory = new GenericXmlApplicationContext("MySpring.xml");
+		StringBiz<String, String> PreBiz = (StringBiz<String, String>)factory.getBean("PreferenceBiz");
+		try {
+			PreBiz.insert(id, name);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return "fail";
+		}
+		return "success";
+	}
+	
+	@RequestMapping("AddIgnore.mc")
+	@ResponseBody
+	public String addIgnTable(@RequestParam("id") String id,@RequestParam("name") String name) {
+		AbstractApplicationContext factory = new GenericXmlApplicationContext("MySpring.xml");
+
+		StringBiz<String,String> IgnBiz = (StringBiz<String,String>)factory.getBean("IgnoreBiz");
+		try {
+			IgnBiz.insert(id, name);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return "fail";
+		}
+		return "success";
+	}
+}
+
+```
+
+
+
+````java
+위 코드를 차례로 살펴보자.
+
+1) @RequestMapping
+
+@RequestMapping 컨트롤러로부터 url을 전달받을 수 있다.
+Url당 하나의 컨트롤러에 매핑 되던 다른 핸들러 매핑과 달리 메서드까지 세분화하여 적용할 수 있다.
+파라미터, 헤더 등 더 넓은 범위를 적용할 수도 있다.
+produces는 content-type을 설정하기 위함이다.
+produces의 디폴트 값은 charset=ISO-8859-1이다.
+위 타입은 한글이 ?? 으로 출력되는 문제가 생길 수 있다.
+utf8로 설정해주자.
+
+
+2) @ ResponseBody
+
+위 어노테이션이 설정되어있으면 메소드에서 리턴되는 값은 View를 통해서 출력되지않고, HTTP ResponseBody에 직접 쓰여지게된다.
+
+
+ * Http 통신 방식
+ 1) HyperText Transfer Protocol
+ 
+ HTML 문서를 교환하기 위한 통신규약
+ 서버<->클라이언트
+ 프론트엔드<->백엔드
+ 
+ HTTP는 TCP/IP기반
+ 
+ 2) 통신방식
+ 클라이언트가 HTTP Request를 보내면 HTTP Response를 보내는 구조
+ stateless하다
+ 
+ 3) HTTP Request 구조
+ - start line
+ - headers
+ - body
+ 
+ 3-1) start line
+ start line 또한 3부분으로 구성되어있다.
+ 
+ 예시) GET/ Search HTTP/1.1
+ 
+  - HTTP Method
+  해당 request가 의도한 action을 정의하는 부분
+  get post put delete options 등이 있다.
+  주로 get post가 사용됨
+  
+  - Request target 
+  해당 request가 전송되는 목표 uri
+  
+  - HTTP version
+  말 그대로 http의 버전이다.
+  
+  3-2) headers
+  해당 request에 대한 추가 정보(addtional information)를 담고 있는 부분.
+  예를 들어, request 메세지 body의 총 길이 (Content-Length), HOST(www.google.com) 등.
+  
+  3-3) body
+  해당 request의 실제 메세지/내용
+  
+  
+  * http 구조 예시
+  
+  POST /payment-sync HTTP/1.1
+
+Accept: application/json
+Accept-Encoding: gzip, deflate
+Connection: keep-alive
+Content-Length: 83
+Content-Type: application/json
+Host: intropython.com
+User-Agent: HTTPie/0.9.3
+
+{
+    "imp_uid": "imp_1234567890",
+    "merchant_uid": "order_id_8237352",
+    "status": "paid"
+}
+
+
+클라이언트에서 서버로 필요한 데이터를 전송하기 위해서 JSON이라는 데이터를 요청 본문에 담아서 서버로 보내면, 서버에서는 @RequestBody 어노테이션을 사용하여 HTTP 요청 본문에 담긴 값들을 자바 객체로 변환 시켜, 객체에 저장시킵니다.
+    
+    
+서버에서 클라이언트로 응답 데이터를 전송하기 위해서 @ResponseBody 를 사용하여 자바 객체를 HTTP 응답 본문의 객체로 변환하여 클라이언트로 전송시키는 역할을 합니다.
+    
+    
+비동기 통신을 하기위해서 클라이언트가 서버로 요청 메시지의 본문에 데이터를 담아서 보내야하며, 서버도 클라이언트로 응답을 보내기 위해서는 응답 메시지의 본문에 데이터를 담아서 보내야 합니다.
+    
+    
+json
+xml을 능가하는 데이터 포맷
+자료의 종류에 큰 제한이 없다.
+프로그램의 변수값을 표현하는데 효과적이다.
+    
+key:value 쌍
+        
+만드는 방식에 제한이 없다.
+````
+
+
+
+```
+https://offbyone.tistory.com/16
+프로젝트 버전 변경시
+```
+
+
+
+# KAKAO API
+
+```
+			<link rel="stylesheet" href="view/css/kakaoMap.css">
+			
+			<script type="text/javascript"
+	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=f0d6e6a070335aaa5e70c85e9c45b206&libraries=services"></script>
+
+			
+			<script type="text/javascript" src="view/js/kakaoMap_geolocation.js"></script>
+			<script type="text/javascript" src="view/js/kakaoMap_request.js"></script>
+			
+			
+			
+							var mapContainer = document.getElementById('map'), // 지도를 표시할 div
+				mapOption = {
+					center : new kakao.maps.LatLng(37.566826, 126.9786567), // 지도의 중심좌표
+					// center: new kakao.maps.LatLng(35.233446, 127.650310), // 지도의 중심좌표
+					level : 3
+				// 지도의 확대 레벨
+				};
+
+				// 지도를 생성합니다 
+				map = new kakao.maps.Map(mapContainer, mapOption);
+				// 장소 검색 객체를 생성합니다
+				ps = new kakao.maps.services.Places();
+				// 검색 결과 목록이나 마커를 클릭했을 때 장소명을 표출할 인포윈도우를 생성합니다
+				infowindow = new kakao.maps.InfoWindow({
+					zIndex : 1
+				});
+
+				userPosition = {};
+				markers = [];
+```
+
+
+
+# IOC/DI
+
+```
+스피링의 대삼각형
+
+IOC/DI/AOP/PSA
+
+IOC/DI
+
+스프링 프레임워크의 근간
+오브젝트의 생명주기와 의존관계에 대한 프로그래밍 모델
+유연하고 확장성이 뛰어난 코드를 만들 수 있게 해주는 프로그래밍 모델
+
+-by 토비의 스프링
+
+유연하고 확장성이 뛰어나다
+=> 변경이 있을 때 수정이 쉽다
+=> 수정할 부분만 수정하면 된다
+= 관심사의 분리가 잘 이루어져있다.
+
+
+AOP
+관심사를 기준으로 관점지향적인 프로그래밍
+
+부가기능 인프라로직
+
+- 애플리케이션 전 영역에서 나타날 수 있음
+- 중복코드를 만들어낼 가능성 때문에 유지보수가 힘들어짐
+- 비즈니스 로직과 함께 있으면 비즈니스 로직을 이해하기 어려워짐
+
+------------------------------------> 횡단 관심사
+			  권한체크		  권한체크
+성능검사		성능검사		성능검사
+ 로깅		  	   로깅			로깅
+브즈니스로직	   비즈니스로직 	  비즈니스로직
+성능검사		 성능검사		 성능검사
+
+*로그인기능		*글작성기능		*글삭제기능
+
+다양한 AOP 구현방법
+1) 컴파일
+2) 바이트코드조작
+3) 프록시패턴 (Spring AOP)
+
+```
+
