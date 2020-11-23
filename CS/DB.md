@@ -632,3 +632,104 @@ X->Y 이고 Y->Z 이면 X->Z이고 Z가 X에 이행적으로 함수 종속되었
 [![image](https://user-images.githubusercontent.com/49560745/85363761-ad758400-b55c-11ea-96fc-e48c5ea8c728.png)](https://user-images.githubusercontent.com/49560745/85363761-ad758400-b55c-11ea-96fc-e48c5ea8c728.png)
 
  * 학과 테이블
+
+### 12. DB Optimizer
+
+```
+why optimizer?
+
+DB에서 데이터를 조회하고, 저장하는 작업이 거의 대다수!
+서버의 70% 이상이 SQL 처리시간!
+
+따라서, SQL 처리 시간만 최적화해도 성능을 크게 향상할 수 있다.
+```
+
+#### 쿼리처리 흐름
+
+````
+1) 사용자가 작성한 쿼리를 parser에 전달한다. 
+2) Parser
+(문법적인 오류를 찾는다, 컴파일의 느낌?)
+3) Optimizer(실행계획, 비용평가)
+
+ Opimizer는 인덱스의 유무, 데이터 분산 또는 편향 정도 등의
+ 통계정보를 참고하여 "여러 실행계획을 작성하고",
+ 이들의 "비용을 연산"하고,
+ "가장 낮은 비용을 가진 실행계획을 선택"하는 DBMS 핵심엔진
+ 
+ => 만일 통계정보가 부정확하거나, 통계량이 적을 때는
+ 우리가 수동으로 실행계획을 짜야한다.
+
+4) 플랜평가
+````
+
+#### 실행계획
+
+```
+MYSQL 기준
+
+쿼리문에 explain을 붙이면 실행계획이 나온다.
+
+explain
+select *
+from
+user;
+```
+
+#### 최적화 예제
+
+````
+SELECT hobby,max(respondent)
+FROM survey_results_public
+WHERE respondent < 100
+GROUP BY hobby;
+
+쿼리 처리 시간 약 1초!
+````
+
+| id   | selet_type | Table                       | Type | Rows  | Extra                                 |
+| ---- | ---------- | --------------------------- | ---- | ----- | ------------------------------------- |
+| 1    | SIMPLE     | survey_results<br />_public | ALL  | 72522 | Using temporary,<br />Using file sort |
+
+```
+1)
+TYPE : ALL => Table Full Scan
+테이블의 모든 row에 접근 => 가장 비효율적인 방법
+
+2) EXTRA : Using temporary, Uing File sort
+Using temporary : 쿼리를 처리하는 동안 중간결과를 담아두기 위한 임시테이블
+
+Using file sort : 결과를 정렬
+=> 정렬할 필요가 없을땐 없애는게 어떨까?
+```
+
+#### Full Table Scan
+
+```
+Full Table Scan이 더 유리한 경우
+
+- 테이블의 크기가 작을 때
+- 조건절이 없을 때(where,on)
+- 조건에 일치하는 레코드 수가 굉장히 많을 때
+
+그러나!
+예제 테이블은
+1) 테이블 대용량
+2) Where 존재
+3) 결과 집합 고작 2개
+
+따라서, index scan을 해보는게 어떨까?
+```
+
+#### 무엇을 인덱스로 잡을까
+
+````
+resondent,hobby 순으로 인덱싱
+
+후보1) create index repondent_hobby_index on survey_results_public(respondent,hobby);
+
+hobby, respondent 순으로 인덱싱
+
+후보2) create index hobby_repondent_index on survey_results_public(hobby,respondent);
+````
+
