@@ -472,3 +472,69 @@ left=8 right=1이 되는데 이때 위치가 엇갈(큰 값 인덱스>작은값 
  정렬이 완료된다.
 ````
 
+
+
+````
+퀵 정렬 시간복잡도 평균 O(nlogn)
+
+파티션의 갯수가 낱개가 될 때까지 나눈다.
+즉, n번나눠야 한다. => n
+
+그런데 파티션을 나눌 때 마다 검색해야할
+개수가 절반씩 줄어든다. => logn
+
+따라서, nlogn의 시간복잡도가 나오게된다.
+
+
+* 시간복잡도가 O(n^2)이 나오는경우
+
+선택한 기준값이 가장 크거가 가장 작은경우
+매번 파티션의 개수가 1 vs 나머지 꼴로생성된다.
+````
+
+
+
+```java
+
+public class test {
+    // 자바에서 매개변수로 배열을 전달하면 call by reference
+	private static void quickSort(int[] arr,int start, int end) {
+		int part=partition(arr,start,end);
+		if(start<part-1) quickSort(arr,start,part-1);
+		if(end>part) quickSort(arr,part,end);
+	}
+	
+	private static int partition(int[] arr,int start,int end) {
+		int pivot=arr[(start+end)/2];
+		while(start<=end) {
+			while(arr[start]<pivot) start++;
+			while(arr[end]>pivot) end--;
+			if(start<=end) {
+				swap(arr,start,end);
+				start++;
+				end--;
+			}
+		}
+		return start;
+	}
+	
+	private static void swap(int[] arr,int start,int end) {
+		int tmp=arr[start];
+		arr[start]=arr[end];
+		arr[end]=tmp;
+		return;
+	}
+	
+	
+	public static void main(String[] args) {
+		int[] arr= {0,3,4,1,9,5,8,6,7,2};
+		quickSort(arr,0,arr.length-1);
+		for(int i=0;i<arr.length;i++) {
+			System.out.print(arr[i]+",");
+		}
+	}
+
+}
+
+```
+
