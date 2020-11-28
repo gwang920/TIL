@@ -721,6 +721,13 @@ XML 파서로 파싱
 client => Web Server => Web container
 ```
 
+# 캐시
+
+```
+캐시는 무언가를 임시로 저장해놓는 공간
+
+```
+
 
 
 
@@ -972,6 +979,32 @@ log4j
 
 
 
+# preparedstatement vs statement
+
+```
+1)쿼리분석
+2)컴파일
+3)실행
+
+preparedstatement 
+위 1 ~ 3 단 한번만 실행(캐싱을 통해)
+
+statement
+매번실행
+
+* 각 DB마다 SQL캐싱할 수 있는 한계가 있기 때문에 정작 성능상 캐싱되어야 할 쿼리가 그렇지 않은 쿼리 때문에 캐싱이 안 될 수 있기때문에 꼭 필요한 문장만 PreparedStatement를 쓰는것을 권고한다.
+
+출처: https://devbox.tistory.com/entry/Comporison [장인개발자를 꿈꾸는 :: 기록하는 공간]
+
+동일한 쿼리
+preparedstatement>statement
+
+조건절이 매번 바뀌는 쿼리
+preparedstatement<statement
+```
+
+
+
 di
 
 
@@ -1101,10 +1134,6 @@ OS
 
 
 
-하둡프로젝트 / javascript / 인성
-
-
-
 # Hadoop
 
 ````
@@ -1128,7 +1157,57 @@ OS
 네임노드 : 파일을 쪼개주는 역할, 쪼개진 파일이 어느 데이터 노드에 저장되어있는지 기록
 
 데이터노드 : 쪼개진 파일이 저장되어있는 곳
+
+jobtracker
+tasktracker : map/reduce 실행
+
+Client : 분석하고자 하는 데이터를 jobtacker에 전달해주는 역할
+Jobtracker : 하둡에 전달 된 전체 job을 관리하고 모니터링 하는 역할 (name node - 마스터)
+Tasktracker : jobtacker로 부터 배분된 일을 전달 받아 맵디류스를 실행 데이터를 분류 저장하는일을 수행 (Data node - 슬레이브)
+
+보조네임노드 : 메타데이터 backup
+
+마리아 db : hadoop 저장소의 구조 등 메타데이터 저장
+
+
+hive => map/reduce를 쉽게하기 위해 사용
+
+hadoop에 들어가는 데이터구조를 mysql에 저장
+
+
+
+data의 구조는 maria db에 정의 되어있다
+
+data -> in hadoop
+data 구조 -> in mariadb
+sql문 -> in hive
+
+hive에서 데이터 구조를 보고 sql 문을 쓰면 meta정보(table 컬럼정보)를 갖고 map reduce 프로그램을 자기가 짠다 -> jobtracker에 주고 jobtracker가 실제 데이터를 분석한다
+
+
+하이브(Hive)의 메타정보는 파일의 물리적인 위치 및 데이터에 대한 디렉터리 정보를 저장하고 있다.
+
 ```
+
+
+
+![image](https://user-images.githubusercontent.com/49560745/100514740-87fb3f00-31ba-11eb-80c5-2b86b74328ef.png)
+
+
+
+
+
+# hdfs란
+
+```
+블록구조로 파일을 저장하는 특징을 갖고 있으며 대용량의 데이터를 저장할 수 있습니다.
+그 뿐만 아니라 데이터의 복제 가능하기에 데이터의 복구가 빠른편이고
+데이터의 빠른 처리보다는 데이터의 동시처리에 기반을 두고 있습니다.
+```
+
+
+
+
 
 #      Block vs Non-block
 
@@ -1138,6 +1217,8 @@ OS
 | ----- | ----- | ---------- |
 | Sync  | JAVA  |            |
 | Async |       | javascript |
+
+
 
 ```
 제어권의 반환
@@ -1248,6 +1329,15 @@ DB
 
 ```
 
+1) 경험했던것을 넓힐 수 있는곳
+자체서비스 회사이기에 개발을 할 수 있는 매력
+솔루션 특성상 트래픽 효율, 데이터 발생 이런것들을 다뤄보고 싶다.
+
+
+2) 기술로 사람을 낫게만든다.
+회사의 가치관
+
+
 자체서비스
 
 
@@ -1299,7 +1389,9 @@ CS지식이 이 직무에서 ~에 활용되는데 이 점이 좀 부족하다
 # 인재상/핵심가치 중에 가장 자신 있는 부분과 그 이유는?
 
 ````
-
+자신에 대한 책임 - 행복한삶
+조직/고객에 대한 책임 - 명예의삶
+지구촌에 대한 책임 - 박애의삶
 ````
 
 # 정직/원칙준수를 잘했던 경험이 있다면?
