@@ -213,7 +213,7 @@ servlet => jsp [model 1] => jsp + servlet [model 2]
 
 ```
 String 과 StringBuilder, StringBuffer의 차이점은
-String은 immutable, StringBuilder,StringBuffer는 mutable이라는 점이다.
+String은 immutable, StringBuilder,StringBuffer는 mutable이라는 점이다.	
 
 String 객체는 한번 생성되면 할당된 메모리 공간이 변하지 않는다.
 +연사자나 concat 메서드를 통해 기존 생성된 String 객체 문자열에 새로운 문자열을 붙이는것은
